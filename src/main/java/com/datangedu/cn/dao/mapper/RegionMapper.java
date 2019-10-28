@@ -3,8 +3,10 @@ package com.datangedu.cn.dao.mapper;
 import com.datangedu.cn.model.sysUser.Region;
 import com.datangedu.cn.model.sysUser.RegionExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface RegionMapper {
     long countByExample(RegionExample example);
 
@@ -13,6 +15,8 @@ public interface RegionMapper {
     int insert(Region record);
 
     int insertSelective(Region record);
+    
+    int queryByParentId(Region record);
 
     List<Region> selectByExample(RegionExample example);
 
