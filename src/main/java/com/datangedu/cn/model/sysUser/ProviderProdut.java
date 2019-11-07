@@ -11,8 +11,6 @@ public class ProviderProdut {
 
     private String serviceInfo;
 
-    private String serviceImg;
-
     private String serviceContent;
 
     private Integer price;
@@ -28,6 +26,8 @@ public class ProviderProdut {
     private Integer necessary;
 
     private Integer status;
+
+    private byte[] serviceImg;
 
     public String getId() {
         return id;
@@ -59,14 +59,6 @@ public class ProviderProdut {
 
     public void setServiceInfo(String serviceInfo) {
         this.serviceInfo = serviceInfo == null ? null : serviceInfo.trim();
-    }
-
-    public String getServiceImg() {
-        return serviceImg;
-    }
-
-    public void setServiceImg(String serviceImg) {
-        this.serviceImg = serviceImg == null ? null : serviceImg.trim();
     }
 
     public String getServiceContent() {
@@ -131,5 +123,13 @@ public class ProviderProdut {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public byte[] getServiceImg() {
+        return serviceImg;
+    }
+
+    public void setServiceImg(byte[] serviceImg) {
+        this.serviceImg = serviceImg;
     }
 }

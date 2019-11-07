@@ -5,11 +5,16 @@
     <id column="business_no" jdbcType="VARCHAR" property="businessNo" />
     <result column="order_info" jdbcType="VARCHAR" property="orderInfo" />
     <result column="member_id" jdbcType="VARCHAR" property="memberId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_cellphone" jdbcType="VARCHAR" property="memberCellphone" />
     <result column="order_sum" jdbcType="INTEGER" property="orderSum" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="evaluate" jdbcType="VARCHAR" property="evaluate" />
     <result column="pay_type" jdbcType="INTEGER" property="payType" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    business_no, order_info, member_id, order_sum, create_time, evaluate, pay_type, status
+    business_no, order_info, member_id, member_name, member_cellphone, order_sum, create_time, 
+    evaluate, pay_type, status, provider_id, provider_name, order_num
   </sql>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
     select
@@ -104,11 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order (business_no, order_info, member_id, 
-      order_sum, create_time, evaluate, 
-      pay_type, status)
+      member_name, member_cellphone, order_sum, 
+      create_time, evaluate, pay_type, 
+      status, provider_id, provider_name, 
+      order_num)
     values (#{businessNo,jdbcType=VARCHAR}, #{orderInfo,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
-      #{orderSum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{evaluate,jdbcType=VARCHAR}, 
-      #{payType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+      #{memberName,jdbcType=VARCHAR}, #{memberCellphone,jdbcType=VARCHAR}, #{orderSum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{evaluate,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{providerId,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order
@@ -121,6 +131,12 @@
       </if>
       <if test="memberId != null">
         member_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberCellphone != null">
+        member_cellphone,
       </if>
       <if test="orderSum != null">
         order_sum,
@@ -137,6 +153,15 @@
       <if test="status != null">
         status,
       </if>
+      <if test="providerId != null">
+        provider_id,
+      </if>
+      <if test="providerName != null">
+        provider_name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="businessNo != null">
@@ -147,6 +172,12 @@
       </if>
       <if test="memberId != null">
         #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCellphone != null">
+        #{memberCellphone,jdbcType=VARCHAR},
       </if>
       <if test="orderSum != null">
         #{orderSum,jdbcType=INTEGER},
@@ -162,6 +193,15 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="providerId != null">
+        #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -183,6 +223,12 @@
       <if test="record.memberId != null">
         member_id = #{record.memberId,jdbcType=VARCHAR},
       </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberCellphone != null">
+        member_cellphone = #{record.memberCellphone,jdbcType=VARCHAR},
+      </if>
       <if test="record.orderSum != null">
         order_sum = #{record.orderSum,jdbcType=INTEGER},
       </if>
@@ -198,6 +244,15 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.providerId != null">
+        provider_id = #{record.providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerName != null">
+        provider_name = #{record.providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null">
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -208,11 +263,16 @@
     set business_no = #{record.businessNo,jdbcType=VARCHAR},
       order_info = #{record.orderInfo,jdbcType=VARCHAR},
       member_id = #{record.memberId,jdbcType=VARCHAR},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      member_cellphone = #{record.memberCellphone,jdbcType=VARCHAR},
       order_sum = #{record.orderSum,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       evaluate = #{record.evaluate,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      provider_id = #{record.providerId,jdbcType=VARCHAR},
+      provider_name = #{record.providerName,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -225,6 +285,12 @@
       </if>
       <if test="memberId != null">
         member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCellphone != null">
+        member_cellphone = #{memberCellphone,jdbcType=VARCHAR},
       </if>
       <if test="orderSum != null">
         order_sum = #{orderSum,jdbcType=INTEGER},
@@ -241,6 +307,15 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="providerId != null">
+        provider_id = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        provider_name = #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
     </set>
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
@@ -248,11 +323,16 @@
     update business_order
     set order_info = #{orderInfo,jdbcType=VARCHAR},
       member_id = #{memberId,jdbcType=VARCHAR},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_cellphone = #{memberCellphone,jdbcType=VARCHAR},
       order_sum = #{orderSum,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       evaluate = #{evaluate,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      provider_id = #{providerId,jdbcType=VARCHAR},
+      provider_name = #{providerName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER}
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
 </mapper>

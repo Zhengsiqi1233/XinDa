@@ -33,7 +33,9 @@ public class MemberController {
 	MemberService memberService;
 	@Resource
 	MemberMapper memberMapper;
-	
+	/*
+	 * 会员登陆
+	 */
 	@RequestMapping(value = "memberlogin", method = RequestMethod.POST)
 	public Map<String,Object> login(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -50,11 +52,15 @@ public class MemberController {
 		}else if(!request.getParameter("inputCode").equalsIgnoreCase((String) session.getAttribute("code"))) {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
+			
 			map.put("mem", "登陆成功");
 		}
 		
 		return map;
 	}
+	/*
+	 * 会员找回密码
+	 */
 	@RequestMapping(value = "memberfind", method = RequestMethod.POST)
 	public Map<String, Object> findPassword(HttpServletRequest request){
 		System.out.println("findpassword start");
@@ -73,7 +79,6 @@ public class MemberController {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
 			// 调用接口看用户是否存在，不存在直接提示， 存在重置密码
-		System.out.println("else");
 			if(list == null) {
 				map.put("mem","请输入正确的手机号");
 			}else {
@@ -88,6 +93,9 @@ public class MemberController {
 		}
 		return map;	
 	}
+	/*
+	 * 会员注册
+	 */
 	@RequestMapping(value = "memberregister", method = RequestMethod.POST)
 	public Map<String,Object> userRegister(HttpServletRequest request){
 		System.out.println("userRegion start");

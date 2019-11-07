@@ -24,7 +24,9 @@ public class MemberServiceImpl implements MemberService{
 	MemberMapper memberMapper;
 	@Resource
 	RegionService rService;
-
+	/*
+	 * 会员登陆
+	 */
 	@Override
 	public List<Member> login(HttpServletRequest request) {
 		String cellphone =request.getParameter("cellphone"); 
@@ -38,7 +40,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberMapper.selectByExample(memberExample);
 	}
-
+	/*
+	 * 会员找回密码
+	 */
 	@Override
 	public List<Member> findPassword(HttpServletRequest request) {
 		String cellphone = request.getParameter("cellphone");
@@ -55,7 +59,9 @@ public class MemberServiceImpl implements MemberService{
 
 	}
 	
-
+	/*
+	 * 会员注册
+	 */
 	@Override
 	public int userRegion(HttpServletRequest request) {
 		String name = request.getParameter("name");

@@ -81,66 +81,72 @@
             <ul class="main-tab">
                 <li class="border-red order1">服务商信息</li>
             </ul>
-            <div class="main-content">
-                <div class="avatars">
-                    <img src="" alt="用户头像">
-                    <p>更换头像</p>
-                </div>
-                <ul class="store-info">
-                    <li>
+            <div class="main-content"  id="main-content">
+                
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
+
+                    
+              
+                    <!-- <li>
                         <span>服务商名称</span>
-                        <span>云智汇咨询服务有限公司</span>
+                        <span>{provider.getName}</span>
                     </li>
                     <li>
                         <span>地区</span>
-                        <span>北京-朝阳区</span>
+                        <span>{provider.getProvince}-{provider.getCity}-{provider.getArea}</span>
                     </li>
                     <li>
                         <span>手机号</span>
-                        <span>18912345678</span>
+                        <span>{provider.getCellphone}</span>
                     </li>
                     <li>
                         <span>微信</span>
-                        <span></span>
+                        <span>{provider.getWechat}</span>
                     </li>
                     <li>
                         <span>QQ</span>
-                        <span>10001</span>
+                        <span>{provider.getQq}</span>
                     </li>
                     <li>
                         <span>邮箱</span>
-                        <span>10001@qq.com</span>
+                        <span>{provider.getEmail}</span>
                     </li>
-                    <li>
+                   -->
+                  
+            </div>
+            <li>
                         <button class="change-info">修改</button>
                     </li>
-                </ul>
-            </div>
             <div class="main-sercive">银行信息。。</div>
         </div>
     </div>
     <div class="masking">
         <div class="scroller">
-            <h3>添加服务产品</h3>
+            <h3>修改服务商信息</h3>
+             <form action="/providerProdut/providerupdate" method="post" enctype ="multipart/form-data">
             <ul>
                 <li>
                     <span>头像</span>
-                    <button>选择图片</button>
+                    <label for="file" class="btn btn-primary" style="height: 30px;width: 180px;margin-right: 10px">选择照片</label>
+    				<input  id="file" name="file" type="file" style="float: left;display:none"/>
                 </li>
                 <li>
                     <span>服务商名称</span>
                     <input placeholder="请输入服务名称" />
                 </li>
                 <li>
-                    <span class="ver-top">选择地区</span>
-                    <select name="" id="">
-                        <option value="">省</option>
+                     	   <select name="" id="province" onchange="changeprovince()" >
+                    	<option value="">省</option>
                     </select>
-                    <select name="" id="">
+                    <select name="" id="city" onchange="changecity()" >
                         <option value="">市</option>
                     </select>
-                    <select name="" id="">
-                        <option value="">区</option>
+                    <select name="" id="area" >
+                        <option value="" >区</option>
                     </select>
                 </li>
                 <li>
@@ -162,6 +168,7 @@
             </ul>
             <button class="save">提交</button>
             <button class="cancel">取消</button>
+            </form>
         </div>
         <script src="./js/service_setting.js"></script>
 </body>
