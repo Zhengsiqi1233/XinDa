@@ -91,12 +91,24 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from provider_produt
     where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider_produt
+    where service_name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider_produt

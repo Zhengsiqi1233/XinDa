@@ -1,3 +1,288 @@
+$(function(){
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessorderlist",
+		dataType:"json",
+		data:{
+			pagenum:20,
+			pagesize:1,
+		},
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderList;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].memberName}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+                    <td>${bussinessOrderList[i].payType}</td>										
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>		                  
+				</tr>`
+				}
+			console.log(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+/*
+ * 查询所有订单的金额总和
+ */
+
+$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordersum",
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderSum = data.bussinessOrderSum;
+			$("#bussinessordersum").html("");
+			var txt = "";
+			txt = `
+			交易金额 
+			<span class="font-red">${bussinessOrderSum}
+			</span>`
+				console.log(txt);
+			
+			$("#bussinessordersum").html(txt);
+
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+
+function format(time){
+	var date = new Date(time);
+	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+}
+/*
+ * 查询当天的所有订单
+ */
+$(".todaylist").on("click",function(){
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordertoday",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderToday;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].memberName}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+                    <td>${bussinessOrderList[i].payType}</td>										
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>		                  
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordertodaysum",
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderSum = data.bussinessOrderTodaySum;
+			$("#bussinessordersum").html("");
+			var txt = "";
+			txt = `
+			交易金额 
+			<span class="font-red">${bussinessOrderSum}
+			</span>`
+				console.log(txt);
+			
+			$("#bussinessordersum").html(txt);
+
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})	
+})
+/*
+ * 查询本周的所有订单
+ */
+$(".weeklist").on("click",function(){
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessorderweek",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderWeek;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].memberName}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+                    <td>${bussinessOrderList[i].payType}</td>										
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>		                  
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessorderweeksum",
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderSum = data.bussinessOrderWeekSum;
+			$("#bussinessordersum").html("");
+			var txt = "";
+			txt = `
+			交易金额 
+			<span class="font-red">${bussinessOrderSum}
+			</span>`
+				console.log(txt);
+			
+			$("#bussinessordersum").html(txt);
+
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})	
+	
+})
+/*
+ * 查询本月的所有订单
+ */
+$(".monthlist").on("click",function(){
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordermonth",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderMonth;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].memberName}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+                    <td>${bussinessOrderList[i].payType}</td>										
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>		                  
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordermonthsum",
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderSum = data.bussinessOrderMonthSum;
+			$("#bussinessordersum").html("");
+			var txt = "";
+			txt = `
+			交易金额 
+			<span class="font-red">${bussinessOrderSum}
+			</span>`
+				console.log(txt);
+			
+			$("#bussinessordersum").html(txt);
+
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})	
+	
+})
+/*
+ * 查询所有的订单
+ */
+$(".alllist").on("click",function(){
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessorderlist",
+		data:{
+			pagenum:20,
+			pagesize:1,
+		},
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderList;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].memberName}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+                    <td>${bussinessOrderList[i].payType}</td>										
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>		                  
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	$.ajax({
+		type:"get",
+		url:"/bussinessordercontroller/bussinessordersum",
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderSum = data.bussinessOrderSum;
+			$("#bussinessordersum").html("");
+			var txt = "";
+			txt = `
+			交易金额 
+			<span class="font-red">${bussinessOrderSum}
+			</span>`
+				console.log(txt);
+			
+			$("#bussinessordersum").html(txt);
+
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+
+
 $(".user-arrow-down").on("click", function () {
     if ($(".dropdown").is(":hidden")) {
         $(".dropdown").show();

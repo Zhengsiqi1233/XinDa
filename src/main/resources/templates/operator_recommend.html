@@ -97,7 +97,7 @@
                     <select>
                         <option value="">--选择服务分类</option>
                     </select>
-                    <input placeholder="服务名称" /><button><i class="fa fa-search fa-fw"></i></button>
+                    <input placeholder="服务名称" class="searchlist" /><button class="search-btn"><i class="fa fa-search fa-fw"></i></button>
                     <span><span class="font-orange">提示：</span>销量排名靠前的可选为优质服务，价格最低的选择为推荐服务</span>
                 </div>
                 <ul class="sort">
@@ -118,27 +118,59 @@
                         <th>初创企业必备</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="providerprodutlist">
                     <tr>
-                        <td>社保补缴（三个月外）</td>
+                        <!-- <td>社保补缴（三个月外）</td>
                         <td>社保补缴三个月外，单月的服务费，社保金额及滞纳金单独核算</td>
                         <td>8</td>
                         <td>云智汇咨询服务有限公司</td>
                         <td>¥500.00</td>
                         <td><input class="checkbox" type="checkbox" /></td>
-                        <td><input class="checkbox" type="checkbox" /></td>
+                        <td><input class="checkbox" type="checkbox" /></td> -->
                     </tr>
-                    <tr>
-                        <td>社保补缴（三个月外）</td>
-                        <td>社保补缴三个月外，单月的服务费，社保金额及滞纳金单独核算</td>
-                        <td>8</td>
-                        <td>云智汇咨询服务有限公司</td>
-                        <td>¥500.00</td>
-                        <td><input class="checkbox" type="checkbox" /></td>
-                        <td><input class="checkbox" type="checkbox" /></td>
-                    </tr>
+                    
                 </tbody>
             </table>
+            <script>
+            $(".search-btn").on("click",function(){
+            	var value=$(".searchlist").val();
+            	$.ajax({
+            		type:"get",
+            		url:"/providerproductcontroller/providerprodutpage",
+            		data:{
+            			service_name:value, 
+            			pagenum:4,
+            			pagesize:1,
+            		}, 
+            		success:function(data){
+            			console.log("成功返回的数据",data);
+            		
+            			var providerProdutList = data.providerProdutPage;
+            			$("#providerprodutlist").html("");
+            			var txt = "";
+            			for(var i = 0; i < providerProdutList.length; i ++){
+            				txt += `<tr>
+            					<td>${providerProdutList[i].serviceName}</td>
+            					<td>${providerProdutList[i].serviceContent}</td>
+            					<td>${providerProdutList[i].salesNum}</td>
+            					<td>${providerProdutList[i].serviceName}</td>
+            					<td>¥${providerProdutList[i].price}</td>
+            					<td><input class="checkbox" type="checkbox" /></td>
+                                <td><input class="checkbox" type="checkbox" /></td>
+            				</tr>`
+            				}
+            			//console.log(txt);
+            			// var tbody = $("<tbody></tbody>").html(txt);
+            			$("#providerprodutlist").html(txt);
+            		},
+            		error:function(data){
+            			console.log("失败后返回的数据",data);
+            		}
+            	})
+            	
+            })
+            </script>
+            
             <div class="main-pagination">
                 <span>首页</span>
                 <span>上一页</span>

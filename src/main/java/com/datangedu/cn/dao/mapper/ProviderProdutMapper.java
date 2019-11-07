@@ -3,8 +3,10 @@ package com.datangedu.cn.dao.mapper;
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 import com.datangedu.cn.model.sysUser.ProviderProdutExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ProviderProdutMapper {
     long countByExample(ProviderProdutExample example);
 
@@ -19,6 +21,8 @@ public interface ProviderProdutMapper {
     List<ProviderProdut> selectByExample(ProviderProdutExample example);
 
     ProviderProdut selectByPrimaryKey(String id);
+    
+    List<ProviderProdut> selectByLike(ProviderProdutExample example);
 
     int updateByExampleSelective(@Param("record") ProviderProdut record, @Param("example") ProviderProdutExample example);
 

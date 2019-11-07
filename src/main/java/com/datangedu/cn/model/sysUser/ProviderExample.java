@@ -5,13 +5,44 @@ import java.util.Date;
 import java.util.List;
 
 public class ProviderExample {
+	
+    protected int pageNum;
+	
+	protected int pageSize;
+	
+	protected String likeName;
+	
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ProviderExample() {
+    public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = (pageSize-1)*pageNum;
+	}
+
+	public String getLikeName() {
+		return likeName;
+	}
+
+	public void setLikeName(String likeName) {
+		this.likeName = likeName;
+	}
+
+	public ProviderExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -62,6 +93,9 @@ public class ProviderExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+        likeName=null;
+        pageNum=3;
+        pageSize=1;
     }
 
     protected abstract static class GeneratedCriteria {

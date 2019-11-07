@@ -3,8 +3,10 @@ package com.datangedu.cn.dao.mapper;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.MemberExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface MemberMapper {
     long countByExample(MemberExample example);
 
@@ -27,4 +29,8 @@ public interface MemberMapper {
     int updateByPrimaryKeySelective(Member record);
 
     int updateByPrimaryKey(Member record);
+
+    int updateByExample1(Member record);
+
+	List<Member> selectByLike(MemberExample memberExample);
 }

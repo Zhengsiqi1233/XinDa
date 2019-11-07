@@ -97,7 +97,7 @@
                         <option value="3">选择服务类型2</option>
                         <option value="4">选择服务类型3</option>
                     </select>
-                    <input placeholder="业务订单号" /><button><i class="fa fa-search fa-fw"></i></button>
+                    <input placeholder="业务订单号" class="searchlist" /><button class="search-btn"><i class="fa fa-search fa-fw"></i></button>
                 </div>
             </div>
             <table border="0" cellspacing="0" cellpadding="0">
@@ -112,31 +112,53 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>S1706080004074530088</td>
-                        <td>张三</td>
-                        <td>代理记账（一年）*1</td>
-                        <td>¥10000.00</td>
-                        <td>2019-09-20</td>
-                        <td>已支付</td>
-                        <td>
-                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>S1706080004074530088</td>
-                        <td>李四</td>
-                        <td>税务报道*1</td>
-                        <td>¥500.00</td>
-                        <td>2019-09-20</td>
-                        <td>未支付</td>
-                        <td>
-                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
-                        </td>
-                    </tr>
+                <tbody id="bussinessorderlist">
+                    <tr >
+                
+                    </tr>                    
                 </tbody>
             </table>
+                 <script>
+            $(".search-btn").on("click",function(){
+            	var value=$(".searchlist").val();
+            	$.ajax({
+            		type:"get",
+            		url:"/bussinessordercontroller/bussinessorderpage",
+            		data:{
+            			business_no:value, 
+            			pagenum:4,
+            			pagesize:1,
+            		}, 
+            		success:function(data){
+            			console.log("成功返回的数据",data);
+            		
+            			var bussinessOrderList = data.bussinessOrderPage;
+            			var txt = "";
+            			for(var i = 0; i < bussinessOrderList.length; i ++){
+            				txt += `<tr> 
+            					<td>${bussinessOrderList[i].businessNo}</td>
+            					<td>${bussinessOrderList[i].memberName}</td>					
+            					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>
+            					<td>¥${bussinessOrderList[i].orderSum}</td>
+            					<td>${format(bussinessOrderList[i].createTime)}</td>
+                                <td>${bussinessOrderList[i].status}</td>
+                                <td>
+                                    <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                                </td>
+            					
+            				</tr>`
+            				}
+            			console.log(txt);
+            			// var tbody = $("<tbody></tbody>").html(txt);
+            			$("#bussinessorderlist").html(txt);
+            		},
+            		error:function(data){
+            			console.log("失败后返回的数据",data);
+            		}
+            	})
+            	
+            })
+            </script>
             <div class="main-sercive">服务订单...</div>
         </div>
     </div>

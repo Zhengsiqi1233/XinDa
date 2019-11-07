@@ -95,12 +95,42 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+     <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from provider
     where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByCommon" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where status=1
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByStop" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where status=2
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider
@@ -125,6 +155,10 @@
       #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{authFile,jdbcType=VARCHAR}, 
       #{workTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tel,jdbcType=VARCHAR}, 
       #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert> 
+  <insert id="insertProvider" parameterType="com.datangedu.cn.model.sysUser.Provider">
+  insert into provider (id,cellphone,password)
+  values (#{id,jdbcType=VARCHAR},#{cellphone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.Provider">
     insert into provider

@@ -10,6 +10,11 @@
     <result column="evaluate" jdbcType="VARCHAR" property="evaluate" />
     <result column="pay_type" jdbcType="INTEGER" property="payType" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_cellphone" jdbcType="VARCHAR" property="memberCellphone" />
+    <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    business_no, order_info, member_id, order_sum, create_time, evaluate, pay_type, status
+    business_no, order_info, member_id, order_sum, create_time, evaluate, pay_type, status, 
+    member_name, member_cellphone, provider_id, provider_name, order_num
   </sql>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
     select
@@ -82,8 +88,13 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <!-- <if test="orderByClause != null">
       order by ${orderByClause}
+    </if> -->
+    order by create_time
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -91,6 +102,61 @@
     <include refid="Base_Column_List" />
     from business_order
     where business_no = #{businessNo,jdbcType=VARCHAR}
+  </select>
+    <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where business_no like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    order by create_time
+    </if>
+  </select>
+  <select id="selectByToday" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where TO_DAYS(create_time)=TO_DAYS(NOW())
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectByWeek" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where YEARWEEK(DATE_FORMAT(create_time,'%Y-%m-%d'))=YEARWEEK(NOW())
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectByMonth" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+    order by create_time
+   <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectBySum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+  </select>
+  <select id="selectByTodaySum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where TO_DAYS(create_time)=TO_DAYS(NOW())
+  </select>
+  <select id="selectByWeekSum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where YEARWEEK(DATE_FORMAT(create_time,'%Y-%m-%d'))=YEARWEEK(NOW())
+  </select>
+  <select id="selectByMonthSum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from business_order
@@ -105,10 +171,14 @@
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order (business_no, order_info, member_id, 
       order_sum, create_time, evaluate, 
-      pay_type, status)
+      pay_type, status, member_name, 
+      member_cellphone, provider_id, provider_name, 
+      order_num)
     values (#{businessNo,jdbcType=VARCHAR}, #{orderInfo,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
       #{orderSum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{evaluate,jdbcType=VARCHAR}, 
-      #{payType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+      #{payType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{memberCellphone,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order
@@ -137,6 +207,21 @@
       <if test="status != null">
         status,
       </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberCellphone != null">
+        member_cellphone,
+      </if>
+      <if test="providerId != null">
+        provider_id,
+      </if>
+      <if test="providerName != null">
+        provider_name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="businessNo != null">
@@ -162,6 +247,21 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCellphone != null">
+        #{memberCellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -198,6 +298,21 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberCellphone != null">
+        member_cellphone = #{record.memberCellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerId != null">
+        provider_id = #{record.providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerName != null">
+        provider_name = #{record.providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null">
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +327,12 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       evaluate = #{record.evaluate,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      member_cellphone = #{record.memberCellphone,jdbcType=VARCHAR},
+      provider_id = #{record.providerId,jdbcType=VARCHAR},
+      provider_name = #{record.providerName,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +361,21 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCellphone != null">
+        member_cellphone = #{memberCellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        provider_id = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerName != null">
+        provider_name = #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
     </set>
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
@@ -252,7 +387,12 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       evaluate = #{evaluate,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_cellphone = #{memberCellphone,jdbcType=VARCHAR},
+      provider_id = #{providerId,jdbcType=VARCHAR},
+      provider_name = #{providerName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER}
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
 </mapper>

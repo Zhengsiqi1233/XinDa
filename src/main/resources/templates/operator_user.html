@@ -91,7 +91,7 @@
             </ul>
             <div class="main-content">
                 <div class="search">
-                    <input placeholder="请输入用户姓名查询" /><button><i class="fa fa-search fa-fw"></i></button>
+                    <input placeholder="请输入用户姓名查询"  class="searchlist"/><button class="search-btn"><i class="fa fa-search fa-fw"></i></button>
                 </div>
             </div>
             <table border="0" cellspacing="0" cellpadding="0">
@@ -107,38 +107,57 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>17</td>
-                        <td>张三</td>
-                        <td>13312345678</td>
-                        <td>北京市-海淀区</td>
-                        <td>2019-09-20</td>
-                        <td>2</td>
-                        <td>¥10300.00</td>
-                        <td>
-                            <span class="handle-btn">查看</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>17</td>
-                        <td>张三</td>
-                        <td>13312345678</td>
-                        <td>北京市-海淀区</td>
-                        <td>2019-09-20</td>
-                        <td>2</td>
-                        <td>¥10300.00</td>
-                        <td>
-                            <span class="handle-btn">查看</span>
-                        </td>
-                    </tr>
+                <tbody id="memberlist">                  
                 </tbody>
+                <script>
+            $(".search-btn").on("click",function(){
+            	var value=$(".searchlist").val();
+            	$.ajax({
+            		type:"get",
+            		url:"/membercomtroller/memberpage",
+            		data:{
+            			name:value, 
+            			pagenum:3,
+            			pagesize:1,
+            		}, 
+            		success:function(data){
+            			console.log("成功返回的数据",data);
+            		
+            			var memberList = data.memberPage;
+            			$("#memberlist").html("");
+            			var txt = "";
+            			for(var i = 0; i < memberList.length; i ++){
+            				txt += `<tr>
+            					<td>${memberList[i].id}</td>
+            					<td>${memberList[i].name}</td>
+            					<td>${memberList[i].cellphone}</td>
+            					<td>${memberList[i].region}</td>
+            					<td>${format(memberList[i].createTime)}</td>
+            					<td>${memberList[i].orderNum}</td>
+            					<td>${memberList[i].orderSum}</td>
+            					<td>
+                                   <span class="handle-btn">查看</span>
+                                </td>
+            					
+            				</tr>`
+            				}
+            			console.log(txt);
+            			// var tbody = $("<tbody></tbody>").html(txt);
+            			$("#memberlist").html(txt);
+            		},
+            		error:function(data){
+            			console.log("失败后返回的数据",data);
+            		}
+            	})
+            	
+            })
+            </script>
             </table>
             <div class="main-pagination">
                 <span>首页</span>
                 <span>上一页</span>
                 <span class="main-pagination-page">1</span>
-                <span>下一页</span>
+                <span class="nextpage">下一页</span>
                 <span>尾页</span>
             </div>
             <div class="main-sercive">付费用户...</div>

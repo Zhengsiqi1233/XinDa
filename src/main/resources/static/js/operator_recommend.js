@@ -1,3 +1,41 @@
+$(function(){
+	$.ajax({
+		type:"get",
+		url:"/providerproductcontroller/providerprodutlist",
+		dataType:"json",
+		data:{
+			pagenum:20,
+			pagesize:1,
+		},
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var providerProdutList = data.providerProdutList;
+			$("#providerprodutlist").html("");
+			var txt = "";
+			for(var i = 0; i < providerProdutList.length; i ++){
+				txt += `<tr>
+					<td>${providerProdutList[i].serviceName}</td>
+					<td>${providerProdutList[i].serviceContent}</td>
+					<td>${providerProdutList[i].salesNum}</td>
+					<td>${providerProdutList[i].serviceName}</td>
+					<td>¥${providerProdutList[i].price}</td>
+					<td><input class="checkbox" type="checkbox" /></td>
+                    <td><input class="checkbox" type="checkbox" /></td>
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#providerprodutlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+
+
+
 $(".user-arrow-down").on("click", function () {
     if ($(".dropdown").is(":hidden")) {
         $(".dropdown").show();
