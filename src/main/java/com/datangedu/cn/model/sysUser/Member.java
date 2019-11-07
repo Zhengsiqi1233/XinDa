@@ -19,13 +19,17 @@ public class Member {
 
     private String email;
 
-    private String region;
-
     private Integer orderNum;
 
     private Integer orderSum;
 
     private Integer status;
+
+    private String province;
+
+    private String city;
+
+    private String area;
 
     public String getId() {
         return id;
@@ -91,14 +95,6 @@ public class Member {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region == null ? null : region.trim();
-    }
-
     public Integer getOrderNum() {
         return orderNum;
     }
@@ -121,5 +117,29 @@ public class Member {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 }

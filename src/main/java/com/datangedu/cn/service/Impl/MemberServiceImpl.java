@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService{
 	@Resource
 	RegionService rService;
 
+
+	/*
+	 * 会员登陆
+	 */
+
 	@Override
 	public List<Member> login(HttpServletRequest request) {
 		String cellphone =request.getParameter("cellphone"); 
@@ -38,6 +43,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberMapper.selectByExample(memberExample);
 	}
+
+
+
+	/*
+	 * 会员找回密码
+	 */
 
 	@Override
 	public List<Member> findPassword(HttpServletRequest request) {
@@ -56,6 +67,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 
+
+
+	/*
+	 * 会员注册
+	 */
+
 	@Override
 	public int userRegion(HttpServletRequest request) {
 		String name = request.getParameter("name");
@@ -71,14 +88,37 @@ public class MemberServiceImpl implements MemberService{
 	    member.setName(name);
 	    member.setCellphone(cellphone);
 	    member.setPassword(password);
+
 		/*
 		 * member.setProvince(province); member.setCity(city); member.setArea(area);
 		 */
+
+	    member.setProvince(province);
+	    member.setCity(city);
+	    member.setArea(area);
+
 
 	    
 		return memberMapper.insert(member);
 	    }
 
 	
+	@Override
+	public List<Member> getMemberList(HttpServletRequest request) {
+		MemberExample memberExample=new MemberExample();
+		MemberExample.Criteria criteria=memberExample.createCriteria();
+		memberExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		memberExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+		return memberMapper.selectByExample(memberExample);
+	}
+	@Override
+	public List<Member> getMemberPage(HttpServletRequest request) {
+		MemberExample memberExample=new MemberExample();
+		memberExample.setLikeName(request.getParameter("name"));
+		memberExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		memberExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+		    List<Member> memberPage=memberMapper.selectByLike(memberExample);
+			return memberPage;
+	}
 
 }

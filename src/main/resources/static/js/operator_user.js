@@ -5,7 +5,7 @@ function format(time){
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/membercomtroller/memberlist",
+		url:"/member/memberlist",
 		dataType:"json",
 		data:{
 			pagenum:20,

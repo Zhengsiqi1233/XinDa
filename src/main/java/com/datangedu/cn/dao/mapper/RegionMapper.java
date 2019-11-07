@@ -15,6 +15,8 @@ public interface RegionMapper {
     int insert(Region record);
 
     int insertSelective(Region record);
+    
+    int queryByParentId(Region record);
 
     List<Region> selectByExample(RegionExample example);
 

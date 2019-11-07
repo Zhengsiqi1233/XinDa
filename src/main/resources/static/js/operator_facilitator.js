@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/membercontroller/providerlist",
+		url:"/provider/providerlist",
 		dataType:"json",
 		data:{
 			pagenum:20,
@@ -42,7 +42,7 @@ $(function(){
 $(".providercommon").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/membercontroller/providerlist",
+		url:"/provider/providerlist",
 		data:{
 			pagenum:20,
 			pagesize:1,
@@ -79,7 +79,7 @@ $(".providercommon").on("click",function(){
 $(".providerstop").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/membercontroller/providerstop",
+		url:"/provider/providerstop",
 		data:{
 			pagenum:20,
 			pagesize:1,

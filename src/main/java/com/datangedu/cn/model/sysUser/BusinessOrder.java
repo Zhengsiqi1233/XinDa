@@ -9,6 +9,10 @@ public class BusinessOrder {
 
     private String memberId;
 
+    private String memberName;
+
+    private String memberCellphone;
+
     private Integer orderSum;
 
     private Date createTime;
@@ -18,10 +22,6 @@ public class BusinessOrder {
     private Integer payType;
 
     private Integer status;
-
-    private String memberName;
-
-    private String memberCellphone;
 
     private String providerId;
 
@@ -51,6 +51,22 @@ public class BusinessOrder {
 
     public void setMemberId(String memberId) {
         this.memberId = memberId == null ? null : memberId.trim();
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName == null ? null : memberName.trim();
+    }
+
+    public String getMemberCellphone() {
+        return memberCellphone;
+    }
+
+    public void setMemberCellphone(String memberCellphone) {
+        this.memberCellphone = memberCellphone == null ? null : memberCellphone.trim();
     }
 
     public Integer getOrderSum() {
@@ -91,22 +107,6 @@ public class BusinessOrder {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
-    }
-
-    public String getMemberCellphone() {
-        return memberCellphone;
-    }
-
-    public void setMemberCellphone(String memberCellphone) {
-        this.memberCellphone = memberCellphone == null ? null : memberCellphone.trim();
     }
 
     public String getProviderId() {

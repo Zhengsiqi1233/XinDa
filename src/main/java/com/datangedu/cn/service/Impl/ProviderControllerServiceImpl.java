@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.datangedu.cn.controller.provider.MemberComtroller;
+
 import com.datangedu.cn.dao.mapper.ProviderMapper;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.MemberExample;
@@ -20,29 +20,18 @@ public class ProviderControllerServiceImpl implements ProviderControllerService 
 
 	@Resource
 	ProviderMapper providerMapper;
-	@Override
-	public int setproviderlogin(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
-	public Provider loginPage(String cellphone, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int setproviderregister(HttpServletRequest request) {
-		if (request.getParameter("cellphone").length()==0 && request.getParameter("password").length()==0) {
-			return 2;
-		}else if (request.getParameter("password").length()<6) {
-			return 3;
-		}
-		Provider provider=new Provider();
-  		provider.setId(request.getParameter("id"));
-  		provider.setCellphone(request.getParameter("cellphone"));
-  		provider.setPassword(request.getParameter("password"));
-		return providerMapper.insertProvider(provider);
-	}
+	/*
+	 * public int setproviderregister(HttpServletRequest request) { if
+	 * (request.getParameter("cellphone").length()==0 &&
+	 * request.getParameter("password").length()==0) { return 2; }else if
+	 * (request.getParameter("password").length()<6) { return 3; } Provider
+	 * provider=new Provider(); provider.setId(request.getParameter("id"));
+	 * provider.setCellphone(request.getParameter("cellphone"));
+	 * provider.setPassword(request.getParameter("password")); return
+	 * providerMapper.insertProvider(provider); }
+	 */
 
 	@Override
 	public List<Provider> getProviderList(HttpServletRequest request) {

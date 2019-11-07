@@ -15,19 +15,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.ProviderProdut;
-import com.datangedu.cn.service.BussinessOrderService;
 
-@Controller
-@RequestMapping("/bussinessordercontroller")
+
+
+		
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.datangedu.cn.model.sysUser.BusinessOrder;
+import com.datangedu.cn.model.sysUser.ProviderProdut;
+import com.datangedu.cn.service.BusinessOrderService;
+
+@RestController
+@RequestMapping("business")
 public class BussinessOrderController {
 	@Resource
-	BussinessOrderService bussinessOrderService;
+	BusinessOrderService businessOrderService;
+	/*
+	 * 根据服务商id获取订单列表
+	 */
+	@RequestMapping(value = "businessorderlistbyid", method = RequestMethod.GET)
+	public Map<String,Object> businessOrderList(HttpServletRequest request, String providerid){
+		System.out.println("businessOrderList start");
+		HttpSession session =  request.getSession();
+		System.out.println(providerid);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<BusinessOrder> businessOrderList = businessOrderService.getBusinessOrderListById(providerid);
+		map.put("businessOrderList", businessOrderList);
+		System.out.println("cellphone : " + businessOrderList.get(0).getMemberCellphone());
+		return map;
+	}
 	@ResponseBody
 	@RequestMapping(value="/bussinessorderlist",method=RequestMethod.GET)	
 	public Map<String,Object> bussinessOrderList(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderList=bussinessOrderService.getBussinessOrderList(request);
+		List<BusinessOrder> bussinessOrderList=businessOrderService.getBussinessOrderList(request);
 		map.put("bussinessOrderList", bussinessOrderList);
 		return map; 
 	}
@@ -36,7 +62,7 @@ public class BussinessOrderController {
 	@RequestMapping(value="/bussinessorderpage",method=RequestMethod.GET)	
 	public Map<String,Object> ProviderProdutPage(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderPage=bussinessOrderService.getBussinessOrderPage(request);
+		List<BusinessOrder> bussinessOrderPage=businessOrderService.getBussinessOrderPage(request);
 		map.put("bussinessOrderPage", bussinessOrderPage);
 		map.put("code", 1);
 		return map;
@@ -47,7 +73,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderToday(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderToday=bussinessOrderService.getBussinessOrderToday(request);
+		List<BusinessOrder> bussinessOrderToday=businessOrderService.getBussinessOrderToday(request);
 		map.put("bussinessOrderToday", bussinessOrderToday);
 		return map; 
 	}
@@ -57,7 +83,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderWeek(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderWeek=bussinessOrderService.getBussinessOrderWeek(request);
+		List<BusinessOrder> bussinessOrderWeek=businessOrderService.getBussinessOrderWeek(request);
 		map.put("bussinessOrderWeek", bussinessOrderWeek);
 		return map; 
 	}
@@ -67,7 +93,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderMonth(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderMonth=bussinessOrderService.getBussinessOrderMonth(request);
+		List<BusinessOrder> bussinessOrderMonth=businessOrderService.getBussinessOrderMonth(request);
 		map.put("bussinessOrderMonth", bussinessOrderMonth);
 		return map; 
 	}
@@ -77,7 +103,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderSum(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		int bussinessOrderSum=bussinessOrderService.getBussinessOrderSum(request);
+		int bussinessOrderSum=businessOrderService.getBussinessOrderSum(request);
 		map.put("bussinessOrderSum", bussinessOrderSum);
 		return map; 
 	}
@@ -87,7 +113,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderTodaySum(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		int bussinessOrderTodaySum=bussinessOrderService.getBussinessOrderTodaySum(request);
+		int bussinessOrderTodaySum=businessOrderService.getBussinessOrderTodaySum(request);
 		map.put("bussinessOrderTodaySum", bussinessOrderTodaySum);
 		return map; 
 	}
@@ -97,7 +123,7 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderWeekSum(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		int bussinessOrderWeekSum=bussinessOrderService.getBussinessOrderWeekSum(request);
+		int bussinessOrderWeekSum=businessOrderService.getBussinessOrderWeekSum(request);
 		map.put("bussinessOrderWeekSum", bussinessOrderWeekSum);
 		return map; 
 	}
@@ -107,12 +133,12 @@ public class BussinessOrderController {
 	public Map<String,Object> bussinessOrderMonthSum(HttpServletRequest request){
 		HttpSession session = request.getSession(); 
 		Map<String,Object> map=new HashMap<String,Object>();
-		int bussinessOrderMonthSum=bussinessOrderService.getBussinessOrderMonthSum(request);
+		int bussinessOrderMonthSum=businessOrderService.getBussinessOrderMonthSum(request);
 		map.put("bussinessOrderMonthSum", bussinessOrderMonthSum);
 		return map; 
 	}
 	
-	
+
 
 
 }

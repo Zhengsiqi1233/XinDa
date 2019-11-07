@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/providerproductcontroller/providerprodutlist",
+		url:"/providerProdut/providerprodutlist",
 		dataType:"json",
 		data:{
 			pagenum:20,
@@ -43,7 +43,7 @@ function delUser(id){
 	console.log("删除",id);
 	 $.ajax({
 			type:"post",
-			url:"/providerproductcontroller/providerprodutdelete",
+			url:"/providerProdut/providerprodutdelete",
 			data:{
 				id:id,
 				//name:value, 
@@ -56,7 +56,7 @@ function delUser(id){
 				if(data.code == 1){
 					$.ajax({
 						type:"get",
-						url:"/providerproductcontroller/providerprodutlist",
+						url:"/providerProdut/providerprodutlist",
 						
 						dataType:"json",
 						success:function(data){

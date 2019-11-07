@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessorderlist",
+		url:"/business/bussinessorderlist",
 		dataType:"json",
 		data:{
 			pagenum:20,

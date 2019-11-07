@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessorderlist",
+		url:"/business/bussinessorderlist",
 		dataType:"json",
 		data:{
 			pagenum:20,
@@ -35,7 +35,7 @@ $(function(){
 
 $.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordersum",
+		url:"/business/bussinessordersum",
 		dataType:"json",
 		success:function(data){
 			console.log("成功返回的数据",data);
@@ -68,7 +68,7 @@ function format(time){
 $(".todaylist").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordertoday",
+		url:"/business/bussinessordertoday",
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderList = data.bussinessOrderToday;
@@ -94,7 +94,7 @@ $(".todaylist").on("click",function(){
 	})
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordertodaysum",
+		url:"/business/bussinessordertodaysum",
 		dataType:"json",
 		success:function(data){
 			console.log("成功返回的数据",data);
@@ -121,7 +121,7 @@ $(".todaylist").on("click",function(){
 $(".weeklist").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessorderweek",
+		url:"/business/bussinessorderweek",
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderList = data.bussinessOrderWeek;
@@ -147,7 +147,7 @@ $(".weeklist").on("click",function(){
 	})
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessorderweeksum",
+		url:"/business/bussinessorderweeksum",
 		dataType:"json",
 		success:function(data){
 			console.log("成功返回的数据",data);
@@ -175,7 +175,7 @@ $(".weeklist").on("click",function(){
 $(".monthlist").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordermonth",
+		url:"/business/bussinessordermonth",
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderList = data.bussinessOrderMonth;
@@ -201,7 +201,7 @@ $(".monthlist").on("click",function(){
 	})
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordermonthsum",
+		url:"/business/bussinessordermonthsum",
 		dataType:"json",
 		success:function(data){
 			console.log("成功返回的数据",data);
@@ -229,7 +229,7 @@ $(".monthlist").on("click",function(){
 $(".alllist").on("click",function(){
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessorderlist",
+		url:"/business/bussinessorderlist",
 		data:{
 			pagenum:20,
 			pagesize:1,
@@ -259,7 +259,7 @@ $(".alllist").on("click",function(){
 	})
 	$.ajax({
 		type:"get",
-		url:"/bussinessordercontroller/bussinessordersum",
+		url:"/business/bussinessordersum",
 		dataType:"json",
 		success:function(data){
 			console.log("成功返回的数据",data);

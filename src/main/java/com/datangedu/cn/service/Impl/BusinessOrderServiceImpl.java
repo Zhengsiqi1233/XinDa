@@ -1,28 +1,30 @@
-  package com.datangedu.cn.service.Impl;
+package com.datangedu.cn.service.Impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
 import com.datangedu.cn.dao.mapper.BusinessOrderMapper;
-import com.datangedu.cn.dao.mapper.ProviderProdutMapper;
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.BusinessOrderExample;
-import com.datangedu.cn.model.sysUser.ProviderProdut;
-import com.datangedu.cn.model.sysUser.ProviderProdutExample;
-import com.datangedu.cn.service.BussinessOrderService;
-import com.datangedu.cn.service.ProviderProdutControllerService;
-
-@Service("BussinessOrderService")
-public class BussinessOrderServiceImpl implements BussinessOrderService {
-
+import com.datangedu.cn.service.BusinessOrderService;
+@Service
+public class BusinessOrderServiceImpl implements BusinessOrderService{
 	@Resource
 	BusinessOrderMapper businessOrderMapper;
-
+	/*
+	 * 根据服务商id获取订单
+	 */
+	@Override
+	public List<BusinessOrder> getBusinessOrderListById(String providerid) {
+		BusinessOrderExample businessOrderExaple = new BusinessOrderExample();
+		BusinessOrderExample.Criteria criteria = businessOrderExaple.createCriteria();
+		criteria.andProviderIdEqualTo(providerid);
+		return businessOrderMapper.selectByExample(businessOrderExaple);
+	}
 	@Override
 	public List<BusinessOrder> getBussinessOrderList(HttpServletRequest request) {
 		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
@@ -88,5 +90,6 @@ public class BussinessOrderServiceImpl implements BussinessOrderService {
 	public int getBussinessOrderMonthSum(HttpServletRequest request) {
 		return businessOrderMapper.selectByMonthSum();
 	}
+
 
 }

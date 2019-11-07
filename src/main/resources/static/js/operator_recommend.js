@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/providerproductcontroller/providerprodutlist",
+		url:"/providerProdut/providerprodutlist",
 		dataType:"json",
 		data:{
 			pagenum:20,
@@ -17,7 +17,7 @@ $(function(){
 					<td>${providerProdutList[i].serviceName}</td>
 					<td>${providerProdutList[i].serviceContent}</td>
 					<td>${providerProdutList[i].salesNum}</td>
-					<td>${providerProdutList[i].serviceName}</td>
+					<td>${providerProdutList[i].providerName}</td>
 					<td>¥${providerProdutList[i].price}</td>
 					<td><input class="checkbox" type="checkbox" /></td>
                     <td><input class="checkbox" type="checkbox" /></td>

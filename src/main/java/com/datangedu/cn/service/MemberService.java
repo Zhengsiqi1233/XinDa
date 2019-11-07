@@ -13,7 +13,9 @@ public interface MemberService {
 	public List<Member> findPassword(HttpServletRequest request);
 	
 	public int userRegion(HttpServletRequest request);
+	List<Member> getMemberList(HttpServletRequest request);
 
+	List<Member> getMemberPage(HttpServletRequest request);
 	
 
 }

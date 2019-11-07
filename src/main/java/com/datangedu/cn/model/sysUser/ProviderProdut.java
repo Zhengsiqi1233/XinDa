@@ -5,13 +5,13 @@ import java.util.Date;
 public class ProviderProdut {
     private String id;
 
+    private String providerName;
+
     private String providerId;
 
     private String serviceName;
 
     private String serviceInfo;
-
-    private String serviceImg;
 
     private String serviceContent;
 
@@ -29,12 +29,22 @@ public class ProviderProdut {
 
     private Integer status;
 
+    private byte[] serviceImg;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName == null ? null : providerName.trim();
     }
 
     public String getProviderId() {
@@ -59,14 +69,6 @@ public class ProviderProdut {
 
     public void setServiceInfo(String serviceInfo) {
         this.serviceInfo = serviceInfo == null ? null : serviceInfo.trim();
-    }
-
-    public String getServiceImg() {
-        return serviceImg;
-    }
-
-    public void setServiceImg(String serviceImg) {
-        this.serviceImg = serviceImg == null ? null : serviceImg.trim();
     }
 
     public String getServiceContent() {
@@ -131,5 +133,13 @@ public class ProviderProdut {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public byte[] getServiceImg() {
+        return serviceImg;
+    }
+
+    public void setServiceImg(byte[] serviceImg) {
+        this.serviceImg = serviceImg;
     }
 }

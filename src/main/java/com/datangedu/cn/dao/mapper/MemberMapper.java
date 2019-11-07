@@ -30,7 +30,12 @@ public interface MemberMapper {
 
     int updateByPrimaryKey(Member record);
 
+
     int updateByExample1(Member record);
 
 	List<Member> selectByLike(MemberExample memberExample);
+
+    
+  
+
 }

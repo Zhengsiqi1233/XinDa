@@ -18,17 +18,23 @@ public interface ProviderProdutMapper {
 
     int insertSelective(ProviderProdut record);
 
+    List<ProviderProdut> selectByExampleWithBLOBs(ProviderProdutExample example);
+
     List<ProviderProdut> selectByExample(ProviderProdutExample example);
 
     ProviderProdut selectByPrimaryKey(String id);
-    
-    List<ProviderProdut> selectByLike(ProviderProdutExample example);
 
     int updateByExampleSelective(@Param("record") ProviderProdut record, @Param("example") ProviderProdutExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") ProviderProdut record, @Param("example") ProviderProdutExample example);
 
     int updateByExample(@Param("record") ProviderProdut record, @Param("example") ProviderProdutExample example);
 
     int updateByPrimaryKeySelective(ProviderProdut record);
 
+    int updateByPrimaryKeyWithBLOBs(ProviderProdut record);
+
     int updateByPrimaryKey(ProviderProdut record);
+
+	List<ProviderProdut> selectByLike(ProviderProdutExample example);
 }
