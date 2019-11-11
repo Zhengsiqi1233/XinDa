@@ -92,12 +92,24 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from member
     where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.MemberExample" resultMap="BaseResultMap">
+    select 
+    *
+    from member
+    where name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from member

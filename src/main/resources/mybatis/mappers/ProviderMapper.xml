@@ -8,7 +8,6 @@
     <result column="provider_info_member" jdbcType="VARCHAR" property="providerInfoMember" />
     <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="provider_img" jdbcType="VARCHAR" property="providerImg" />
     <result column="region" jdbcType="VARCHAR" property="region" />
     <result column="wechat" jdbcType="VARCHAR" property="wechat" />
     <result column="qq" jdbcType="VARCHAR" property="qq" />
@@ -19,6 +18,12 @@
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="recommend" jdbcType="INTEGER" property="recommend" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.datangedu.cn.model.sysUser.Provider">
+    <result column="provider_img" jdbcType="LONGVARBINARY" property="providerImg" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,9 +84,29 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, provider_info_user, provider_info_member, cellphone, password, provider_img, 
-    region, wechat, qq, email, auth_file, work_time, create_time, tel, recommend, status
+    id, name, provider_info_user, provider_info_member, cellphone, password, region, 
+    wechat, qq, email, auth_file, work_time, create_time, tel, recommend, status, province, 
+    city, area
   </sql>
+  <sql id="Blob_Column_List">
+    provider_img
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from provider
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -96,12 +121,42 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from provider
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByCommon" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where status=1
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByStop" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where status=2
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider
     where id = #{id,jdbcType=VARCHAR}
@@ -115,16 +170,18 @@
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.Provider">
     insert into provider (id, name, provider_info_user, 
       provider_info_member, cellphone, password, 
-      provider_img, region, wechat, 
-      qq, email, auth_file, 
-      work_time, create_time, tel, 
-      recommend, status)
+      region, wechat, qq, 
+      email, auth_file, work_time, 
+      create_time, tel, recommend, 
+      status, province, city, 
+      area, provider_img)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{providerInfoUser,jdbcType=VARCHAR}, 
       #{providerInfoMember,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{providerImg,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{authFile,jdbcType=VARCHAR}, 
-      #{workTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tel,jdbcType=VARCHAR}, 
-      #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+      #{region,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{authFile,jdbcType=VARCHAR}, #{workTime,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{tel,jdbcType=VARCHAR}, #{recommend,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{providerImg,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.Provider">
     insert into provider
@@ -146,9 +203,6 @@
       </if>
       <if test="password != null">
         password,
-      </if>
-      <if test="providerImg != null">
-        provider_img,
       </if>
       <if test="region != null">
         region,
@@ -180,6 +234,18 @@
       <if test="status != null">
         status,
       </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="providerImg != null">
+        provider_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -199,9 +265,6 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="providerImg != null">
-        #{providerImg,jdbcType=VARCHAR},
       </if>
       <if test="region != null">
         #{region,jdbcType=VARCHAR},
@@ -233,6 +296,18 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="providerImg != null">
+        #{providerImg,jdbcType=LONGVARBINARY},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.datangedu.cn.model.sysUser.ProviderExample" resultType="java.lang.Long">
@@ -261,9 +336,6 @@
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.providerImg != null">
-        provider_img = #{record.providerImg,jdbcType=VARCHAR},
       </if>
       <if test="record.region != null">
         region = #{record.region,jdbcType=VARCHAR},
@@ -295,7 +367,45 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerImg != null">
+        provider_img = #{record.providerImg,jdbcType=LONGVARBINARY},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update provider
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      provider_info_user = #{record.providerInfoUser,jdbcType=VARCHAR},
+      provider_info_member = #{record.providerInfoMember,jdbcType=VARCHAR},
+      cellphone = #{record.cellphone,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      region = #{record.region,jdbcType=VARCHAR},
+      wechat = #{record.wechat,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      auth_file = #{record.authFile,jdbcType=VARCHAR},
+      work_time = #{record.workTime,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      recommend = #{record.recommend,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      provider_img = #{record.providerImg,jdbcType=LONGVARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -308,7 +418,6 @@
       provider_info_member = #{record.providerInfoMember,jdbcType=VARCHAR},
       cellphone = #{record.cellphone,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      provider_img = #{record.providerImg,jdbcType=VARCHAR},
       region = #{record.region,jdbcType=VARCHAR},
       wechat = #{record.wechat,jdbcType=VARCHAR},
       qq = #{record.qq,jdbcType=VARCHAR},
@@ -318,7 +427,10 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       tel = #{record.tel,jdbcType=VARCHAR},
       recommend = #{record.recommend,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -340,9 +452,6 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="providerImg != null">
-        provider_img = #{providerImg,jdbcType=VARCHAR},
       </if>
       <if test="region != null">
         region = #{region,jdbcType=VARCHAR},
@@ -374,17 +483,28 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="providerImg != null">
+        provider_img = #{providerImg,jdbcType=LONGVARBINARY},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.datangedu.cn.model.sysUser.Provider">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.datangedu.cn.model.sysUser.Provider">
     update provider
     set name = #{name,jdbcType=VARCHAR},
       provider_info_user = #{providerInfoUser,jdbcType=VARCHAR},
       provider_info_member = #{providerInfoMember,jdbcType=VARCHAR},
       cellphone = #{cellphone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      provider_img = #{providerImg,jdbcType=VARCHAR},
       region = #{region,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},
       qq = #{qq,jdbcType=VARCHAR},
@@ -394,7 +514,33 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       tel = #{tel,jdbcType=VARCHAR},
       recommend = #{recommend,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      provider_img = #{providerImg,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.datangedu.cn.model.sysUser.Provider">
+    update provider
+    set name = #{name,jdbcType=VARCHAR},
+      provider_info_user = #{providerInfoUser,jdbcType=VARCHAR},
+      provider_info_member = #{providerInfoMember,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      auth_file = #{authFile,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      tel = #{tel,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -15,7 +15,15 @@ import javax.imageio.ImageIO;
 
 public class ImgCodeUtil {
 	private static int width = 110;// 定义图片的width
+<<<<<<< HEAD
     private static int height = 40;// 定义图片的height
+=======
+
+    private static int height = 45;// 定义图片的height
+
+
+
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
     private static int codeCount = 4;// 定义图片上显示验证码的个数
     private static int xx = 20;
     private static int fontHeight = 40;

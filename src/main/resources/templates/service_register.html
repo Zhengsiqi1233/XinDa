@@ -8,6 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/public.css">
     <link rel="stylesheet" href="./css/e-commerce_register.css">
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+
 </head>
 
 <body>
@@ -29,26 +32,40 @@
         <h2 class="title">信达服务商端</h2>
         <ul class="main">
             <ul class="input">
+             
                 <li>
-                    <input type="text" placeholder="请输入手机号">
+                    
+
+                    <input type="text"  class="name" placeholder="请输入姓名">
+
                 </li>
                 <li>
-                    <input type="text" class="code" placeholder="请输入验证码">
-                    <img src="./images/code.png" alt="">
+                    <input type="text"  class="cellphone" placeholder="请输入手机号">
                 </li>
+                 <li>
+                    <input type="text" class="password" placeholder="请设置密码">
+                </li>
+               
                 <li>
-                    <select name="" id="">
-                        <option value="">省</option>
+                	   <select name="" id="province" onchange="changeprovince()" >
+                    	<option value="">省</option>
                     </select>
-                    <select name="" id="">
+                    <select name="" id="city" onchange="changecity()" >
                         <option value="">市</option>
                     </select>
-                    <select name="" id="">
-                        <option value="">区</option>
+                    <select name="" id="area" >
+                        <option value="" >区</option>
                     </select>
                 </li>
                 <li>
-                    <input type="text" placeholder="请设置密码">
+
+                    <input class="p_password" type="text" placeholder="请设置密码">
+
+                    <input type="text" class="input-code" placeholder="请输入验证码">
+                </li>
+                <li>
+                	<img onclick="imgChange()" class="codeimg" src="" />
+
                 </li>
                 <li>
                     <p class="login-btn font-aqua">立即注册</p>
@@ -63,7 +80,22 @@
             </ul>
         </ul>
     </ul>
-            <script src="./js/e-commerce_register.js"></script>
+            <script src="./js/service_register.js"></script>
+
+
+            <script type="text/javascript">
+    $(function(){
+    	var time=new Date().getTime();
+		$(".codeimg").attr("src","imgGetCode?t="+time);
+	})
+    	function imgChange(){
+    		//获得验证码图片对象
+    		var time=new Date().getTime();
+    		$(".codeimg").attr("src","imgGetCode?t="+time);
+    	}
+    
+    </script>
+
 </body>
 
 </html>

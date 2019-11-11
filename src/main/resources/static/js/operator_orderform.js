@@ -1,3 +1,45 @@
+$(function(){
+	$.ajax({
+		type:"get",
+		url:"/business/bussinessorderlist",
+		dataType:"json",
+		data:{
+			pagenum:20,
+			pagesize:1,
+		},
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var bussinessOrderList = data.bussinessOrderList;
+			$("#bussinessorderlist").html("");
+			var txt = "";
+			for(var i = 0; i < bussinessOrderList.length; i ++){
+				txt += `<tr> 
+					<td>${bussinessOrderList[i].businessNo}</td>
+					<td>${bussinessOrderList[i].memberName}</td>					
+					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>
+					<td>¥${bussinessOrderList[i].orderSum}</td>
+					<td>${format(bussinessOrderList[i].createTime)}</td>
+                    <td>${bussinessOrderList[i].status}</td>
+                    <td>
+                        <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                    </td>
+					
+				</tr>`
+				}
+			console.log(txt);
+			// var tbody = $("<tbody></tbody>").html(txt);
+			$("#bussinessorderlist").html(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+function format(time){
+	var date = new Date(time);
+	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+}
 $(".user-arrow-down").on("click",function(){
     if($(".dropdown").is(":hidden")){
         $(".dropdown").show();

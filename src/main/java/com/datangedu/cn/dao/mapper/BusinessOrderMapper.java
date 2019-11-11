@@ -3,8 +3,10 @@ package com.datangedu.cn.dao.mapper;
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.BusinessOrderExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface BusinessOrderMapper {
     long countByExample(BusinessOrderExample example);
 
@@ -27,4 +29,21 @@ public interface BusinessOrderMapper {
     int updateByPrimaryKeySelective(BusinessOrder record);
 
     int updateByPrimaryKey(BusinessOrder record);
+    
+    List<BusinessOrder> selectByLike(BusinessOrderExample example);
+
+	List<BusinessOrder> selectByToday(BusinessOrderExample example);
+
+	List<BusinessOrder> selectByWeek(BusinessOrderExample example);
+
+	List<BusinessOrder> selectByMonth(BusinessOrderExample example);
+
+	int selectBySum();
+	
+	int selectByTodaySum();
+	
+	int selectByWeekSum();
+	
+	int selectByMonthSum();
+
 }

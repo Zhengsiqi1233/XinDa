@@ -15,8 +15,6 @@ public class Provider {
 
     private String password;
 
-    private String providerImg;
-
     private String region;
 
     private String wechat;
@@ -36,6 +34,14 @@ public class Provider {
     private Integer recommend;
 
     private Integer status;
+
+    private String province;
+
+    private String city;
+
+    private String area;
+
+    private byte[] providerImg;
 
     public String getId() {
         return id;
@@ -83,14 +89,6 @@ public class Provider {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getProviderImg() {
-        return providerImg;
-    }
-
-    public void setProviderImg(String providerImg) {
-        this.providerImg = providerImg == null ? null : providerImg.trim();
     }
 
     public String getRegion() {
@@ -171,5 +169,37 @@ public class Provider {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
+    }
+
+    public byte[] getProviderImg() {
+        return providerImg;
+    }
+
+    public void setProviderImg(byte[] providerImg) {
+        this.providerImg = providerImg;
     }
 }

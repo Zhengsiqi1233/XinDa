@@ -5,6 +5,35 @@ import java.util.Date;
 import java.util.List;
 
 public class ProviderProdutExample {
+	
+    protected int pageNum;
+	
+	protected int pageSize;
+	
+	protected String likeName;
+    public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = (pageSize-1)*pageNum;
+	}
+
+	public String getLikeName() {
+		return likeName;
+	}
+
+	public void setLikeName(String likeName) {
+		this.likeName = likeName;
+	}
     protected String orderByClause;
 
     protected boolean distinct;
@@ -62,6 +91,9 @@ public class ProviderProdutExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+        likeName=null;
+        pageNum=3;
+        pageSize=1;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -172,6 +204,76 @@ public class ProviderProdutExample {
 
         public Criteria andIdNotBetween(String value1, String value2) {
             addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameIsNull() {
+            addCriterion("provider_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameIsNotNull() {
+            addCriterion("provider_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameEqualTo(String value) {
+            addCriterion("provider_name =", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameNotEqualTo(String value) {
+            addCriterion("provider_name <>", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameGreaterThan(String value) {
+            addCriterion("provider_name >", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameGreaterThanOrEqualTo(String value) {
+            addCriterion("provider_name >=", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameLessThan(String value) {
+            addCriterion("provider_name <", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameLessThanOrEqualTo(String value) {
+            addCriterion("provider_name <=", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameLike(String value) {
+            addCriterion("provider_name like", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameNotLike(String value) {
+            addCriterion("provider_name not like", value, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameIn(List<String> values) {
+            addCriterion("provider_name in", values, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameNotIn(List<String> values) {
+            addCriterion("provider_name not in", values, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameBetween(String value1, String value2) {
+            addCriterion("provider_name between", value1, value2, "providerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andProviderNameNotBetween(String value1, String value2) {
+            addCriterion("provider_name not between", value1, value2, "providerName");
             return (Criteria) this;
         }
 
@@ -382,76 +484,6 @@ public class ProviderProdutExample {
 
         public Criteria andServiceInfoNotBetween(String value1, String value2) {
             addCriterion("service_info not between", value1, value2, "serviceInfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgIsNull() {
-            addCriterion("service_img is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgIsNotNull() {
-            addCriterion("service_img is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgEqualTo(String value) {
-            addCriterion("service_img =", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgNotEqualTo(String value) {
-            addCriterion("service_img <>", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgGreaterThan(String value) {
-            addCriterion("service_img >", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgGreaterThanOrEqualTo(String value) {
-            addCriterion("service_img >=", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgLessThan(String value) {
-            addCriterion("service_img <", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgLessThanOrEqualTo(String value) {
-            addCriterion("service_img <=", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgLike(String value) {
-            addCriterion("service_img like", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgNotLike(String value) {
-            addCriterion("service_img not like", value, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgIn(List<String> values) {
-            addCriterion("service_img in", values, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgNotIn(List<String> values) {
-            addCriterion("service_img not in", values, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgBetween(String value1, String value2) {
-            addCriterion("service_img between", value1, value2, "serviceImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andServiceImgNotBetween(String value1, String value2) {
-            addCriterion("service_img not between", value1, value2, "serviceImg");
             return (Criteria) this;
         }
 
