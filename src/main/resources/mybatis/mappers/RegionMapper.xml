@@ -84,6 +84,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+<select id="queryByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from region
+  where parent_id = #{id,jdbcType=INTEGER}
+</select>
+
   <delete id="deleteByExample" parameterType="com.datangedu.cn.model.sysUser.RegionExample">
     delete from region
     <if test="_parameter != null">

@@ -10,10 +10,12 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="region" jdbcType="VARCHAR" property="region" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="order_sum" jdbcType="INTEGER" property="orderSum" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, gender, cellphone, head_img, password, create_time, email, region, order_num, 
-    order_sum, status
+    id, name, gender, cellphone, head_img, password, create_time, email, order_num, order_sum, 
+    status, province, city, area
   </sql>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.MemberExample" resultMap="BaseResultMap">
     select
@@ -110,14 +112,14 @@
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.Member">
     insert into member (id, name, gender, 
       cellphone, head_img, password, 
-      create_time, email, region, 
-      order_num, order_sum, status
-      )
+      create_time, email, order_num, 
+      order_sum, status, province, 
+      city, area)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
       #{cellphone,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=INTEGER}, #{orderSum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
+      #{orderSum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.Member">
     insert into member
@@ -146,9 +148,6 @@
       <if test="email != null">
         email,
       </if>
-      <if test="region != null">
-        region,
-      </if>
       <if test="orderNum != null">
         order_num,
       </if>
@@ -157,6 +156,15 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -184,9 +192,6 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="region != null">
-        #{region,jdbcType=VARCHAR},
-      </if>
       <if test="orderNum != null">
         #{orderNum,jdbcType=INTEGER},
       </if>
@@ -195,6 +200,15 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,9 +245,6 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.region != null">
-        region = #{record.region,jdbcType=VARCHAR},
-      </if>
       <if test="record.orderNum != null">
         order_num = #{record.orderNum,jdbcType=INTEGER},
       </if>
@@ -242,6 +253,15 @@
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -258,13 +278,19 @@
       password = #{record.password,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       email = #{record.email,jdbcType=VARCHAR},
-      region = #{record.region,jdbcType=VARCHAR},
       order_num = #{record.orderNum,jdbcType=INTEGER},
       order_sum = #{record.orderSum,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByExample1" parameterType="com.datangedu.cn.model.sysUser.Member">
+  	 update member set password = #{password,jdbcType=VARCHAR}
+  	 where cellphone = #{cellphone,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.datangedu.cn.model.sysUser.Member">
     update member
@@ -290,9 +316,6 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="region != null">
-        region = #{region,jdbcType=VARCHAR},
-      </if>
       <if test="orderNum != null">
         order_num = #{orderNum,jdbcType=INTEGER},
       </if>
@@ -301,6 +324,15 @@
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -314,10 +346,12 @@
       password = #{password,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       email = #{email,jdbcType=VARCHAR},
-      region = #{region,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},
       order_sum = #{orderSum,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
