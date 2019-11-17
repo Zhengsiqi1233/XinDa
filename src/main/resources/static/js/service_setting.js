@@ -38,10 +38,17 @@ $(".cancel").on("click", function(event){
     console.log("取消");
 })
 $(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})
+
+$(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	$.ajax({
 		type:"get",
-		url:"/providerProdut/providermessage",
+		url:"/provider/providermessage",
 		data:{
 			providerid:providerid,
 		},

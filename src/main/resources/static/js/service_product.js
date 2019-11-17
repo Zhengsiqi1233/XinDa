@@ -129,6 +129,13 @@ $(".cancel").on("click", function(event){
     $(".masking").hide();
     console.log("取消");
 })
+$(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})
+
 function change(produtid){
 	console.log("改变状态", produtid);
 	 $.ajax({
@@ -187,6 +194,7 @@ function change(produtid){
 			}
 	 })	
 }
+
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	

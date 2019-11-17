@@ -16,6 +16,7 @@
     <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="produt_id" jdbcType="VARCHAR" property="produtId" />
+<<<<<<< HEAD
     <association property="member" javaType="com.datangedu.cn.model.sysUser.Member" resultMap="memDo"/>
     <association property="produt" javaType="com.datangedu.cn.model.sysUser.ProviderProdut" resultMap="produtDo"/>
     
@@ -32,6 +33,8 @@
   <result column="service_info" property="serviceInfo" jdbcType="VARCHAR"/>  
      
     
+=======
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -93,7 +96,7 @@
   </sql>
   <sql id="Base_Column_List">
     business_no, order_info, member_id, member_name, member_cellphone, order_sum, create_time, 
-    evaluate, pay_type, status, provider_id, provider_name, order_num
+    evaluate, pay_type, status, provider_id, provider_name, order_num, produt_id
   </sql>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
     select
@@ -105,6 +108,7 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+<<<<<<< HEAD
     order by create_time
     <!-- <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
@@ -177,6 +181,10 @@
     from business_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
+=======
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
     </if>
     and status=2 
    <!--  <if test="pageSize>=0">
@@ -204,6 +212,7 @@
     from business_order
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </select>
+<<<<<<< HEAD
   <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
      select
     <if test="distinct">
@@ -296,6 +305,8 @@
     select sum(order_sum) allSum from business_order
     where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
   </select>
+=======
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
   set foreign_key_checks=0
     delete from business_order
@@ -317,12 +328,12 @@
       member_name, member_cellphone, order_sum, 
       create_time, evaluate, pay_type, 
       status, provider_id, provider_name, 
-      order_num)
+      order_num, produt_id)
     values (#{businessNo,jdbcType=VARCHAR}, #{orderInfo,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
       #{memberName,jdbcType=VARCHAR}, #{memberCellphone,jdbcType=VARCHAR}, #{orderSum,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{evaluate,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{providerId,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=INTEGER})
+      #{orderNum,jdbcType=INTEGER}, #{produtId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order
@@ -366,6 +377,9 @@
       <if test="orderNum != null">
         order_num,
       </if>
+      <if test="produtId != null">
+        produt_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="businessNo != null">
@@ -406,6 +420,9 @@
       </if>
       <if test="orderNum != null">
         #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="produtId != null">
+        #{produtId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -457,6 +474,9 @@
       <if test="record.orderNum != null">
         order_num = #{record.orderNum,jdbcType=INTEGER},
       </if>
+      <if test="record.produtId != null">
+        produt_id = #{record.produtId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -476,7 +496,8 @@
       status = #{record.status,jdbcType=INTEGER},
       provider_id = #{record.providerId,jdbcType=VARCHAR},
       provider_name = #{record.providerName,jdbcType=VARCHAR},
-      order_num = #{record.orderNum,jdbcType=INTEGER}
+      order_num = #{record.orderNum,jdbcType=INTEGER},
+      produt_id = #{record.produtId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -520,6 +541,9 @@
       <if test="orderNum != null">
         order_num = #{orderNum,jdbcType=INTEGER},
       </if>
+      <if test="produtId != null">
+        produt_id = #{produtId,jdbcType=VARCHAR},
+      </if>
     </set>
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
@@ -541,7 +565,8 @@
       status = #{status,jdbcType=INTEGER},
       provider_id = #{providerId,jdbcType=VARCHAR},
       provider_name = #{providerName,jdbcType=VARCHAR},
-      order_num = #{orderNum,jdbcType=INTEGER}
+      order_num = #{orderNum,jdbcType=INTEGER},
+      produt_id = #{produtId,jdbcType=VARCHAR}
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </update>
 </mapper>

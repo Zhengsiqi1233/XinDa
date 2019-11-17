@@ -28,6 +28,7 @@ public class BusinessOrder {
     private String providerName;
 
     private Integer orderNum;
+<<<<<<< HEAD
         
     private String produtId;
     
@@ -62,6 +63,12 @@ public class BusinessOrder {
 	}
 
 	public String getBusinessNo() {
+=======
+
+    private String produtId;
+
+    public String getBusinessNo() {
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
         return businessNo;
     }
 
@@ -163,5 +170,13 @@ public class BusinessOrder {
 
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
+    }
+
+    public String getProdutId() {
+        return produtId;
+    }
+
+    public void setProdutId(String produtId) {
+        this.produtId = produtId == null ? null : produtId.trim();
     }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.datangedu.cn.model.sysUser.BusinessOrder;
+import com.datangedu.cn.model.sysUser.Cart;
+import com.datangedu.cn.model.sysUser.ProviderProdut;
 
 public interface BusinessOrderService {
 
@@ -28,6 +30,7 @@ public interface BusinessOrderService {
 
 	public int getBussinessOrderMonthSum(HttpServletRequest request);
 
+<<<<<<< HEAD
 	public List<BusinessOrder> getBusinessOrderListByIdStop(String providerid);
 
 	public List<BusinessOrder> getBussinessOrderLike(HttpServletRequest request,String providerid);
@@ -41,6 +44,17 @@ public interface BusinessOrderService {
 	public List<BusinessOrder> getBussinessNoLike(HttpServletRequest request);
 
 	public int evaluateInsert(HttpServletRequest request);
+=======
+	
+
+	public List<BusinessOrder> getBusinessOrderInsert(HttpServletRequest request, String memberid, String memberName);
+
+	public List<BusinessOrder> getBusinessOrderByMemberId(HttpServletRequest request, String memberid);
+
+	public int getBusinessPay(HttpServletRequest request, String businessNo,String val);
+
+	public List<Cart> getBusinessOrderName(String temp1);
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 
 
 }

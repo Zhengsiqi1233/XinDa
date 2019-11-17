@@ -48,6 +48,9 @@ import com.datangedu.cn.service.Impl.ProviderProdutServiceImpl;
 @Controller
 @RequestMapping("/providerProdut")
 public class ProviderProdutController {
+<<<<<<< HEAD
+	
+=======
 	@Resource
 	ProviderProdutService providerProdutService ;
 	@Resource
@@ -134,54 +137,6 @@ public class ProviderProdutController {
 	
 		return "service_product";	
 	}
-	/*
-	 * 获得服务商信息
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/providermessage",method = RequestMethod.GET)
-	public Map<String,Object> providerMessage(HttpServletRequest request, String providerid){
-		System.out.println("providerMessage start");
-	
-		HttpSession session =  request.getSession();
-		session.setAttribute("providerid", providerid);
-		System.out.println(providerid);
-		Map<String,Object> map = new HashMap<String,Object>();
-		List<Provider> providerList = providerService.getProviderMessage(providerid);
-		Region region = new Region();
-		RegionExample regionExample = new RegionExample();
-		RegionExample.Criteria criteria = regionExample.createCriteria();
-		criteria.andIdEqualTo(providerList.get(0).getProvince());
-		map.put("providerProvince", regionMapper.selectByExample(regionExample));
-		
-		RegionExample regionExample1 = new RegionExample();
-		RegionExample.Criteria criteria1 = regionExample1.createCriteria();
-		criteria1.andIdEqualTo(providerList.get(0).getCity());
-		map.put("providerCity", regionMapper.selectByExample(regionExample1));
-		RegionExample regionExample2 = new RegionExample();
-		RegionExample.Criteria criteria2 = regionExample2.createCriteria();
-		criteria2.andIdEqualTo(providerList.get(0).getArea());
-		map.put("providerArea", regionMapper.selectByExample(regionExample2));
-				
-		map.put("providerList", providerList);
-		return map;
-	}
-	
-	@RequestMapping(value = "/headImg", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<byte[]> headImg( String providerid) throws Exception{
-
-		byte[] imageContent ;
-		// 根据id获取当前用户的信息
-
-	    List<Provider> provider =   providerService.getProviderMessage(providerid);	        
-		imageContent = provider.get(0).getProviderImg();
-		System.out.println("图片==="+provider.get(0).getProviderImg());
-				        
-		// 设置http头部信息
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		// 返回响应实体
-		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-	}
 	
 	@ResponseBody
 	@RequestMapping(value="/providerprodutlist",method=RequestMethod.GET)	
@@ -210,5 +165,22 @@ public class ProviderProdutController {
 		map.put("code", 1);
 		return map;
 	}
+<<<<<<< HEAD
+	/*
+	 * 修改服务商信息
+	 */
+	@RequestMapping("/providerupdate")
+	public String providerUpdate(HttpServletRequest request, MultipartFile file,String name, String province, String city, String area, String cellphone, String wechat, String qq, String email){
+		System.out.println("providerprodutUpdate start");
+		Map<String,Object> map = new HashMap<String,Object>();
+	    providerProdutService.providerUpdate(request, file, name, province, city, area, cellphone, wechat, qq, email);
 
+		return "service_setting";	
+	
+	}
+=======
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
+>>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
+
+	
 }

@@ -26,6 +26,15 @@ $(".order2").on("click", function(){
 $(".order3").on("click", function(){
     $(".main-top li").eq(3).text("未通过用户");
 })
+<<<<<<< HEAD
+=======
+$(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})
+
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	function format(time){
@@ -211,6 +220,7 @@ $(".businessorderstop").on("click",function(){
 					console.log("失败后返回的数据",data);
 				}
 		})
+<<<<<<< HEAD
 		$(".search-btn").on("click",function(){
             	var value=$(".searchlist").val();
             	/*var providerid = sessionStorage.getItem("providerid");
@@ -259,3 +269,7 @@ $(".businessorderstop").on("click",function(){
             })
 })
 		
+=======
+		
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b

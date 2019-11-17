@@ -44,4 +44,6 @@ public interface ProviderMapper {
 
 	List<Provider> selectByCommon(ProviderExample providerExample);
 
+	int saveUserImg(Provider provider);
+
 }

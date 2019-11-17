@@ -5,8 +5,6 @@ import java.util.Date;
 public class ProviderProdut {
     private String id;
 
-    private String providerName;
-
     private String providerId;
 
     private String serviceName;
@@ -29,6 +27,8 @@ public class ProviderProdut {
 
     private Integer status;
 
+    private String providerName;
+
     private byte[] serviceImg;
 
     public String getId() {
@@ -37,14 +37,6 @@ public class ProviderProdut {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName == null ? null : providerName.trim();
     }
 
     public String getProviderId() {
@@ -133,6 +125,14 @@ public class ProviderProdut {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName == null ? null : providerName.trim();
     }
 
     public byte[] getServiceImg() {

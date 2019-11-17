@@ -24,6 +24,10 @@ public interface ProviderService {
 
 	public List<Provider> getProviderStop(HttpServletRequest request);
 
+	public List<Provider> getProviderStore(String providerid);
+
+	public void saveUserImg(Provider provider) throws Exception;
+
 	
 
 }

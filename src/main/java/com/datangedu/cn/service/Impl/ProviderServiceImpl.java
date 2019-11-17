@@ -82,6 +82,7 @@ public class ProviderServiceImpl implements ProviderService{
 	    provider.setProvince(province);
 	    provider.setCity(city);
 	    provider.setArea(area);
+
 		return providerMapper.insert(provider);
 	    }
 	/*
@@ -124,6 +125,26 @@ public class ProviderServiceImpl implements ProviderService{
 		providerExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
 		return providerMapper.selectByStop(providerExample);
 	}
+	/*
+	 * 店铺信息
+	 */
+	@Override
+	public List<Provider> getProviderStore(String providerid) {
+		ProviderExample providerExample = new ProviderExample();
+		ProviderExample.Criteria criteria = providerExample.createCriteria();
+		criteria.andIdEqualTo(providerid);
+		return providerMapper.selectByExample(providerExample);
+		
+	}
+	@Override
+	public void saveUserImg(Provider provider) throws Exception {
+			int i = providerMapper.saveUserImg(provider);
+			if(i!=1) {
+				throw new Exception("更新用户头像失败");
+			}
+		}
+
+		
 	
 
 
