@@ -16,6 +16,25 @@
     <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="produt_id" jdbcType="VARCHAR" property="produtId" />
+<<<<<<< HEAD
+    <association property="member" javaType="com.datangedu.cn.model.sysUser.Member" resultMap="memDo"/>
+    <association property="produt" javaType="com.datangedu.cn.model.sysUser.ProviderProdut" resultMap="produtDo"/>
+    
+  </resultMap>
+  <resultMap type="com.datangedu.cn.model.sysUser.Member" id="memDo">
+  <id column="id" property="id" jdbcType="VARCHAR"/>
+  <result column="name" property="name" jdbcType="VARCHAR"/>  
+  </resultMap>
+  <resultMap type="com.datangedu.cn.model.sysUser.ProviderProdut" id="produtDo">
+  <id column="id" property="id" jdbcType="VARCHAR"/>
+  <result column="price" property="price" jdbcType="VARCHAR"/>
+  <result column="service_name" property="serviceName" jdbcType="VARCHAR"/> 
+  <result column="provider_name" property="providerName" jdbcType="VARCHAR"/>  
+  <result column="service_info" property="serviceInfo" jdbcType="VARCHAR"/>  
+     
+    
+=======
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,9 +108,103 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+<<<<<<< HEAD
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if> -->
+  </select>
+   <select id="selectByOther" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+   select
+     business_no, order_info, member_id, member_name, member_cellphone, order_sum,
+     evaluate, pay_type,order_num,business_order.provider_id,business_order.status,
+     business_order.produt_id,provider_produt.price,provider_produt.service_name,
+     provider_produt.provider_name,business_order.create_time,provider_produt.service_info
+    from business_order,provider_produt
+    where
+    business_order.produt_id=provider_produt.id
+    order by status desc
+    <!-- <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if> -->
+    
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+    <select id="selectByPay" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+     <!-- select
+     business_no, order_info, member_id, member_name, member_cellphone, order_sum,
+     evaluate, pay_type,order_num,business_order.provider_id,business_order.status,
+     business_order.produt_id,provider_produt.price,provider_produt.service_name,
+     provider_produt.provider_name,business_order.create_time
+     from business_order,provider_produt
+     <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+     and
+     business_order.produt_id=provider_produt.id -->
+      select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectNoByLike" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    business_no, order_info, member_id, member_name, member_cellphone, order_sum,
+     evaluate, pay_type,order_num,business_order.provider_id,business_order.status,
+     business_order.produt_id,provider_produt.price,provider_produt.service_name,
+     provider_produt.provider_name,business_order.create_time
+    from business_order,provider_produt
+    where 
+    business_order.produt_id=provider_produt.id
+    and business_no like '%${likeName}%'
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if> -->
+  </select>
+  
+  <select id="selectByCommon" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+   select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+=======
     <if test="orderByClause != null">
       order by ${orderByClause}
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
     </if>
+    and status=2 
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectByStop" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    and status=1
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -99,16 +212,117 @@
     from business_order
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </select>
+<<<<<<< HEAD
+  <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+     select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    and order_info like '%${likeName}%'
+    and status=2 
+    order by create_time
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if> -->
+  </select>
+  <select id="selectByLikeInfoStop" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+     select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    and order_info like '%${likeName}%'
+    and status=1
+    order by create_time
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if> -->
+  </select>
+   <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where business_no like '%${likeName}%'
+    order by create_time
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if>
+  </select>
+  <select id="selectByToday" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where TO_DAYS(create_time)=TO_DAYS(NOW())
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectByWeek" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where YEARWEEK(DATE_FORMAT(create_time,'%Y-%m-%d'))=YEARWEEK(NOW())
+    order by create_time
+    <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectByMonth" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+    select 
+    *
+    from business_order
+    where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+    order by create_time
+   <!-- <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> -->
+  </select>
+  <select id="selectBySum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+  </select>
+  <select id="selectByTodaySum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where TO_DAYS(create_time)=TO_DAYS(NOW())
+  </select>
+  <select id="selectByWeekSum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where YEARWEEK(DATE_FORMAT(create_time,'%Y-%m-%d'))=YEARWEEK(NOW())
+  </select>
+  <select id="selectByMonthSum" resultType="java.lang.Integer">
+    select sum(order_sum) allSum from business_order
+    where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+  </select>
+=======
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  set foreign_key_checks=0
     delete from business_order
-    where business_no = #{businessNo,jdbcType=VARCHAR}
+    where business_no = #{businessNo,jdbcType=VARCHAR}  
+       set foreign_key_checks=1
   </delete>
   <delete id="deleteByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample">
+    set foreign_key_checks=0
+    
     delete from business_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+     set foreign_key_checks=1
   </delete>
+  
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     insert into business_order (business_no, order_info, member_id, 
       member_name, member_cellphone, order_sum, 
@@ -332,6 +546,11 @@
       </if>
     </set>
     where business_no = #{businessNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByNo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
+    update business_order
+    set evaluate = #{evaluate,jdbcType=VARCHAR}
+    where business_no = #{business_no,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     update business_order

@@ -10,7 +10,6 @@ $(".login-btn").on("click", function(){
     		cellphone:cellphone,
     		password:password,
     		inputCode:inputCode,
-    		
     	},
     	dataType:"json",
     	success:function(data){

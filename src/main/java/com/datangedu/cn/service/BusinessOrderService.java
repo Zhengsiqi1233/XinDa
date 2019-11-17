@@ -30,6 +30,21 @@ public interface BusinessOrderService {
 
 	public int getBussinessOrderMonthSum(HttpServletRequest request);
 
+<<<<<<< HEAD
+	public List<BusinessOrder> getBusinessOrderListByIdStop(String providerid);
+
+	public List<BusinessOrder> getBussinessOrderLike(HttpServletRequest request,String providerid);
+
+	public List<BusinessOrder> getBussinessOrderLikeStop(HttpServletRequest request, String providerid);
+
+	public int setOrderDelete(HttpServletRequest request);
+
+	public List<BusinessOrder> getBussinessOrderPay(String business_no);
+
+	public List<BusinessOrder> getBussinessNoLike(HttpServletRequest request);
+
+	public int evaluateInsert(HttpServletRequest request);
+=======
 	
 
 	public List<BusinessOrder> getBusinessOrderInsert(HttpServletRequest request, String memberid, String memberName);
@@ -39,6 +54,7 @@ public interface BusinessOrderService {
 	public int getBusinessPay(HttpServletRequest request, String businessNo,String val);
 
 	public List<Cart> getBusinessOrderName(String temp1);
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 
 
 }

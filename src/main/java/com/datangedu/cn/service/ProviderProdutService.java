@@ -24,9 +24,13 @@ public interface ProviderProdutService {
 
 	List<ProviderProdut> getProviderProdutPage(HttpServletRequest request);
 
+<<<<<<< HEAD
+	public List<ProviderProdut> getProdutListByLike(HttpServletRequest request, String providerid);
+=======
 	public int providerUpdate(HttpServletRequest request, MultipartFile file, String name, String province, String city,
 			String area, String cellphone, String wechat, String qq, String email);
 
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 
 =======
 	public int providerUpdate(HttpServletRequest request, MultipartFile file, String name, String province, String city,

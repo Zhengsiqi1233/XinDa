@@ -16,7 +16,7 @@ public interface BusinessOrderMapper {
 
     int insert(BusinessOrder record);
 
-    int insertSelective(BusinessOrder record);
+    int insertSelective(String business_no, BusinessOrder record);
 
     List<BusinessOrder> selectByExample(BusinessOrderExample example);
 
@@ -28,7 +28,7 @@ public interface BusinessOrderMapper {
 
     int updateByPrimaryKeySelective(BusinessOrder record);
 
-    int updateByPrimaryKey(BusinessOrder record);
+    int updateByPrimaryKey(String business_no, BusinessOrder record);
     
     List<BusinessOrder> selectByLike(BusinessOrderExample example);
 
@@ -45,5 +45,23 @@ public interface BusinessOrderMapper {
 	int selectByWeekSum();
 	
 	int selectByMonthSum();
+
+	List<BusinessOrder> selectByCommon(BusinessOrderExample businessOrderExaple);
+
+	List<BusinessOrder> selectByStop(BusinessOrderExample businessOrderExaple);
+
+	List<BusinessOrder> selectByLikeInfo(BusinessOrderExample businessOrderExample);
+
+	List<BusinessOrder> selectByLikeInfoStop(BusinessOrderExample businessOrderExample);
+
+	List<BusinessOrder> selectByOther(BusinessOrderExample businessOrderExample);
+
+	List<BusinessOrder> selectByPay(BusinessOrderExample businessOrderExample);
+
+	List<BusinessOrder> selectNoByLike(BusinessOrderExample businessOrderExample);
+
+	int insertByNo(String business_no, BusinessOrder businessOrder);
+
+	int updateByNo(String business_no, String evaluate);
 
 }

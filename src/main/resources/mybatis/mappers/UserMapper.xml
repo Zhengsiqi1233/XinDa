@@ -171,6 +171,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <update id="updateByExample1" parameterType="com.datangedu.cn.model.sysUser.User">
+  	 update user set password = #{password,jdbcType=VARCHAR}
+  	 where cellphone = #{cellphone,jdbcType=VARCHAR}
+  </update>
   <update id="updateByExampleSelective" parameterType="map">
     update user
     <set>

@@ -28,10 +28,47 @@ public class BusinessOrder {
     private String providerName;
 
     private Integer orderNum;
+<<<<<<< HEAD
+        
+    private String produtId;
+    
+    private ProviderProdut produt;
+    
+    private Member member;
+    
+    
+
+    public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public ProviderProdut getProdut() {
+		return produt;
+	}
+
+	public void setProdut(ProviderProdut produt) {
+		this.produt = produt;
+	}
+
+	public String getProdutId() {
+		return produtId;
+	}
+
+	public void setProdutId(String produtId) {
+		this.produtId = produtId;
+	}
+
+	public String getBusinessNo() {
+=======
 
     private String produtId;
 
     public String getBusinessNo() {
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
         return businessNo;
     }
 

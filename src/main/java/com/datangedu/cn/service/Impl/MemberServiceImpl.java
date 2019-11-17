@@ -41,7 +41,11 @@ public class MemberServiceImpl implements MemberService{
 		String cellphone =request.getParameter("cellphone"); 
 		String password = MD5Util.getMD5(request.getParameter("password").getBytes());
 		String inputCode = request.getParameter("inputCode");
+<<<<<<< HEAD
+System.out.println("cellphone :" + cellphone + "password" + password);
+=======
 		System.out.println("cellphone : " + cellphone + "password : " +  MD5Util.getMD5(request.getParameter("password").getBytes()));
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 		MemberExample memberExample = new MemberExample(); 
 		MemberExample.Criteria criteria = memberExample.createCriteria();
 	    criteria.andCellphoneEqualTo(cellphone);

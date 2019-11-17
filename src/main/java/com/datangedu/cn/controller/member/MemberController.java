@@ -99,6 +99,12 @@ public class MemberController {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
 <<<<<<< HEAD
+			System.out.println("list.size" + list.size());
+			//map.put("memberid",list.get(0).getId());
+			//map.put("member", list.get(0));
+			 
+=======
+<<<<<<< HEAD
 			System.out.println(list.size());
 			map.put("memberid", list.get(0).getId());
 			map.put("membername", list.get(0).getName());
@@ -108,6 +114,7 @@ public class MemberController {
 			
 >>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 >>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 			map.put("mem", "登陆成功");
 		}
 		

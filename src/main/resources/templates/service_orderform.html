@@ -79,12 +79,12 @@
                 </ul>
             </div>
             <ul class="main-tab">
-                <li class="border-red order1">服务中</li>
-                <li class="order2">已完成</li>
+                <li class="businessordercommon border-red order1">服务中</li>
+                <li class="businessorderstop order2">已完成</li>
             </ul>
             <div class="main-content">
                 <div class="search">
-                    <input placeholder="请输入服务名称查询" /><button><i class="fa fa-search fa-fw"></i></button>
+                    <input placeholder="请输入服务名称查询" class="searchlist"/><button class="search-btn"><i class="fa fa-search fa-fw"></i></button>
                 </div>
             </div>
             <table border="0" cellspacing="0" cellpadding="0">
@@ -102,31 +102,57 @@
                 </thead>
                 <tbody id="businessorderlist">
                     <tr>
-                        <!-- <td>B1739075164</td>
-                        <td>个人代理社保和公积金</td>
-                        <td>张三</td>
-                        <td>13312345678</td>
-                        <td>1</td>
-                        <td>¥1976.00</td>
-                        <td>2017-02-25 08:41:59</td>
-                        <td>
-                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>B1739075164</td>
-                        <td>个人代理社保和公积金</td>
-                        <td>张三</td>
-                        <td>13312345678</td>
-                        <td>1</td>
-                        <td>¥1976.00</td>
-                        <td>2017-02-25 08:41:59</td>
-                        <td>
-                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
-                        </td> -->
                     </tr>
                 </tbody>
             </table>
+            <script>
+            $(".search-btn").on("click",function(){
+            	var value=$(".searchlist").val();
+            	var providerid = sessionStorage.getItem("providerid");
+            	function format(time){
+            		var date = new Date(time);
+            		return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+            	}
+
+            			$.ajax({
+            				type:"get",
+            				url:"/business/bussinessorderlike", 
+            				data:{
+            					providerid:providerid,
+            					order_info:value,
+            				},
+            				dataType:"json",
+            				
+            				success:function(data){
+            					console.log("成功返回的数据",data);
+            					
+            					var businessOrderList = data.bussinessOrderLike;
+            					$("#businessorderlist").html("");
+            					var txt = "";
+            					for(var i = 0; i < businessOrderList.length; i ++){
+            						txt += `<tr>
+            							<td>${businessOrderList[i].businessNo}</td>
+            							<td>${businessOrderList[i].orderInfo}</td>
+            							<td>${businessOrderList[i].memberName}</td>
+            							<td>${businessOrderList[i].memberCellphone}</td>
+            							<td>${businessOrderList[i].orderNum}</td>
+            							<td>${businessOrderList[i].orderSum}</td>
+            							<td>${format(businessOrderList[i].createTime)}</td>
+            							<td>
+                                        	<span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                                       </td>
+            						</tr>`
+            						}
+            					console.log(txt);
+            					
+            					$("#businessorderlist").html(txt);
+            				},
+            				error:function(data){
+            					console.log("失败后返回的数据",data);
+            				}
+            		})
+            })
+            </script>
             <div class="main-pagination">
                 <span>首页</span>
                 <span>上一页</span>

@@ -122,6 +122,35 @@
     from provider_produt
     where id = #{id,jdbcType=VARCHAR}
   </select>
+<<<<<<< HEAD
+  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider_produt
+    where service_name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from provider_produt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    and service_name like '%${likeName}%'
+    order by create_time
+   <!--  <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    
+    </if> -->
+  </select>
+=======
+>>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider_produt
     where id = #{id,jdbcType=VARCHAR}
