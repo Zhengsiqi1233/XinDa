@@ -28,11 +28,14 @@ public class MemberServiceImpl implements MemberService{
 	@Resource 
 	CartService cartService;
 
+<<<<<<< HEAD
+=======
 
 	/*
 	 * 会员登陆
 	 */
 
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 	@Override
 	public List<Member> login(HttpServletRequest request) {
 		String cellphone =request.getParameter("cellphone"); 
@@ -47,12 +50,15 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectByExample(memberExample);
 	}
 
+<<<<<<< HEAD
+=======
 
 
 	/*
 	 * 会员找回密码
 	 */
 
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 	@Override
 	public List<Member> findPassword(HttpServletRequest request) {
 		String cellphone = request.getParameter("cellphone");
@@ -68,10 +74,20 @@ public class MemberServiceImpl implements MemberService{
 	    return memberMapper.selectByExample(memberExample);
 
 	}
+<<<<<<< HEAD
+=======
+	
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
 	/*
 	 * 会员注册
 	 */
 
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 	@Override
 	public int userRegion(HttpServletRequest request) {
 		String name = request.getParameter("name");
@@ -87,21 +103,29 @@ public class MemberServiceImpl implements MemberService{
 	    member.setName(name);
 	    member.setCellphone(cellphone);
 	    member.setPassword(password);
+<<<<<<< HEAD
+=======
 
 		/*
 		 * member.setProvince(province); member.setCity(city); member.setArea(area);
 		 */
 
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 	    member.setProvince(province);
 	    member.setCity(city);
 	    member.setArea(area);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 	    
 		return memberMapper.insert(member);
 	    }
 
 	
+<<<<<<< HEAD
+=======
 	@Override
 	public List<Member> getMemberList(HttpServletRequest request) {
 		MemberExample memberExample=new MemberExample();
@@ -119,6 +143,7 @@ public class MemberServiceImpl implements MemberService{
 		    List<Member> memberPage=memberMapper.selectByLike(memberExample);
 			return memberPage;
 	}
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 
 
 /*

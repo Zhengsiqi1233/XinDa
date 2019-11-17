@@ -48,6 +48,9 @@ import com.datangedu.cn.service.Impl.ProviderProdutServiceImpl;
 @Controller
 @RequestMapping("/providerProdut")
 public class ProviderProdutController {
+<<<<<<< HEAD
+	
+=======
 	@Resource
 	ProviderProdutService providerProdutService ;
 	@Resource
@@ -145,6 +148,7 @@ public class ProviderProdutController {
 		map.put("code", 1);
 		return map;
 	}
+<<<<<<< HEAD
 	/*
 	 * 修改服务商信息
 	 */
@@ -157,6 +161,9 @@ public class ProviderProdutController {
 		return "service_setting";	
 	
 	}
+=======
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
+>>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
 
 	
 }

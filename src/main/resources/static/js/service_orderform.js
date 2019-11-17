@@ -26,6 +26,8 @@ $(".order2").on("click", function(){
 $(".order3").on("click", function(){
     $(".main-top li").eq(3).text("未通过用户");
 })
+<<<<<<< HEAD
+=======
 $(function(){
 		$("#username").html("");
 		var txt="";
@@ -79,3 +81,4 @@ $(function(){
 			
 		})
 		
+>>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8

@@ -1,5 +1,6 @@
 package com.datangedu.cn.controller.provider;
 
+<<<<<<< HEAD
 
 
 	
@@ -267,5 +268,9 @@ public class ProviderController {
 
 
 
+=======
+public class ProviderController {
+	
+>>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
 
 }
