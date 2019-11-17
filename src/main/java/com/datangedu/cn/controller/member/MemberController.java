@@ -73,7 +73,9 @@ public class MemberController {
 		}else if(!request.getParameter("inputCode").equalsIgnoreCase((String) session.getAttribute("code"))) {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
-			
+			System.out.println(list.size());
+			map.put("memberid", list.get(0).getId());
+			map.put("membername", list.get(0).getName());
 			map.put("mem", "登陆成功");
 		}
 		
@@ -164,6 +166,7 @@ public class MemberController {
 		map.put("memberList", memberList);
 		return map;
 	}
+	
 	
 	
 }

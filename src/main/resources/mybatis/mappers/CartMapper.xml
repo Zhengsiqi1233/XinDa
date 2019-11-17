@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.datangedu.cn.dao.mapper.CartMapper">
   <resultMap id="BaseResultMap" type="com.datangedu.cn.model.sysUser.Cart">
-    <result column="service_id" jdbcType="VARCHAR" property="serviceId" />
+    <result column="produt_id" jdbcType="VARCHAR" property="produtId" />
     <result column="buy_num" jdbcType="INTEGER" property="buyNum" />
+    <result column="produt_name" jdbcType="VARCHAR" property="produtName" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="sum" jdbcType="INTEGER" property="sum" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="member_id" jdbcType="VARCHAR" property="memberId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.datangedu.cn.model.sysUser.Cart">
+    <result column="produt_img" jdbcType="LONGVARBINARY" property="produtImg" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,8 +74,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    service_id, buy_num
+    produt_id, buy_num, produt_name, price, sum, provider_name, member_id, member_name, 
+    provider_id
   </sql>
+  <sql id="Blob_Column_List">
+    produt_img
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.datangedu.cn.model.sysUser.CartExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.CartExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -87,25 +117,79 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.Cart">
-    insert into cart (service_id, buy_num)
-    values (#{serviceId,jdbcType=VARCHAR}, #{buyNum,jdbcType=INTEGER})
+    insert into cart (produt_id, buy_num, produt_name, 
+      price, sum, provider_name, 
+      member_id, member_name, provider_id, 
+      produt_img)
+    values (#{produtId,jdbcType=VARCHAR}, #{buyNum,jdbcType=INTEGER}, #{produtName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{sum,jdbcType=INTEGER}, #{providerName,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, 
+      #{produtImg,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.Cart">
     insert into cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="serviceId != null">
-        service_id,
+      <if test="produtId != null">
+        produt_id,
       </if>
       <if test="buyNum != null">
         buy_num,
       </if>
+      <if test="produtName != null">
+        produt_name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="sum != null">
+        sum,
+      </if>
+      <if test="providerName != null">
+        provider_name,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="providerId != null">
+        provider_id,
+      </if>
+      <if test="produtImg != null">
+        produt_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="serviceId != null">
-        #{serviceId,jdbcType=VARCHAR},
+      <if test="produtId != null">
+        #{produtId,jdbcType=VARCHAR},
       </if>
       <if test="buyNum != null">
         #{buyNum,jdbcType=INTEGER},
+      </if>
+      <if test="produtName != null">
+        #{produtName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="sum != null">
+        #{sum,jdbcType=INTEGER},
+      </if>
+      <if test="providerName != null">
+        #{providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="produtImg != null">
+        #{produtImg,jdbcType=LONGVARBINARY},
       </if>
     </trim>
   </insert>
@@ -118,21 +202,72 @@
   <update id="updateByExampleSelective" parameterType="map">
     update cart
     <set>
-      <if test="record.serviceId != null">
-        service_id = #{record.serviceId,jdbcType=VARCHAR},
+      <if test="record.produtId != null">
+        produt_id = #{record.produtId,jdbcType=VARCHAR},
       </if>
       <if test="record.buyNum != null">
         buy_num = #{record.buyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.produtName != null">
+        produt_name = #{record.produtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.sum != null">
+        sum = #{record.sum,jdbcType=INTEGER},
+      </if>
+      <if test="record.providerName != null">
+        provider_name = #{record.providerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerId != null">
+        provider_id = #{record.providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.produtImg != null">
+        produt_img = #{record.produtImg,jdbcType=LONGVARBINARY},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cart
+    set produt_id = #{record.produtId,jdbcType=VARCHAR},
+      buy_num = #{record.buyNum,jdbcType=INTEGER},
+      produt_name = #{record.produtName,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=INTEGER},
+      sum = #{record.sum,jdbcType=INTEGER},
+      provider_name = #{record.providerName,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=VARCHAR},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      provider_id = #{record.providerId,jdbcType=VARCHAR},
+      produt_img = #{record.produtImg,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByNum" parameterType="com.datangedu.cn.model.sysUser.Cart">
+  	 update cart set buy_num = #{buyNum,jdbcType=INTEGER}
+  	 where produt_id = #{produtId,jdbcType=VARCHAR}
+  </update>
   <update id="updateByExample" parameterType="map">
     update cart
-    set service_id = #{record.serviceId,jdbcType=VARCHAR},
-      buy_num = #{record.buyNum,jdbcType=INTEGER}
+    set produt_id = #{record.produtId,jdbcType=VARCHAR},
+      buy_num = #{record.buyNum,jdbcType=INTEGER},
+      produt_name = #{record.produtName,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=INTEGER},
+      sum = #{record.sum,jdbcType=INTEGER},
+      provider_name = #{record.providerName,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=VARCHAR},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      provider_id = #{record.providerId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

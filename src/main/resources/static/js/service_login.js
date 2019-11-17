@@ -18,7 +18,8 @@ $(".login-btn").on("click", function(){
 			if(data.mem == "登陆成功"){
 				 location.href="redirect?page=service_product";
 				 sessionStorage.setItem("providerid",data.providerid);
-				 sessionSrorage.setItem("provider", data.provider);
+				 sessionStorage.setItem("providername",data.providername);
+				
 				 
 			}else{
 				alert(data.mem);

@@ -16,10 +16,15 @@ public interface ProviderProdutService {
 
 	public int produtInsert(HttpServletRequest request , MultipartFile file, String serviceName, String serviceInfo, String price);
 
+
 	List<ProviderProdut> getProviderProdutList(HttpServletRequest request);
 
 	int setPProviderProdutDelete(HttpServletRequest request);
 
 	List<ProviderProdut> getProviderProdutPage(HttpServletRequest request);
+
+	public int providerUpdate(HttpServletRequest request, MultipartFile file, String name, String province, String city,
+			String area, String cellphone, String wechat, String qq, String email);
+
 
 }

@@ -17,3 +17,9 @@ $(".order2").on("click", function(){
     $(".order2").addClass("border-red");
     $(".order1").removeClass("border-red");
 })
+$(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})

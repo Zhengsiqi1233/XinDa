@@ -27,6 +27,13 @@ $(".order3").on("click", function(){
     $(".main-top li").eq(3).text("未通过用户");
 })
 $(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})
+
+$(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	function format(time){
 		var date = new Date(time);

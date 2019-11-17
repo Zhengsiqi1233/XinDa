@@ -29,6 +29,8 @@ public class BusinessOrder {
 
     private Integer orderNum;
 
+    private String produtId;
+
     public String getBusinessNo() {
         return businessNo;
     }
@@ -131,5 +133,13 @@ public class BusinessOrder {
 
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
+    }
+
+    public String getProdutId() {
+        return produtId;
+    }
+
+    public void setProdutId(String produtId) {
+        this.produtId = produtId == null ? null : produtId.trim();
     }
 }

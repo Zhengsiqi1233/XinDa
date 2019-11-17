@@ -14,6 +14,7 @@ import com.datangedu.cn.dao.mapper.MemberMapper;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.MemberExample;
 import com.datangedu.cn.model.sysUser.Region;
+import com.datangedu.cn.service.CartService;
 import com.datangedu.cn.service.MemberService;
 import com.datangedu.cn.service.RegionService;
 
@@ -24,6 +25,8 @@ public class MemberServiceImpl implements MemberService{
 	MemberMapper memberMapper;
 	@Resource
 	RegionService rService;
+	@Resource 
+	CartService cartService;
 
 
 	/*
@@ -35,11 +38,11 @@ public class MemberServiceImpl implements MemberService{
 		String cellphone =request.getParameter("cellphone"); 
 		String password = MD5Util.getMD5(request.getParameter("password").getBytes());
 		String inputCode = request.getParameter("inputCode");
-
+		System.out.println("cellphone : " + cellphone + "password : " +  MD5Util.getMD5(request.getParameter("password").getBytes()));
 		MemberExample memberExample = new MemberExample(); 
 		MemberExample.Criteria criteria = memberExample.createCriteria();
 	    criteria.andCellphoneEqualTo(cellphone);
-		criteria.andPasswordEqualTo(request.getParameter("password"));
+		criteria.andPasswordEqualTo(MD5Util.getMD5(request.getParameter("password").getBytes()));
 		
 		return memberMapper.selectByExample(memberExample);
 	}
@@ -65,10 +68,6 @@ public class MemberServiceImpl implements MemberService{
 	    return memberMapper.selectByExample(memberExample);
 
 	}
-	
-
-
-
 	/*
 	 * 会员注册
 	 */
@@ -119,6 +118,19 @@ public class MemberServiceImpl implements MemberService{
 		memberExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
 		    List<Member> memberPage=memberMapper.selectByLike(memberExample);
 			return memberPage;
+	}
+
+
+/*
+ * 购物车列表
+ */
+	@Override
+	public List<Member> getMemberCart(String memberid) {
+		System.out.println("getMemberCart start");
+		MemberExample memberExample=new MemberExample();
+		MemberExample.Criteria criteria = memberExample.createCriteria();
+		criteria.andIdEqualTo(memberid);
+		return memberMapper.selectByExample(memberExample);
 	}
 
 }

@@ -35,6 +35,6 @@ public interface ProviderProdutMapper {
     int updateByPrimaryKeyWithBLOBs(ProviderProdut record);
 
     int updateByPrimaryKey(ProviderProdut record);
-
-	List<ProviderProdut> selectByLike(ProviderProdutExample example);
+    
+    List<ProviderProdut> selectByLike(ProviderProdutExample example);
 }

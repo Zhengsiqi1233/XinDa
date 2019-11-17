@@ -92,9 +92,9 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
-    <if test="pageSize>=0">
+   <!--  <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
-    </if>
+    </if> -->
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -230,6 +230,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <update id="updateByExample1" parameterType="com.datangedu.cn.model.sysUser.Member">
+  	 update member set password = #{password,jdbcType=VARCHAR}
+  	 where cellphone = #{cellphone,jdbcType=VARCHAR}
+  </update>
   <update id="updateByExampleSelective" parameterType="map">
     update member
     <set>
@@ -299,10 +303,6 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByExample1" parameterType="com.datangedu.cn.model.sysUser.Member">
-  	 update member set password = #{password,jdbcType=VARCHAR}
-  	 where cellphone = #{cellphone,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.datangedu.cn.model.sysUser.Member">
     update member

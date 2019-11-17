@@ -5,34 +5,37 @@ import java.util.Date;
 import java.util.List;
 
 public class BusinessOrderExample {
-	 protected int pageNum;
-		
-		protected int pageSize;
-		
-		protected String likeName;
-	    public int getPageNum() {
-			return pageNum;
-		}
+protected int pageNum;
+	
+	protected int pageSize;
+	
+	protected String likeName;
+	
+	
+	
+    public int getPageNum() {
+		return pageNum;
+	}
 
-		public void setPageNum(int pageNum) {
-			this.pageNum = pageNum;
-		}
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
 
-		public int getPageSize() {
-			return pageSize;
-		}
+	public int getPageSize() {
+		return pageSize;
+	}
 
-		public void setPageSize(int pageSize) {
-			this.pageSize = (pageSize-1)*pageNum;
-		}
+	public void setPageSize(int pageSize) {
+		this.pageSize = (pageSize-1)*pageNum;
+	}
 
-		public String getLikeName() {
-			return likeName;
-		}
+	public String getLikeName() {
+		return likeName;
+	}
 
-		public void setLikeName(String likeName) {
-			this.likeName = likeName;
-		}
+	public void setLikeName(String likeName) {
+		this.likeName = likeName;
+	}
     protected String orderByClause;
 
     protected boolean distinct;
@@ -993,6 +996,76 @@ public class BusinessOrderExample {
 
         public Criteria andOrderNumNotBetween(Integer value1, Integer value2) {
             addCriterion("order_num not between", value1, value2, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdIsNull() {
+            addCriterion("produt_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdIsNotNull() {
+            addCriterion("produt_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdEqualTo(String value) {
+            addCriterion("produt_id =", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdNotEqualTo(String value) {
+            addCriterion("produt_id <>", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdGreaterThan(String value) {
+            addCriterion("produt_id >", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdGreaterThanOrEqualTo(String value) {
+            addCriterion("produt_id >=", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdLessThan(String value) {
+            addCriterion("produt_id <", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdLessThanOrEqualTo(String value) {
+            addCriterion("produt_id <=", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdLike(String value) {
+            addCriterion("produt_id like", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdNotLike(String value) {
+            addCriterion("produt_id not like", value, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdIn(List<String> values) {
+            addCriterion("produt_id in", values, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdNotIn(List<String> values) {
+            addCriterion("produt_id not in", values, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdBetween(String value1, String value2) {
+            addCriterion("produt_id between", value1, value2, "produtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdutIdNotBetween(String value1, String value2) {
+            addCriterion("produt_id not between", value1, value2, "produtId");
             return (Criteria) this;
         }
     }

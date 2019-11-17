@@ -3,7 +3,6 @@
 <mapper namespace="com.datangedu.cn.dao.mapper.ProviderProdutMapper">
   <resultMap id="BaseResultMap" type="com.datangedu.cn.model.sysUser.ProviderProdut">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
     <result column="provider_id" jdbcType="VARCHAR" property="providerId" />
     <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
     <result column="service_info" jdbcType="VARCHAR" property="serviceInfo" />
@@ -15,6 +14,7 @@
     <result column="recommend" jdbcType="INTEGER" property="recommend" />
     <result column="necessary" jdbcType="INTEGER" property="necessary" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.datangedu.cn.model.sysUser.ProviderProdut">
     <result column="service_img" jdbcType="LONGVARBINARY" property="serviceImg" />
@@ -78,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, provider_name, provider_id, service_name, service_info, service_content, price, 
-    sales_num, region, create_time, recommend, necessary, status
+    id, provider_id, service_name, service_info, service_content, price, sales_num, region, 
+    create_time, recommend, necessary, status, provider_name
   </sql>
   <sql id="Blob_Column_List">
     service_img
@@ -122,15 +122,6 @@
     from provider_produt
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
-    select 
-    *
-    from provider_produt
-    where service_name like '%${likeName}%'
-    <if test="pageSize>=0">
-    limit ${pageSize},${pageNum}
-    </if>
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider_produt
     where id = #{id,jdbcType=VARCHAR}
@@ -142,25 +133,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.ProviderProdut">
-    insert into provider_produt (id, provider_name, provider_id, 
-      service_name, service_info, service_content, 
-      price, sales_num, region, 
-      create_time, recommend, necessary, 
-      status, service_img)
-    values (#{id,jdbcType=VARCHAR}, #{providerName,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, 
-      #{serviceName,jdbcType=VARCHAR}, #{serviceInfo,jdbcType=VARCHAR}, #{serviceContent,jdbcType=VARCHAR}, 
-      #{price,jdbcType=INTEGER}, #{salesNum,jdbcType=INTEGER}, #{region,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{recommend,jdbcType=INTEGER}, #{necessary,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{serviceImg,jdbcType=LONGVARBINARY})
+    insert into provider_produt (id, provider_id, service_name, 
+      service_info, service_content, price, 
+      sales_num, region, create_time, 
+      recommend, necessary, status, 
+      provider_name, service_img)
+    values (#{id,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{serviceInfo,jdbcType=VARCHAR}, #{serviceContent,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
+      #{salesNum,jdbcType=INTEGER}, #{region,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{recommend,jdbcType=INTEGER}, #{necessary,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{providerName,jdbcType=VARCHAR}, #{serviceImg,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.datangedu.cn.model.sysUser.ProviderProdut">
     insert into provider_produt
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="providerName != null">
-        provider_name,
       </if>
       <if test="providerId != null">
         provider_id,
@@ -195,6 +183,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="providerName != null">
+        provider_name,
+      </if>
       <if test="serviceImg != null">
         service_img,
       </if>
@@ -202,9 +193,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="providerName != null">
-        #{providerName,jdbcType=VARCHAR},
       </if>
       <if test="providerId != null">
         #{providerId,jdbcType=VARCHAR},
@@ -239,6 +227,9 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="providerName != null">
+        #{providerName,jdbcType=VARCHAR},
+      </if>
       <if test="serviceImg != null">
         #{serviceImg,jdbcType=LONGVARBINARY},
       </if>
@@ -250,14 +241,20 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+   <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider_produt
+    where service_name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update provider_produt
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.providerName != null">
-        provider_name = #{record.providerName,jdbcType=VARCHAR},
       </if>
       <if test="record.providerId != null">
         provider_id = #{record.providerId,jdbcType=VARCHAR},
@@ -292,6 +289,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.providerName != null">
+        provider_name = #{record.providerName,jdbcType=VARCHAR},
+      </if>
       <if test="record.serviceImg != null">
         service_img = #{record.serviceImg,jdbcType=LONGVARBINARY},
       </if>
@@ -300,10 +300,10 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update provider_produt
     set id = #{record.id,jdbcType=VARCHAR},
-      provider_name = #{record.providerName,jdbcType=VARCHAR},
       provider_id = #{record.providerId,jdbcType=VARCHAR},
       service_name = #{record.serviceName,jdbcType=VARCHAR},
       service_info = #{record.serviceInfo,jdbcType=VARCHAR},
@@ -315,6 +315,7 @@
       recommend = #{record.recommend,jdbcType=INTEGER},
       necessary = #{record.necessary,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
+      provider_name = #{record.providerName,jdbcType=VARCHAR},
       service_img = #{record.serviceImg,jdbcType=LONGVARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -323,7 +324,6 @@
   <update id="updateByExample" parameterType="map">
     update provider_produt
     set id = #{record.id,jdbcType=VARCHAR},
-      provider_name = #{record.providerName,jdbcType=VARCHAR},
       provider_id = #{record.providerId,jdbcType=VARCHAR},
       service_name = #{record.serviceName,jdbcType=VARCHAR},
       service_info = #{record.serviceInfo,jdbcType=VARCHAR},
@@ -334,7 +334,8 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       recommend = #{record.recommend,jdbcType=INTEGER},
       necessary = #{record.necessary,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      provider_name = #{record.providerName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -342,9 +343,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.datangedu.cn.model.sysUser.ProviderProdut">
     update provider_produt
     <set>
-      <if test="providerName != null">
-        provider_name = #{providerName,jdbcType=VARCHAR},
-      </if>
       <if test="providerId != null">
         provider_id = #{providerId,jdbcType=VARCHAR},
       </if>
@@ -378,6 +376,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="providerName != null">
+        provider_name = #{providerName,jdbcType=VARCHAR},
+      </if>
       <if test="serviceImg != null">
         service_img = #{serviceImg,jdbcType=LONGVARBINARY},
       </if>
@@ -386,8 +387,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.datangedu.cn.model.sysUser.ProviderProdut">
     update provider_produt
-    set provider_name = #{providerName,jdbcType=VARCHAR},
-      provider_id = #{providerId,jdbcType=VARCHAR},
+    set provider_id = #{providerId,jdbcType=VARCHAR},
       service_name = #{serviceName,jdbcType=VARCHAR},
       service_info = #{serviceInfo,jdbcType=VARCHAR},
       service_content = #{serviceContent,jdbcType=VARCHAR},
@@ -398,13 +398,13 @@
       recommend = #{recommend,jdbcType=INTEGER},
       necessary = #{necessary,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
+      provider_name = #{providerName,jdbcType=VARCHAR},
       service_img = #{serviceImg,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.datangedu.cn.model.sysUser.ProviderProdut">
     update provider_produt
-    set provider_name = #{providerName,jdbcType=VARCHAR},
-      provider_id = #{providerId,jdbcType=VARCHAR},
+    set provider_id = #{providerId,jdbcType=VARCHAR},
       service_name = #{serviceName,jdbcType=VARCHAR},
       service_info = #{serviceInfo,jdbcType=VARCHAR},
       service_content = #{serviceContent,jdbcType=VARCHAR},
@@ -414,7 +414,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       recommend = #{recommend,jdbcType=INTEGER},
       necessary = #{necessary,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      provider_name = #{providerName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
