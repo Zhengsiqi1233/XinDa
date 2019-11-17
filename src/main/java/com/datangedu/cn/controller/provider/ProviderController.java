@@ -60,7 +60,7 @@ public class ProviderController {
 	/*
 	 * 服务商找回密码
 	 */
-	@RequestMapping(value = "paroviderfind", method = RequestMethod.POST)
+	@RequestMapping(value = "providerfind", method = RequestMethod.POST)
 	public Map<String, Object> findPassword(HttpServletRequest request){
 		System.out.println("findpassword start");
 		HttpSession session = request.getSession();

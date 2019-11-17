@@ -16,6 +16,8 @@ $(".login-btn").on("click", function(){
 			console.log("成功返回的数据",data);	
 			if(data.mem == "登陆成功"){
 				 location.href="redirect?page=e-commerce_product";
+				 //sessionStorage.setItem("memberid",data.memberid);
+				
 			}else{
 				alert(data.mem);
 			}	

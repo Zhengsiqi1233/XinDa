@@ -22,4 +22,6 @@ public interface ProviderProdutService {
 
 	List<ProviderProdut> getProviderProdutPage(HttpServletRequest request);
 
+	public List<ProviderProdut> getProdutListByLike(HttpServletRequest request, String providerid);
+
 }

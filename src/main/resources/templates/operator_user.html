@@ -30,7 +30,11 @@
                 <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
                 <ul class="dropdown">
                     <li>更改信息</li>
-                    <li>退出登录</li>
+                    <li>
+                    <a href="redirect?page=index">
+                                                           退出登录
+                    </a>                                       
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -117,7 +121,7 @@
             		url:"/member/memberpage",
             		data:{
             			name:value, 
-            			pagenum:3,
+            			pagenum:20,
             			pagesize:1,
             		}, 
             		success:function(data){

@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.datangedu.cn.controller.id.Sequence;
 import com.datangedu.cn.dao.mapper.ProviderProdutMapper;
+import com.datangedu.cn.model.sysUser.BusinessOrder;
+import com.datangedu.cn.model.sysUser.BusinessOrderExample;
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 import com.datangedu.cn.model.sysUser.ProviderProdutExample;
 
@@ -35,6 +37,20 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
 		criteria.andProviderIdEqualTo(providerid);
 		return providerProdutMapper.selectByExample(providerProdutExample);
+	}
+	/*
+	 * 根据服务名称获取产品的列表
+	 */
+	@Override
+	public List<ProviderProdut> getProdutListByLike(HttpServletRequest request,String providerid) {
+		ProviderProdutExample providerProdutExample = new ProviderProdutExample();
+		ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
+		criteria.andProviderIdEqualTo(providerid);
+		providerProdutExample.setLikeName(request.getParameter("service_name"));
+		//businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		//businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+		    List<ProviderProdut> providerProdutByLike=providerProdutMapper.selectByLikeInfo(providerProdutExample);
+			return providerProdutByLike;
 	}
 	/*
 	 * 产品上线下线
@@ -116,6 +132,7 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 	    List<ProviderProdut> providerProdutPage=providerProdutMapper.selectByLike(providerProdutExample);
 		return providerProdutPage;
 	}
+	
 
 
 }

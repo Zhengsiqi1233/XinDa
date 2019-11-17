@@ -72,6 +72,23 @@ public class ProviderProdutController {
 		map.put("providerProdutList", providerProdutList);
 		return map;
 	}
+	
+	/*
+	 * 通过服务名称查询产品的列表(服务商系统)
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/providerprodutbylike",method = RequestMethod.GET)
+	public Map<String,Object> providerProdutByLike(HttpServletRequest request, String providerid){
+		System.out.println("providerProdutByLike start");
+	
+		HttpSession session =  request.getSession();
+		session.setAttribute("providerid", providerid);
+		System.out.println(providerid);
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<ProviderProdut> providerProdutByLike = providerProdutService.getProdutListByLike(request,providerid);
+		map.put("providerProdutByLike", providerProdutByLike);
+		return map;
+	}
 	/*
 	 * 产品上线下线
 	 */

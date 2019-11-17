@@ -37,4 +37,6 @@ public interface ProviderProdutMapper {
     int updateByPrimaryKey(ProviderProdut record);
 
 	List<ProviderProdut> selectByLike(ProviderProdutExample example);
+
+	List<ProviderProdut> selectByLikeInfo(ProviderProdutExample providerProdutExample);
 }

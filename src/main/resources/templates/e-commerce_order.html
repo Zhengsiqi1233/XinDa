@@ -72,8 +72,7 @@
             <ul class="order-search">
                 <li>
                     <span>订单号：</span>
-                    <input type="text" placeholder="请输入订单号搜索" />
-                    <span>搜索</span>
+                    <input type="text" placeholder="请输入订单号搜索" class="searchlist" /><span class="search-btn">搜索</span>
                 </li>
                 <li>
                     <span>创建时间：</span>
@@ -89,8 +88,8 @@
                 <li>订单状态</li>
                 <li>订单操作</li>
             </ul>
-            <div class="orders">
-                <div class="order-num">订单号：S12334556544564858 下单时间：2017-02-23 12:43:23</div>
+            <div class="orders" id="bussinessorderlist">
+           <!--      <div class="order-num">订单号：S12334556544564858 下单时间：2017-02-23 12:43:23</div>
                 <ul class="order-details">
                     <li>
                         <img src="./images/user-lg.png" alt="图片">
@@ -104,9 +103,9 @@
                     <li class="font-aqua">¥500.00</li>
                     <li class="font-aqua">已付款</li>
                     <li>交易完成</li>
-                </ul>
+                </ul> -->
             </div>
-            <div class="orders">
+<!--             <div class="orders">
                     <div class="order-num">订单号：S12334556544564858 下单时间：2017-02-23 12:43:23</div>
                     <ul class="order-details">
                         <li>
@@ -125,8 +124,64 @@
                             <span>删除订单</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
         </div>
+        <script>
+            $(".search-btn").on("click",function(){
+            	var value=$(".searchlist").val();
+            	$.ajax({
+            		type:"get",
+            		url:"/business/bussinessnolike",
+            		data:{
+            			business_no:value, 
+            			
+            		}, 
+            		success:function(data){
+            			console.log("成功返回的数据",data);
+            		
+            			var bussinessOrderList = data.bussinessNoLike;
+            			var txt = "";
+            			for(var i = 0; i < bussinessOrderList.length; i ++){
+            				txt += `<div class="orders">
+            	                <div class="order-num">
+                                订单号：${bussinessOrderList[i].businessNo} 下单时间：${format(bussinessOrderList[i].createTime)}</div>
+              <ul class="order-details">
+                  <li>
+                      <img src="./images/user-lg.png" alt="图片">
+                      <ul>
+                          <li>${bussinessOrderList[i].produt.providerName}</li>
+                          <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
+                      </ul>
+                      <p>${bussinessOrderList[i].produt.price}</p>
+                      <p>${bussinessOrderList[i].orderNum}</p>
+                  </li>
+                  <li class="font-aqua">¥${bussinessOrderList[i].orderSum}</li>`
+					if(bussinessOrderList[i].status == 1){
+						txt +=`<li class="font-aqua">已付款</li>
+						 <li>交易完成</li>
+						 </ul>`
+					}else{
+						txt +=`<li class="font-aqua">等待买家付款</li>
+                      <li>
+                          <p onclick="pay('${bussinessOrderList[i].businessNo}')">付款</p>
+                          <button onclick="delUser('${bussinessOrderList[i].businessNo}')">删除订单</button>
+                      </li>
+                      </ul>`
+					}
+						
+                   txt += `</div>`
+            				}
+            			console.log(txt);
+            			// var tbody = $("<tbody></tbody>").html(txt);
+            			$("#bussinessorderlist").html(txt);
+            		},
+            		error:function(data){
+            			console.log("失败后返回的数据",data);
+            		}
+            	})
+            	
+            })
+            </script>
     </div>
 
     <script src="./js/e-commerce_order.js"></script>
