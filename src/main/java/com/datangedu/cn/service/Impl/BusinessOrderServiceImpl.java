@@ -44,7 +44,11 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		System.out.println("getBusinessOrder start");
 		BusinessOrderExample businessOrderExaple = new BusinessOrderExample();
 		BusinessOrderExample.Criteria criteria = businessOrderExaple.createCriteria();
+<<<<<<< Updated upstream
 		System.out.println("providerid : " + providerid);
+=======
+
+>>>>>>> Stashed changes
 		criteria.andProviderIdEqualTo(providerid);
 
 		return businessOrderMapper.selectByExample(businessOrderExaple);

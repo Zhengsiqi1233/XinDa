@@ -94,6 +94,53 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		 }
 		
 	}
+	
+	/*
+	 * 修改服务商信息
+	 */
+	@Override
+	public int providerUpdate(HttpServletRequest request, MultipartFile file,String name,  String province, String city, String area, String cellphone, String wechat, String qq, String email) {
+		Map<Object,Object> result = new HashMap<Object,Object>();
+		try {
+			// 获取客户端传图图片的输入流
+			InputStream ins = file.getInputStream();
+			byte[] buffer=new byte[1024];//bit---byte---1k---1m
+			int len=0;
+			 // 字节输出流
+			 ByteArrayOutputStream bos=new ByteArrayOutputStream();
+			while((len=ins.read(buffer))!=-1){
+				bos.write(buffer,0,len);
+			 }
+			 bos.flush();
+			byte data[] = bos.toByteArray();
+			// 调用接口对图片进行存储
+			HttpSession session =  request.getSession();
+		
+		String providerid = (String) session.getAttribute("providerid");
+		Provider provider = new Provider();
+		provider.setName(name);
+		
+		ProviderProdut providerProdut = new ProviderProdut();
+		System.out.println("服务商id：" + providerid);
+		providerProdut.setProviderId(providerid);
+		providerProdut.setId(Sequence.nextId());
+	
+	
+		providerProdut.setServiceImg(data);
+
+
+		return providerProdutMapper.updateByPrimaryKey(providerProdut);
+		
+		} catch (Exception e) {
+			
+			return 1;
+		 }		
+		
+		
+		
+		
+		
+	}
 
 	@Override
 	public List<ProviderProdut> getProviderProdutList(HttpServletRequest request) {

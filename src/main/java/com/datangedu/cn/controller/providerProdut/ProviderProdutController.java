@@ -161,9 +161,22 @@ public class ProviderProdutController {
 		return "service_setting";	
 	
 	}
+<<<<<<< Updated upstream
 =======
 >>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 >>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
+=======
+	/*
+	 * 修改服务商信息
+	 */
+	@RequestMapping("/providerupdate")
+	public String providerUpdate(HttpServletRequest request, MultipartFile file,String name, String province, String city, String area, String cellphone, String wechat, String qq, String email){
+		System.out.println("providerprodutInsert start");
+		Map<String,Object> map = new HashMap<String,Object>();
+	    providerProdutService.providerUpdate(request, file, name, province, city, area, cellphone, wechat, qq, email);
+		return "service_product";	
+	}
+>>>>>>> Stashed changes
 
 	
 }

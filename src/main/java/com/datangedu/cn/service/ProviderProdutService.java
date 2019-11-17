@@ -16,6 +16,7 @@ public interface ProviderProdutService {
 
 	public int produtInsert(HttpServletRequest request , MultipartFile file, String serviceName, String serviceInfo, String price);
 
+<<<<<<< Updated upstream
 
 	List<ProviderProdut> getProviderProdutList(HttpServletRequest request);
 
@@ -27,4 +28,9 @@ public interface ProviderProdutService {
 			String area, String cellphone, String wechat, String qq, String email);
 
 
+=======
+	public int providerUpdate(HttpServletRequest request, MultipartFile file, String name, String province, String city,
+			String area, String cellphone, String wechat, String qq, String email);
+
+>>>>>>> Stashed changes
 }

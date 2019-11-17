@@ -36,6 +36,13 @@ $(function(){
 })
 
 $(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("providername")
+		$("#username").append(txt);
+})
+
+$(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	function format(time){
 		var date = new Date(time);

@@ -11,6 +11,7 @@ $(function(){
 		txt += sessionStorage.getItem("providername")
 		$("#username").append(txt);
 })
+<<<<<<< Updated upstream
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	$("#store-info1").html("");
@@ -72,3 +73,5 @@ $(function(){
 	})
 		
 })
+=======
+>>>>>>> Stashed changes
