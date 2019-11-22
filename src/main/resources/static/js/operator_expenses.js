@@ -57,7 +57,12 @@ $.ajax({
 	})
 	
 })
-
+$(function(){
+	$("#username").html("");
+	var txt="";
+	txt += sessionStorage.getItem("username")
+	$("#username").append(txt);
+})
 function format(time){
 	var date = new Date(time);
 	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();

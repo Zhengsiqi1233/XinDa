@@ -1,5 +1,48 @@
 $(function(){
-	//var providerid = sessionStorage.getItem("memberid");
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("membername")
+		$("#username").append(txt);
+})
+$(function(){
+	var memberid = sessionStorage.getItem("memberid");
+	var membername = sessionStorage.getItem("membername");
+		$("#userinfo").html("");
+		var txt="";
+		txt += `<img src="/member/headImg?id=${memberid}" onerror="defaultImg(this)" style="height:90px; width:100px;"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
+                <p>${membername}</p>`
+		$("#userinfo").append(txt);
+})
+$(function(){
+	var memberid = sessionStorage.getItem("memberid");
+	$.ajax({
+		type:"get",
+		url:"/cart/cartall",
+		data:{
+			memberid:memberid,
+		},
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var all = data.all;
+			$("#all").html("");
+			var txt="";
+			txt += all
+			$("#all").append(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+$(function(){
+	var providerid = sessionStorage.getItem("memberid");
 	$.ajax({
 		type:"get",
 		url:"/business/bussinessorderlist",

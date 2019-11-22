@@ -136,3 +136,12 @@
     cursor: pointer;
     margin-top: 10px;
 }
+img {
+ float:left;
+
+    height:50px;
+    width:50px;
+}
+button.change-info{
+	margin-left:150px;
+}

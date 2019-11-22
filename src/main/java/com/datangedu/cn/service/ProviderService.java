@@ -28,6 +28,8 @@ public interface ProviderService {
 
 	public void saveUserImg(Provider provider) throws Exception;
 
+	public Provider getProviderImg(String id);
+
 	
 
 }

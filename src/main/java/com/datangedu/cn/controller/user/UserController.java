@@ -38,8 +38,11 @@ public class UserController {
 		}else if(!request.getParameter("inputCode").equalsIgnoreCase((String) session.getAttribute("code"))) {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {	
-			//map.put("userid", list.get(0).getId());
-			//map.put("provider", list.get(0));
+			
+			map.put("userid", list.get(0).getId());
+			
+			map.put("username", list.get(0).getUserName());
+			System.out.println(list.get(0).getUserName());
 			map.put("mem", "登陆成功");
 		}
 		

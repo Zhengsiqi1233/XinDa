@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService{
 	public List<User> login(HttpServletRequest request) {
 		HttpSession session =  request.getSession();
 		String cellphone =request.getParameter("cellphone"); 
-		String password=request.getParameter("password");
-		//String password = MD5Util.getMD5(request.getParameter("password").getBytes());
+//		String password=request.getParameter("password");
+		String password = MD5Util.getMD5(request.getParameter("password").getBytes());
 		String inputCode = request.getParameter("inputCode");
-		System.out.println("cellphone : " + cellphone + "password : " +  MD5Util.getMD5(request.getParameter("password").getBytes()));
+		System.out.println("cellphone : " + cellphone + "password : " + password);
 		UserExample userExample=new UserExample();
 		UserExample.Criteria criteria = userExample.createCriteria();
 		criteria.andCellphoneEqualTo(cellphone);

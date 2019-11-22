@@ -5,19 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 public class MemberExample {
-	
-    protected int pageNum;
+protected int pageNum;
 	
 	protected int pageSize;
 	
 	protected String likeName;
 	
-    protected String orderByClause;
-
-    protected boolean distinct;
-
-    protected List<Criteria> oredCriteria;
-
+	
+	
     public int getPageNum() {
 		return pageNum;
 	}
@@ -42,7 +37,13 @@ public class MemberExample {
 		this.likeName = likeName;
 	}
 
-	public MemberExample() {
+    protected String orderByClause;
+
+    protected boolean distinct;
+
+    protected List<Criteria> oredCriteria;
+
+    public MemberExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -406,76 +407,6 @@ public class MemberExample {
 
         public Criteria andCellphoneNotBetween(String value1, String value2) {
             addCriterion("cellphone not between", value1, value2, "cellphone");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgIsNull() {
-            addCriterion("head_img is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgIsNotNull() {
-            addCriterion("head_img is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgEqualTo(String value) {
-            addCriterion("head_img =", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgNotEqualTo(String value) {
-            addCriterion("head_img <>", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgGreaterThan(String value) {
-            addCriterion("head_img >", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgGreaterThanOrEqualTo(String value) {
-            addCriterion("head_img >=", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgLessThan(String value) {
-            addCriterion("head_img <", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgLessThanOrEqualTo(String value) {
-            addCriterion("head_img <=", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgLike(String value) {
-            addCriterion("head_img like", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgNotLike(String value) {
-            addCriterion("head_img not like", value, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgIn(List<String> values) {
-            addCriterion("head_img in", values, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgNotIn(List<String> values) {
-            addCriterion("head_img not in", values, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgBetween(String value1, String value2) {
-            addCriterion("head_img between", value1, value2, "headImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgNotBetween(String value1, String value2) {
-            addCriterion("head_img not between", value1, value2, "headImg");
             return (Criteria) this;
         }
 

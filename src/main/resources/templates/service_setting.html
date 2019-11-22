@@ -26,11 +26,10 @@
             <li><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
             <li><i class="fa fa-bell-o fa-fw"></i>通知(0)</li>
             <li>
-<<<<<<< Updated upstream
-                <img src="/images/default_user.png">
-=======
-                <img src="./images/default_user.png">
->>>>>>> Stashed changes
+
+                <div id = "img" class="imgs">
+		                </div>
+
                  <span id="username"></span>
                 <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
                 <ul class="dropdown">
@@ -95,31 +94,7 @@
 
                     
               
-                    <!-- <li>
-                        <span>服务商名称</span>
-                        <span>{provider.getName}</span>
-                    </li>
-                    <li>
-                        <span>地区</span>
-                        <span>{provider.getProvince}-{provider.getCity}-{provider.getArea}</span>
-                    </li>
-                    <li>
-                        <span>手机号</span>
-                        <span>{provider.getCellphone}</span>
-                    </li>
-                    <li>
-                        <span>微信</span>
-                        <span>{provider.getWechat}</span>
-                    </li>
-                    <li>
-                        <span>QQ</span>
-                        <span>{provider.getQq}</span>
-                    </li>
-                    <li>
-                        <span>邮箱</span>
-                        <span>{provider.getEmail}</span>
-                    </li>
-                   -->
+         
                   
             </div>
             <li>
@@ -138,15 +113,11 @@
                     <label for="file" class="btn btn-primary" style="height: 30px;width: 180px;margin-right: 10px">选择照片</label>
     				<input  id="file" name="file" type="file" style="float: left;display:none"/>
                 </li>
+                
                 <li>
-                    <span>服务商名称</span>
-                    <input placeholder="请输入服务名称"  name = "name"/>
-                </li>
-                <li>
-<<<<<<< Updated upstream
+
                 <span>服务商地址</span>
-=======
->>>>>>> Stashed changes
+
                      	   <select name="province" id="province" onchange="changeprovince()" >
                     	<option value="">省</option>
                     </select>
@@ -175,8 +146,8 @@
                 </li>
             </ul>
             <button class="save">提交</button>
-            <button class="cancel">取消</button>
             </form>
+             <button class="cancel">取消</button>
         </div>
         <script src="/js/service_setting.js"></script>
 </body>

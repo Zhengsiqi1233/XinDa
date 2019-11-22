@@ -113,6 +113,12 @@ $(".providerstop").on("click",function(){
 	})
 	
 })
+$(function(){
+	$("#username").html("");
+	var txt="";
+	txt += sessionStorage.getItem("username")
+	$("#username").append(txt);
+})
 $(".user-arrow-down").on("click",function(){
     if($(".dropdown").is(":hidden")){
         $(".dropdown").show();

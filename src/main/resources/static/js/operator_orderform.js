@@ -36,6 +36,7 @@ $(function(){
 	})
 	
 })
+
 function format(time){
 	var date = new Date(time);
 	return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
@@ -46,6 +47,12 @@ $(".user-arrow-down").on("click",function(){
  }else{
        $(".dropdown").hide();
  }
+})
+$(function(){
+	$("#username").html("");
+	var txt="";
+	txt += sessionStorage.getItem("username")
+	$("#username").append(txt);
 })
 $(".business-order").on("click", function(){
     $(".main-content").show();

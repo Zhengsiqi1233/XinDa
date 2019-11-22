@@ -26,7 +26,7 @@
             <li><i class="fa fa-cube fa-fw"></i>业务管理</li>
             <li>
                 <img src="./images/default_user.png">
-                <span>用户名字</span>
+                 <span id="username"></span>
                 <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
                 <ul class="dropdown">
                     <li>更改信息</li>
@@ -130,23 +130,27 @@
             			var providerProdutList = data.providerProdutPage;
             			$("#providerprodutlist").html("");
             			var txt = "";
-            			for(var i = 0; i < providerProdutList.length; i ++){
-            				txt += `<tr> 
-            				
-            				    <td><input type="checkbox" class="checkbox"></td>
-            					<td>${providerProdutList[i].serviceName}</td>
-            					<td>${providerProdutList[i].serviceContent}</td>
-            					<td>¥${providerProdutList[i].price}</td>
-                                    <td><span class="up-line-mark up-line-mark-red">在线</span></td>
-                                    <td><span class="down-line-mark down-line-mark-orange">下线</span></td>
-                                    <td>
-                                        <button class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</button>
-                                        <button onclick="delUser('${providerProdutList[i].id}')" class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</button>
-                                        <button class="handle-btn"><i class="fa fa-arrow-up fa-fw"></i>上线</button>
-                                    </td>
-            					
-            				</tr>`
-            				}
+						for(var i = 0; i < providerProdutList.length; i ++){
+							txt += `<tr> 
+							
+							    <td><input type="checkbox" class="checkbox"></td>
+								<td>${providerProdutList[i].serviceName}</td>
+								<td>${providerProdutList[i].serviceContent}</td>
+								<td>¥${providerProdutList[i].price}</td>
+			                        <td><span class="up-line-mark up-line-mark-red">在线</span></td>	`
+			                     if(providerProdutList[i].status == 1){
+											txt += `<td><span class="up-line-mark up-line-mark-red">在线</span></td>
+			                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw" onclick="change(${providerProdutList[i].id})"></i>下线</span></td>`
+										} else{
+											txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
+			                        <td>
+			                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
+			                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
+			                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
+			                        </td>`
+										}
+												txt += `</tr>`
+							}
             			//console.log(txt);
             			// var tbody = $("<tbody></tbody>").html(txt);
             			$("#providerprodutlist").html(txt);

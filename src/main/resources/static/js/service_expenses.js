@@ -23,3 +23,10 @@ $(function(){
 		txt += sessionStorage.getItem("providername")
 		$("#username").append(txt);
 })
+/*$(function(){
+	var providerid = sessionStorage.getItem("providerid");
+		$("#img").html("");
+		var txt="";
+		txt += `<img src="/provider/headImg?id=${providerid}" onerror="defaultImg(this)"/>`
+		$("#img").append(txt);
+})*/

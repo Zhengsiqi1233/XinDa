@@ -1,4 +1,33 @@
 $(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("membername")
+		$("#username").append(txt);
+})
+$(function(){
+	var memberid = sessionStorage.getItem("memberid");
+	$.ajax({
+		type:"get",
+		url:"/cart/cartall",
+		data:{
+			memberid:memberid,
+		},
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var all = data.all;
+			$("#all").html("");
+			var txt="";
+			txt += all
+			$("#all").append(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
+$(function(){
 	//var providerid = sessionStorage.getItem("memberid");
 	$.ajax({
 		type:"get",

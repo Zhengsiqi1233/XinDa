@@ -84,12 +84,35 @@ public class CartServiceImpl implements CartService{
 		
 		return cartMapper.deleteByExample(cartExample);
 	}
+	
 	@Override
 	public List<Cart> getCart(HttpServletRequest request, String memberid) {
 		CartExample cartExample = new CartExample();
 		CartExample.Criteria criteria = cartExample.createCriteria();
 		criteria.andMemberIdEqualTo(memberid);
 		return cartMapper.selectByExample(cartExample);
+	}
+	
+	/*
+	 * 购物车数量
+	 */
+	@Override
+	public int getCartAll(HttpServletRequest request, String memberid) {
+		CartExample cartExample = new CartExample();
+		CartExample.Criteria criteria = cartExample.createCriteria();
+		criteria.andMemberIdEqualTo(memberid);
+		return cartMapper.selectAll();
+	}
+	
+	/*
+	 * 清空购物车
+	 */
+	@Override
+	public int getCartClear(HttpServletRequest request, String memberid) {
+		CartExample cartExample = new CartExample();
+		CartExample.Criteria criteria = cartExample.createCriteria();
+		criteria.andMemberIdEqualTo(memberid);
+		return cartMapper.deleteByExample(cartExample);
 	}
 	
 	

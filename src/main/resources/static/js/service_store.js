@@ -11,7 +11,13 @@ $(function(){
 		txt += sessionStorage.getItem("providername")
 		$("#username").append(txt);
 })
-<<<<<<< Updated upstream
+$(function(){
+	var providerid = sessionStorage.getItem("providerid");
+		$("#img").html("");
+		var txt="";
+		txt += `<img src="/provider/headImg?id=${providerid}" onerror="defaultImg(this)"/>`
+		$("#img").append(txt);
+})
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	$("#store-info1").html("");
@@ -71,7 +77,5 @@ $(function(){
 			$("#store-info").html(txt);
 		}
 	})
-		
-})
-=======
->>>>>>> Stashed changes
+})	
+

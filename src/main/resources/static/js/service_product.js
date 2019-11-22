@@ -30,7 +30,7 @@
 								txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
                         <td>
                             <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
-                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
+                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
                             <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
                         </td>`
 							}	
@@ -100,7 +100,7 @@ $(".save").on("click", function(event){
 									txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
 	                        <td>
 	                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
-	                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
+	                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
 	                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
 	                        </td>`
 								}	
@@ -135,7 +135,13 @@ $(function(){
 		txt += sessionStorage.getItem("providername")
 		$("#username").append(txt);
 })
-
+$(function(){
+	var providerid = sessionStorage.getItem("providerid");
+		$("#img").html("");
+		var txt="";
+		txt += `<img src="/provider/headImg?id=${providerid}" onerror="defaultImg(this)"/>`
+		$("#img").append(txt);
+})
 function change(produtid){
 	console.log("改变状态", produtid);
 	 $.ajax({
@@ -151,15 +157,13 @@ function change(produtid){
 				if(data.code == 1){
 					$.ajax({
 						type:"get",
-						url:"/providerProdut/providerprodutlist",
+						url:"/providerProdut/providerprodutlistbyid",
 						data:{
 							providerid:providerid,
 						},
 						dataType:"json",
-						
 						success:function(data){
-							console.log("成功返回的数据",data);
-							
+							console.log("成功返回的数据",data);	
 							var providerProdutList = data.providerProdutList;
 							$("#providerprodutlist").html("");
 							var txt = "";
@@ -175,15 +179,13 @@ function change(produtid){
 										txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
 		                        <td>
 		                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
-		                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
+		                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
 		                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
 		                        </td>`
 									}	
 								txt += `</tr>`
-								}
-							
-							console.log(txt);
-							
+								}			
+//							console.log(txt);			
 							$("#providerprodutlist").html(txt);
 						},
 						error:function(data){
@@ -194,7 +196,119 @@ function change(produtid){
 			}
 	 })	
 }
-
+ /*function del(id){
+		console.log("删除",id);
+		 $.ajax({
+				type:"post",
+				url:"/providerProdut/providerprodutdelete",
+				data:{
+					id:id,
+					//name:value, 
+	    			//pagenum:4,
+	    			//pagesize:1,
+				}, 
+				dataType:"json",
+				success:function(data){
+					console.log("成功返回的数据",data);
+					if(data.code == 1){
+						$.ajax({
+							type:"get",
+							url:"/providerProdut/providerprodutlistbyid",
+							data:{
+								providerid:providerid,
+							},
+							dataType:"json",
+							success:function(data){
+								console.log("成功返回的数据",data);	
+								var providerProdutList = data.providerProdutList;
+								$("#providerprodutlist").html("");
+								var txt = "";
+								for(var i = 0; i < providerProdutList.length; i ++){
+									txt += `<tr>
+										<td>${providerProdutList[i].serviceName}</td>
+										<td>${providerProdutList[i].serviceInfo}</td>
+										<td>${providerProdutList[i].price}</td>`
+										if(providerProdutList[i].status == 1){
+											txt += `<td><span class="up-line-mark up-line-mark-red">在线</span></td>
+			                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw" onclick="change(${providerProdutList[i].id})"></i>下线</span></td>`
+										} else{
+											txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
+			                        <td>
+			                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
+			                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
+			                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
+			                        </td>`
+										}	
+									txt += `</tr>`
+									}			
+//								console.log(txt);			
+								$("#providerprodutlist").html(txt);
+							},
+							error:function(data){
+								console.log("失败后返回的数据",data);
+							}
+						})
+					}
+				},
+				error:function(data){
+					console.log("失败后返回的数据",data);
+				}
+			})
+	}*/
+ function del(produtid){
+		console.log("删除", produtid);
+		 $.ajax({
+				type:"get",
+				url:"/providerProdut/providerprodutdelete",
+				data:{
+					produtid:produtid,
+				}, 
+				dataType:"json",
+				success:function(data){
+					console.log("成功返回的数据",data);
+					var providerid = sessionStorage.getItem("providerid");
+					if(data.code == 1){
+						$.ajax({
+							type:"get",
+							url:"/providerProdut/providerprodutlistbyid",
+							data:{
+								providerid:providerid,
+							},
+							dataType:"json",
+							success:function(data){
+								console.log("成功返回的数据",data);	
+								var providerProdutList = data.providerProdutList;
+								$("#providerprodutlist").html("");
+								var txt = "";
+								for(var i = 0; i < providerProdutList.length; i ++){
+									txt += `<tr>
+										<td>${providerProdutList[i].serviceName}</td>
+										<td>${providerProdutList[i].serviceInfo}</td>
+										<td>${providerProdutList[i].price}</td>`
+										if(providerProdutList[i].status == 1){
+											txt += `<td><span class="up-line-mark up-line-mark-red">在线</span></td>
+			                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw" onclick="change(${providerProdutList[i].id})"></i>下线</span></td>`
+										} else{
+											txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
+			                        <td>
+			                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
+			                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
+			                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
+			                        </td>`
+										}	
+									txt += `</tr>`
+									}			
+//								console.log(txt);			
+								$("#providerprodutlist").html(txt);
+							},
+							error:function(data){
+								console.log("失败后返回的数据",data);
+							}
+						})
+					}
+				}
+		 })	
+	}
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	
@@ -222,13 +336,13 @@ $(function(){
 								txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
                         <td>
                             <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
-                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
+                            <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
                             <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
                         </td>`
 							}	
 						txt += `</tr>`
 						}			
-					console.log(txt);			
+//					console.log(txt);			
 					$("#providerprodutlist").html(txt);
 				},
 				error:function(data){

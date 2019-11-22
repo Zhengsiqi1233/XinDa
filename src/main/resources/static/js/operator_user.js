@@ -48,6 +48,13 @@ $(".user-arrow-down").on("click",function(){
        $(".dropdown").hide();
  }
 })
+
+$(function(){
+	$("#username").html("");
+	var txt="";
+	txt += sessionStorage.getItem("username")
+	$("#username").append(txt);
+})
 $(".business-order").on("click", function(){
     $(".main-content").show();
     $("table").show();

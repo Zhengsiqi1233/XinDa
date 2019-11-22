@@ -195,3 +195,9 @@ table td:nth-child(5) {
     cursor: pointer;
     margin-top: 10px;
 }
+ img {
+ float:left;
+
+    height:50px;
+    width:50px;
+}

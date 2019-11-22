@@ -29,18 +29,16 @@ public interface MemberMapper {
     int updateByPrimaryKeySelective(Member record);
 
     int updateByPrimaryKey(Member record);
-<<<<<<< HEAD
-    
-    int updateByExample1(Member record);
-=======
+
 
 
     int updateByExample1(Member record);
 
 	List<Member> selectByLike(MemberExample memberExample);
 
+	int updateMember(Member member);
+
     
   
 
->>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
 }

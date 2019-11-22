@@ -43,7 +43,13 @@ $(function(){
 		txt += sessionStorage.getItem("providername")
 		$("#username").append(txt);
 })
-
+$(function(){
+	var providerid = sessionStorage.getItem("providerid");
+		$("#img").html("");
+		var txt="";
+		txt += `<img src="/provider/headImg?id=${providerid}" onerror="defaultImg(this)"/>`
+		$("#img").append(txt);
+})
 $(function(){
 	var providerid = sessionStorage.getItem("providerid");
 	$.ajax({
@@ -64,7 +70,7 @@ $(function(){
 		
 			txt += `
 			<div class="avatars">
-                    <img th:src="@{/providerProdut/headImg?id=${providerid}}" onerror="defaultImg(this)"/><li>
+                    <img src="/provider/headImg?id=${providerid}" onerror="defaultImg(this)"/><li>
                     <p>更换头像</p>
                 </div>
                   <ul class="store-info" id= "store-info">
@@ -91,9 +97,7 @@ $(function(){
             <span>邮箱</span>
             <span>${providerList[0].email}</span>
         </li>
-        <li>
-            <button class="change-info">修改</button>
-        </li>
+       
         </ul>`
 				console.log(txt);
 			

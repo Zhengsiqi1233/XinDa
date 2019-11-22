@@ -155,3 +155,9 @@ table td:nth-child(7) {
     margin: 20px 0 0 30px;
     display: none;
 }
+#img {
+ float:left;
+
+    height:50px;
+    width:50px;
+}

@@ -26,7 +26,14 @@
             <li><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
             <li><i class="fa fa-bell-o fa-fw"></i>通知(0)</li>
             <li>
-                <img src="/images/default_user.png">
+                <li>
+		                <div id = "img" class="imgs">
+		                </div>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
                 <span id="username"></span>
                 <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
                 <ul class="dropdown">
@@ -101,29 +108,7 @@
                 </thead>
                 <tbody id="providerprodutlist">
                     <tr>
-                        <!-- <td class="service_name"></td>
-                        <td class="service_info"></td>
-                        <td class="price"></td>
-                        <td><span class="down-line-mark down-line-mark-orange">下线</span></td>
-                        <td>
-                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
-                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
-                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw"></i>上线</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>电视剧作品登记</td>
-                        <td>电视剧作品登记</td>
-                        <td>¥1000.00元</td>
-                        <td><span class="up-line-mark up-line-mark-red">在线</span></td>
-                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw"></i>下线</span></td>
-                    </tr>
-                    <tr>
-                        <td>电视剧作品登记</td>
-                        <td>电视剧作品登记</td>
-                        <td>¥10000.00元</td>
-                        <td><span class="up-line-mark up-line-mark-red">在线</span></td>
-                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw"></i>上线</span></td> -->
+
                     </tr>
                 </tbody>
             </table>
@@ -162,29 +147,9 @@
     	<input  class="save" type="submit" value="提交" style="float: left">
 		<input class="cancel" type="reset" value="取消" style="float: left">
 		
-<!--           <button class="cancel">取消</button> -->
+
           </form>
-         <!--    <h3>添加服务产品</h3>
-            <ul>
-                <li>
-                    <span>图片简介</span>
-                    <button>选择图片</button>
-                </li>
-                <li>
-                    <span>服务名称</span>
-                    <input class="service_name" placeholder="请输入服务名称" />
-                </li>
-                <li>
-                    <span class="ver-top">服务说明</span>
-                    <textarea class ="service_info" name="" id="" cols="45" rows="7"></textarea>
-                </li>
-                <li>
-                    <span>服务价格</span>
-                    <input class="price" type="number" placeholder="请输入服务价格">
-                </li>
-            </ul>
-            <button class="save">提交</button>
-            <button class="cancel">取消</button> -->
+       
         </div>
     </div>
     <script src="/js/service_product.js"></script>

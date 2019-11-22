@@ -1,6 +1,6 @@
 package com.datangedu.cn.controller.provider;
 
-<<<<<<< HEAD
+
 
 
 	
@@ -34,6 +34,7 @@ import com.datangedu.cn.model.sysUser.Region;
 import com.datangedu.cn.model.sysUser.RegionExample;
 import com.datangedu.cn.service.MemberService;
 import com.datangedu.cn.service.ProviderService;
+import com.datangedu.cn.util.MD5Util;
 
 @RestController
 @RequestMapping("provider")
@@ -65,7 +66,7 @@ public class ProviderController {
 		}else {	
 			map.put("providerid", list.get(0).getId());
 			map.put("providername", list.get(0).getName());
-			System.out.println(list.get(0).getName());
+			
 			map.put("provider", list.get(0));
 			map.put("mem", "登陆成功");
 		}
@@ -97,7 +98,7 @@ public class ProviderController {
 				map.put("mem","请输入正确的手机号");
 			}else {
 				Provider provider = new Provider();
-				provider.setPassword(request.getParameter("password"));
+				provider.setPassword(MD5Util.getMD5(request.getParameter("password").getBytes()));
 				provider.setCellphone(request.getParameter("cellphone"));
 				providerMapper.updateByExample1(provider);
 				map.put("mem", "修改密码成功");
@@ -141,7 +142,6 @@ public class ProviderController {
 	/*
 	 * 获取服务商信息
 	 */
-
 	@ResponseBody
 	@RequestMapping(value = "/providermessage",method = RequestMethod.GET)
 	public Map<String,Object> providerMessage(HttpServletRequest request, String providerid, MultipartFile file){
@@ -170,9 +170,6 @@ public class ProviderController {
 		map.put("providerList", providerList);
 		return map;
 	}
-	
-	
-	
 /*
  * 服务商正常
  */
@@ -248,15 +245,18 @@ public class ProviderController {
 		 }				
 		return "index";	
 	}
+	/*
+	 * 服务商头像
+	 */
 	@RequestMapping(value = "/headImg", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<byte[]> headImg( String providerid) throws Exception{
+	public ResponseEntity<byte[]> headImg( String id) throws Exception{
 
 		byte[] imageContent ;
 		// 根据id获取当前用户的信息
-		List<Provider> provider = providerService.getProviderStore(providerid);
-				        
-		imageContent = provider.get(0).getProviderImg();
-		System.out.println("图片==="+provider.get(0).getProviderImg());
+		
+	    Provider provider = providerService.getProviderImg(id);
+		imageContent = provider.getProviderImg();
+		System.out.println("图片==="+provider.getProviderImg());
 				        
 		// 设置http头部信息
 		final HttpHeaders headers = new HttpHeaders();
@@ -266,11 +266,8 @@ public class ProviderController {
 	}
 
 
-
-
-=======
-public class ProviderController {
-	
->>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
-
 }
+
+
+
+

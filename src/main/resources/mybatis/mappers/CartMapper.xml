@@ -110,6 +110,12 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectAll" resultType="java.lang.Integer">
+	 select count(*) from cart
+	 <if test="_parameter != null">
+      <include refid="Example_Where_Clause" /> 
+    </if>
+  </select>
   <delete id="deleteByExample" parameterType="com.datangedu.cn.model.sysUser.CartExample">
     delete from cart
     <if test="_parameter != null">
@@ -236,6 +242,8 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateBuyNum" parameterType="com.datangedu.cn.model.sysUser.Cart">
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update cart

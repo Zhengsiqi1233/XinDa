@@ -21,4 +21,8 @@ public interface CartService {
 
 	public List<Cart> getCart(HttpServletRequest request, String memberid);
 
+	public int getCartAll(HttpServletRequest request, String memberid);
+
+	public int getCartClear(HttpServletRequest request, String memberid);
+
 }

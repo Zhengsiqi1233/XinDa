@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/public.css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/e-commerce_account.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/e-commerce_account.css">
 
-    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
     <div class="headder-top">
         <div class="width1200 headder-top-content">
-            <div><span>{用户名}</span>欢饮来到信达！<span class="user-quit">[退出]</span></div>
+            <div><span id="username"></span>欢迎来到信达！<span class="user-quit">[退出]</span></div>
             <ul>
                 <li><a href="redirect?page=e-commerce_shoping-car"><i class="fa fa-shopping-cart fa-lg"></i>
                         购物车<span>1</span>件</a></li>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="logo-search width1200">
-        <img class="logo" src="./images/logo-blue.png" />
+        <img class="logo" src="/images/logo-blue.png" />
         <ul class="search">
             <li>
                 <span class="search-product font-aqua">产品</span>丨
@@ -42,7 +42,7 @@
                 热门服务：<span>社保开户</span> <span>公司注册</span>
             </li>
         </ul>
-        <img class="tel" src="./images/xinda-tel.png" alt="">
+        <img class="tel" src="/images/xinda-tel.png" alt="">
     </div>
     <ul class="banner width1200">
         <li><a href="redirect?page=e-commerce_product" class="border-b">全部产品</a></li>
@@ -55,9 +55,9 @@
     <div class="line-aqua"></div>
     <div class="content width1200">
         <div class="content-left">
-            <div class="userinfo">
-                <img src="./images/user-lg.png" alt="">
-                <p>18812345678</p>
+            <div class="userinfo"  id="userinfo">
+               <!--  <img src="./images/user-lg.png" alt="">
+                <p>18812345678</p> -->
             </div>
             <ul class="user-action">
                 <li><a href="redirect?page=e-commerce_order"><i class="fa fa-file-text-o fa-lg"></i> 我的订单</a>
@@ -74,8 +74,8 @@
                 <li>修改密码</li>
             </ul>
             <div class="line-aqua"></div>
-            <ul class="change-password">
-                <li>
+            <ul class="change-password"  id="chang-password">
+               <!--  <li>
                     <span>旧密码：</span>
                     <input type="text" />
                 </li>
@@ -89,33 +89,34 @@
                 </li>
                 <li>
                     <p class="save">保存</p>
-                </li>
+                </li> -->
             </ul>
-            <ul class="account-info">
-                <li>
+ 
+            <ul class="account-info"  id="account-info"> </ul>
+                <!-- <li>
                     <span>当前头像：</span>
                     <img src="./images/user-lg.png" alt="">
                 </li>
                 <li>
                     <span>性别：</span>
-                    <input class="radio" type="radio" name="sex" /> 男 
-                    <input class="radio" type="radio" name="sex" /> 女
+                    <input class="radio" type="radio" name="sex"   checked="checked"  value="男"/> 男 
+                    <input class="radio" type="radio" name="sex"  checked="checked"  value="女"/> 女
                 </li>
                 <li>
                     <span>姓名：</span>
-                    <input type="text" />
+                    <input type="text" name="name"/>
                 </li>
                 <li>
                     <span>邮箱：</span>
-                    <input type="text" />
+                    <input type="text"  name="email"/>
                 </li>
                 <li>
                     <p class="save">保存</p>
-                </li>
-            </ul>
+                </li> -->
+           
         </div>
 
-        <script src="./js/e-commerce_account.js"></script>
+        <script src="/js/e-commerce_account.js"></script>
 </body>
 
 </html>

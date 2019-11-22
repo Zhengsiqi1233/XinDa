@@ -16,6 +16,35 @@ $(".content-nav li").on("click", function(event){
     $(".content-nav a").removeClass("nav-active");
     $(event.target).addClass("nav-active");
 })
+$(function(){
+		$("#username").html("");
+		var txt="";
+		txt += sessionStorage.getItem("membername")
+		$("#username").append(txt);
+})
+$(function(){
+	var memberid = sessionStorage.getItem("memberid");
+	$.ajax({
+		type:"get",
+		url:"/cart/cartall",
+		data:{
+			memberid:memberid,
+		},
+		dataType:"json",
+		success:function(data){
+			console.log("成功返回的数据",data);
+			var all = data.all;
+			$("#all").html("");
+			var txt="";
+			txt += all
+			$("#all").append(txt);
+		},
+		error:function(data){
+			console.log("失败后返回的数据",data);
+		}
+	})
+	
+})
 /*
  * 删除
  */
@@ -51,7 +80,12 @@ function delcart(produtId){
 							txt += `
 			        <ul class="merchandise">
 			            <li>
-			                <img src="" alt="图片">
+			                <img src="/providerProdut/headImg?id=${memberCart[i].productlist[j].produtId}" onerror="defaultImg(this)"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
 			            </li>
 			            <li>${memberCart[i].productlist[j].produtName}</li>
 			            <li>${memberCart[i].productlist[j].price}</li>
@@ -135,7 +169,12 @@ function reducenum(produtId, name){
 						txt += `
 		        <ul class="merchandise">
 		            <li>
-		                <img src="" alt="图片">
+		                <img src="/providerProdut/headImg?id=${memberCart[i].productlist[j].produtId}" onerror="defaultImg(this)"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
 		            </li>
 		            <li>${memberCart[i].productlist[j].produtName}</li>
 		            <li>${memberCart[i].productlist[j].price}</li>
@@ -193,6 +232,7 @@ function addnum(produtId, name){
 		data:{
 			produtId:produtId,
 			orderNum:orderNum,
+			
 		},
 		dataType:"json",
 		success:function(data){
@@ -218,7 +258,12 @@ function addnum(produtId, name){
 						txt += `
 		        <ul class="merchandise">
 		            <li>
-		                <img src="" alt="图片">
+		                <img src="/providerProdut/headImg?id=${memberCart[i].productlist[j].produtId}" onerror="defaultImg(this)"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
 		            </li>
 		            <li>${memberCart[i].productlist[j].produtName}</li>
 		            <li>${memberCart[i].productlist[j].price}</li>
@@ -297,7 +342,12 @@ function changenum(produtId){
 						txt += `
 		        <ul class="merchandise">
 		            <li>
-		                <img src="" alt="图片">
+		                <img src="/providerProdut/headImg?id=${memberCart[i].productlist[j].produtId}" onerror="defaultImg(this)"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
 		            </li>
 		            <li>${memberCart[i].productlist[j].produtName}</li>
 		            <li>${memberCart[i].productlist[j].price}</li>
@@ -368,7 +418,12 @@ $(function(){
 				txt += `
         <ul class="merchandise">
             <li>
-                <img src="" alt="图片">
+                <img src="/providerProdut/headImg?id=${memberCart[i].productlist[j].produtId}" onerror="defaultImg(this)"/>
+<script>
+	function defaultImg(img){
+		img.src="/images/user-lg.png";
+	}
+</script>
             </li>
             <li>${memberCart[i].productlist[j].produtName}</li>
             <li>${memberCart[i].productlist[j].price}</li>
@@ -396,7 +451,7 @@ $(function(){
                 <a href="redirect?page=e-commerce_settlement">去结算</a>
             </li>
         </ul>`
-//console.log(txt);
+
 			
 			$("#memberCart").html(txt);
 		},

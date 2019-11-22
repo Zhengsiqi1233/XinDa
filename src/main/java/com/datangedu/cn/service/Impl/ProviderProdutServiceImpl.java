@@ -16,12 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.datangedu.cn.controller.id.Sequence;
 import com.datangedu.cn.dao.mapper.ProviderMapper;
 import com.datangedu.cn.dao.mapper.ProviderProdutMapper;
-<<<<<<< HEAD
+
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.BusinessOrderExample;
-=======
+
 import com.datangedu.cn.model.sysUser.Provider;
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
+import com.datangedu.cn.model.sysUser.ProviderExample;
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 import com.datangedu.cn.model.sysUser.ProviderProdutExample;
 
@@ -92,6 +92,11 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 			HttpSession session =  request.getSession();
 		int 	prices = Integer.parseInt(price);
 		String providerid = (String) session.getAttribute("providerid");
+		ProviderExample providerExample = new ProviderExample();
+		ProviderExample.Criteria criteria = providerExample.createCriteria();
+		criteria.andIdEqualTo(providerid);
+		List<Provider> list = providerMapper.selectByExample(providerExample);
+		String providerName = list.get(0).getName();
 		System.out.println("serviceName ： " + serviceName + " serviceInfo ： " + serviceInfo + " price ： " + prices);
 		ProviderProdut providerProdut = new ProviderProdut();
 		System.out.println("服务商id：" + providerid);
@@ -101,6 +106,7 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		providerProdut.setServiceInfo(serviceInfo);
 		providerProdut.setPrice(prices);
 		providerProdut.setStatus(2);
+		providerProdut.setProviderName(providerName);
 	
 		providerProdut.setServiceImg(data);
 
@@ -136,20 +142,31 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 			HttpSession session =  request.getSession();
 		
 		String providerid = (String) session.getAttribute("providerid");
+	
 		Provider provider = new Provider();
-		provider.setName(name);
+		provider.setId(providerid);
+		//provider.setName(name);
+		provider.setProvince(province);
+		provider.setCity(city);
+		provider.setArea(area);
+		provider.setCellphone(cellphone);
+		provider.setWechat(wechat);
+		provider.setQq(qq);
+		provider.setEmail(email);
 		
-		ProviderProdut providerProdut = new ProviderProdut();
+		/*ProviderProdut providerProdut = new ProviderProdut();
 		System.out.println("服务商id：" + providerid);
 		providerProdut.setProviderId(providerid);
-		providerProdut.setId(Sequence.nextId());
+		providerProdut.setId(providerid);*/
 	
 	
-		providerProdut.setServiceImg(data);
-
-
-		return providerProdutMapper.updateByPrimaryKey(providerProdut);
 		
+		provider.setProviderImg(data);
+
+
+//		return providerProdutMapper.updateByPrimaryKey(providerProdut);
+//		return providerProdutMapper.updateByPrimaryKeySelective(provider);
+		return providerMapper.updateByPrimaryKeySelective(provider);
 		} catch (Exception e) {
 			
 			return 1;
@@ -170,11 +187,11 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		return providerProdutMapper.selectByExample(providerProdutExample);
 	} 
 	@Override
-	public int setPProviderProdutDelete(HttpServletRequest request) {
-		String id=request.getParameter("id");
+	public int setProviderProdutDelete(HttpServletRequest request, String produtid) {
+		
 		ProviderProdutExample providerProdutExample=new ProviderProdutExample();
 		ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
-		criteria.andIdEqualTo(id);
+		criteria.andIdEqualTo(produtid);
 		return providerProdutMapper.deleteByExample(providerProdutExample);
 	}
 	@Override
@@ -187,13 +204,21 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 	    List<ProviderProdut> providerProdutPage=providerProdutMapper.selectByLike(providerProdutExample);
 		return providerProdutPage;
 	}
+	/*
+	 * 展示产品图片
+	 */
+	@Override
+	public ProviderProdut getProviderProdutInfo(String id) {
+		return providerProdutMapper.selectByPrimaryKey(id);
+	}
+
 	
 
 
 	
 	/*
 	 * 修改服务商信息
-	 */
+	 
 	@Override
 	public int providerUpdate(HttpServletRequest request, MultipartFile file,String name,  String province, String city, String area, String cellphone, String wechat, String qq, String email) {
 		Map<Object,Object> result = new HashMap<Object,Object>();
@@ -236,7 +261,7 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		
 		
 		
-	}
+	}*/
 
 
 }

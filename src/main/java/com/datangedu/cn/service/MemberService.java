@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.datangedu.cn.model.sysUser.Member;
 
 public interface MemberService {
@@ -13,21 +15,24 @@ public interface MemberService {
 	public List<Member> findPassword(HttpServletRequest request);
 	
 	public int userRegion(HttpServletRequest request);
-<<<<<<< HEAD
+
 	
 	List<Member> getMemberList(HttpServletRequest request);
 
 	List<Member> getMemberPage(HttpServletRequest request);
 
 	public List<Member> getMemberCart(String memberid);
-=======
-<<<<<<< HEAD
-=======
-	List<Member> getMemberList(HttpServletRequest request);
 
-	List<Member> getMemberPage(HttpServletRequest request);
->>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
->>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
+	public Member getMemberImg(String id);
+
+	public int getMemberChange(HttpServletRequest request, MultipartFile file);
+
+	public int  saveMember(Member member,  MultipartFile file,HttpServletRequest request, String memberid,String name, String email,String sex,String id) throws Exception;
+
+	public List<Member> getChangeMima(HttpServletRequest request, String memberid);
+
+	public int doChangeMima(HttpServletRequest request, String memberid);
+
 	
 
 }

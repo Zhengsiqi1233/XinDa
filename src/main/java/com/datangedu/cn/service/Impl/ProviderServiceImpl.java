@@ -143,6 +143,15 @@ public class ProviderServiceImpl implements ProviderService{
 				throw new Exception("更新用户头像失败");
 			}
 		}
+	/*
+	 * 服务商头像
+	 */
+	@Override
+	public Provider getProviderImg(String id) {
+		return providerMapper.selectByPrimaryKey(id);
+
+		
+	}
 
 		
 	

@@ -550,4 +550,11 @@
       area = #{area,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+ <!--  <update id="updateByPrimaryKey1" parameterType="com.datangedu.cn.model.sysUser.Provider">
+  update provider set password = #{password,jdbcType=VARCHAR}, wechat = #{wechat,jdbcType=VARCHAR},
+    qq = #{qq,jdbcType=VARCHAR},
+     
+        email = #{email,jdbcType=VARCHAR},
+  	 where cellphone = #{cellphone,jdbcType=VARCHAR}
+  </update> -->
 </mapper>

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.datangedu.cn.model.sysUser.BusinessOrder;
-<<<<<<< HEAD
+
 import com.datangedu.cn.model.sysUser.Provider;
-=======
+
 import com.datangedu.cn.model.sysUser.Cart;
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
+
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 
 
@@ -45,6 +45,7 @@ public class BussinessOrderController {
 	/*
 	 * 根据服务商id获取服务中的订单列表
 	 */
+	@ResponseBody
 	@RequestMapping(value = "businessorderlistbyid", method = RequestMethod.GET)
 	public Map<String,Object> businessOrderListById(HttpServletRequest request, String providerid){
 		System.out.println("businessOrderList start");
@@ -61,6 +62,7 @@ public class BussinessOrderController {
 	/*
 	 * 获取已停用的订单列表
 	 */
+	@ResponseBody
 	@RequestMapping(value = "businessorderlistbyidstop", method = RequestMethod.GET)
 	public Map<String,Object> businessOrderListStop(HttpServletRequest request, String providerid){
 		System.out.println("businessOrderListStop start");
@@ -252,15 +254,14 @@ public class BussinessOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/businesscart",method=RequestMethod.GET)	
-	public Map<String,Object> bussinessInsert(HttpServletRequest request,String memberid,String memberName, String produtId, String num){
+	public Map<String,Object> bussinessInsert(HttpServletRequest request,String memberid,String memberName, String produtId, String num, String sum){
 		System.out.println("bussinessInsert start");
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Cart>  cart= new ArrayList<>();
 		System.out.println("produtId : " + produtId );
 		
-		List<BusinessOrder> businessOrder = businessOrderService.getBusinessOrderInsert(request, memberid, memberName);
+		List<BusinessOrder> businessOrder = businessOrderService.getBusinessOrderInsert(request, memberid, memberName, sum);
 		String[] arr=businessOrder.get(0).getOrderInfo().split(",");
-	
 		for(int i =0 ;i<arr.length;i++)
 		{
 		    String[] arr1 = arr[i].split("\\*");
@@ -287,6 +288,8 @@ public class BussinessOrderController {
 		    }    
 		}
 		List<BusinessOrder> list = businessOrderService.getBusinessOrderByMemberId(request, memberid);
+		//清空购物车
+		int a = cartService.getCartClear(request, memberid);   
 		map.put("list", list);
 		map.put("businessOrder", businessOrder);
 		map.put("cart", cart);
@@ -307,5 +310,20 @@ public class BussinessOrderController {
 		return map;
 		
 	}
-
+/*
+ * 立即购买
+ */
+	@ResponseBody
+	@RequestMapping(value="/buynow",method=RequestMethod.GET)	
+	public Map<String, Object> buyNow(HttpServletRequest request, String produtid, String memberid, String membername){
+		System.out.println("buyNow start");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BusinessOrder> businessOrder = businessOrderService.getBusinessOrderBuyNow(request, produtid, memberid, membername);
+		String[] arr=businessOrder.get(0).getOrderInfo().split("\\*");
+		System.out.println(arr[0]);
+		List<ProviderProdut>  list = businessOrderService.getBusinessOrderNameBuyNow(arr[0]);
+		map.put("list", list);
+		map.put("businessOrder", businessOrder);
+		return map;
+	}
 }

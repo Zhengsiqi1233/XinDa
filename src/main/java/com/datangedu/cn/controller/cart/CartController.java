@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.datangedu.cn.dao.mapper.CartMapper;
 import com.datangedu.cn.model.sysUser.Cart;
+import com.datangedu.cn.model.sysUser.CartExample;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.Provider;
 import com.datangedu.cn.service.CartService;
@@ -57,7 +58,7 @@ public class CartController {
 	    	if(num1 == 1) {
 	    		continue;
 	    	}else {  	
-	    	 list1 = cartService.getMemberCartByName(providerName, memberid);
+	    	list1 = cartService.getMemberCartByName(providerName, memberid);
 	    	map1.put("name", providerName);
 	    	map1.put("productlist", list1);
 	    	car.add(map1);
@@ -111,7 +112,19 @@ public class CartController {
 		System.out.println("商品id：" + id);
 		System.out.println("会员id ：  " + memberid);
 		Map<String, Object> map = new HashMap<String,Object>();
-		cartService.getCartAdd(id,memberid);
+		CartExample cartExample = new CartExample();
+		CartExample.Criteria criteria = cartExample.createCriteria();
+		criteria.andProdutIdEqualTo(id);
+	    List<Cart> list = cartMapper.selectByExample(cartExample);
+	    if(list.size() == 1) {
+	    	Cart cart =list.get(0);
+	    	int num = cart.getBuyNum();
+	    	cart.setBuyNum(num+1);
+	    	cart.setProdutId(id);
+	    	cartMapper.updateByNum(cart);
+	    }else {
+	    	cartService.getCartAdd(id,memberid);
+	    }
 		return map;
 	}
 	
@@ -149,10 +162,19 @@ public class CartController {
 		
 	}
 
-	
-	
-	
-	
+	/*
+	 * 购物车数量
+	 */
+	@ResponseBody
+	@RequestMapping(value="/cartall",method=RequestMethod.GET)	
+	public Map<String, Object> cartAll(HttpServletRequest request, String memberid){
+		System.out.println("cartAll start");
+		System.out.println(memberid);
+		Map<String, Object> map = new HashMap<String,Object>();
+		int all = cartService.getCartAll(request, memberid);
+		map.put("all", all);
+		return map;	
+	}
 	
 	
 	

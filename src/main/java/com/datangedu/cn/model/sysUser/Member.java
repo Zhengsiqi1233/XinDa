@@ -11,8 +11,6 @@ public class Member {
 
     private String cellphone;
 
-    private String headImg;
-
     private String password;
 
     private Date createTime;
@@ -30,6 +28,8 @@ public class Member {
     private String city;
 
     private String area;
+
+    private byte[] headImg;
 
     public String getId() {
         return id;
@@ -61,14 +61,6 @@ public class Member {
 
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone == null ? null : cellphone.trim();
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg == null ? null : headImg.trim();
     }
 
     public String getPassword() {
@@ -141,5 +133,13 @@ public class Member {
 
     public void setArea(String area) {
         this.area = area == null ? null : area.trim();
+    }
+
+    public byte[] getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(byte[] headImg) {
+        this.headImg = headImg;
     }
 }

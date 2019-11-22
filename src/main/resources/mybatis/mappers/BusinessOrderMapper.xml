@@ -16,7 +16,6 @@
     <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
     <result column="produt_id" jdbcType="VARCHAR" property="produtId" />
-<<<<<<< HEAD
     <association property="member" javaType="com.datangedu.cn.model.sysUser.Member" resultMap="memDo"/>
     <association property="produt" javaType="com.datangedu.cn.model.sysUser.ProviderProdut" resultMap="produtDo"/>
     
@@ -32,9 +31,6 @@
   <result column="provider_name" property="providerName" jdbcType="VARCHAR"/>  
   <result column="service_info" property="serviceInfo" jdbcType="VARCHAR"/>  
      
-    
-=======
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -108,7 +104,6 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-<<<<<<< HEAD
     order by create_time
     <!-- <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
@@ -181,10 +176,7 @@
     from business_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
-=======
-    <if test="orderByClause != null">
-      order by ${orderByClause}
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
+    
     </if>
     and status=2 
    <!--  <if test="pageSize>=0">
@@ -212,7 +204,6 @@
     from business_order
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </select>
-<<<<<<< HEAD
   <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
      select
     <if test="distinct">
@@ -305,22 +296,15 @@
     select sum(order_sum) allSum from business_order
     where DATE_FORMAT(create_time,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
   </select>
-=======
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-  set foreign_key_checks=0
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from business_order
     where business_no = #{businessNo,jdbcType=VARCHAR}  
-       set foreign_key_checks=1
   </delete>
-  <delete id="deleteByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample">
-    set foreign_key_checks=0
-    
+  <delete id="deleteByExample" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample">    
     delete from business_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-     set foreign_key_checks=1
   </delete>
   
   <insert id="insert" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
