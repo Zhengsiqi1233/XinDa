@@ -321,23 +321,28 @@ $(function(){
 				dataType:"json",
 				success:function(data){
 					console.log("成功返回的数据",data);	
-					var providerProdutList = data.providerProdutList;
+					var providerProdutListById = data.providerProdutListById;
 					$("#providerprodutlist").html("");
 					var txt = "";
-					for(var i = 0; i < providerProdutList.length; i ++){
+					for(var i = 0; i < providerProdutListById.length; i ++){
 						txt += `<tr>
-							<td>${providerProdutList[i].serviceName}</td>
-							<td>${providerProdutList[i].serviceInfo}</td>
-							<td>${providerProdutList[i].price}</td>`
-							if(providerProdutList[i].status == 1){
+							<td>${providerProdutListById[i].serviceName}</td>
+							<td>${providerProdutListById[i].serviceInfo}</td>
+							<td>${providerProdutListById[i].price}</td>`
+							if(providerProdutListById[i].status == 1){
 								txt += `<td><span class="up-line-mark up-line-mark-red">在线</span></td>
-                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw" onclick="change(${providerProdutList[i].id})"></i>下线</span></td>`
+                        <td><span class="handle-btn"><i class="fa fa-arrow-down fa-fw" onclick="change(${providerProdutListById[i].id})"></i>下线</span></td>`
 							} else{
 								txt += `<td><span class="down-line-mark down-line-mark-orange"  >下线</span></td>
                         <td>
                             <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>编辑</span>
+<<<<<<< HEAD
                             <span class="handle-btn"><i class="fa fa-close fa-fw" onclick="del(${providerProdutList[i].id})"></i>删除</span>
                             <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutList[i].id})"></i>上线</span>
+=======
+                            <span class="handle-btn"><i class="fa fa-close fa-fw"></i>删除</span>
+                            <span class="handle-btn"><i class="fa fa-arrow-up fa-fw" onclick="change(${providerProdutListById[i].id})"></i>上线</span>
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
                         </td>`
 							}	
 						txt += `</tr>`

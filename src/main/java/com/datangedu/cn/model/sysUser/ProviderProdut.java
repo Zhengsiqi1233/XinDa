@@ -30,8 +30,18 @@ public class ProviderProdut {
     private String providerName;
 
     private byte[] serviceImg;
+    
+    private Provider provider;
 
-    public String getId() {
+    public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public String getId() {
         return id;
     }
 

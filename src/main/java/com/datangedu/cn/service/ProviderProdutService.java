@@ -30,8 +30,16 @@ public interface ProviderProdutService {
 	public int providerUpdate(HttpServletRequest request, MultipartFile file, String name, String province, String city,
 			String area, String cellphone, String wechat, String qq, String email);
 
+<<<<<<< HEAD
 	public ProviderProdut getProviderProdutInfo(String id);
 
+=======
+	public List<ProviderProdut> getProviderProdutListByPrice(HttpServletRequest request);
+
+	public List<ProviderProdut> getProviderProdutBy(HttpServletRequest request);
+
+	public List<ProviderProdut> getProviderProdutByClick(HttpServletRequest request);
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 
 
 }

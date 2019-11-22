@@ -33,19 +33,33 @@ public class MemberServiceImpl implements MemberService {
 	@Resource
 	CartService cartService;
 
+<<<<<<< HEAD
 	/*
 	 * 会员登陆
 	 */
 
+=======
+
+	/*
+	 * 会员登陆
+	 */
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@Override
 	public List<Member> login(HttpServletRequest request) {
 		String cellphone = request.getParameter("cellphone");
 		String password = MD5Util.getMD5(request.getParameter("password").getBytes());
 		String inputCode = request.getParameter("inputCode");
+<<<<<<< HEAD
 
 		System.out.println("cellphone :" + cellphone + "password" + password);
 
 		MemberExample memberExample = new MemberExample();
+=======
+System.out.println("cellphone :" + cellphone + "password" + password);
+		System.out.println("cellphone : " + cellphone + "password : " +  MD5Util.getMD5(request.getParameter("password").getBytes()));
+	
+		MemberExample memberExample = new MemberExample(); 
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 		MemberExample.Criteria criteria = memberExample.createCriteria();
 		criteria.andCellphoneEqualTo(cellphone);
 		criteria.andPasswordEqualTo(MD5Util.getMD5(request.getParameter("password").getBytes()));
@@ -53,10 +67,18 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectByExample(memberExample);
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	/*
 	 * 会员找回密码
 	 */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@Override
 	public List<Member> findPassword(HttpServletRequest request) {
 		String cellphone = request.getParameter("cellphone");
@@ -69,10 +91,15 @@ public class MemberServiceImpl implements MemberService {
 		MemberExample.Criteria criteria = memberExample.createCriteria();
 		criteria.andCellphoneEqualTo(cellphone);
 
+<<<<<<< HEAD
 		return memberMapper.selectByExample(memberExample);
 
 	}
 
+=======
+	}
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	/*
 	 * 会员注册
 	 */
@@ -86,6 +113,7 @@ public class MemberServiceImpl implements MemberService {
 		String city = request.getParameter("city");
 		String area = request.getParameter("area");
 		System.out.println(name + "," + cellphone + "，" + password + "," + province + "," + city + "," + area);
+<<<<<<< HEAD
 
 		Member member = new Member();
 		member.setId(Sequence.nextId());
@@ -100,6 +128,27 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.insert(member);
 	}
 
+=======
+	   
+	    Member member = new Member();
+	    member.setId(Sequence.nextId());
+	    member.setName(name);
+	    member.setCellphone(cellphone);
+	    member.setPassword(password);
+
+		/*
+		 * member.setProvince(province); member.setCity(city); member.setArea(area);
+		 */
+
+
+	    member.setProvince(province);
+	    member.setCity(city);
+	    member.setArea(area);
+
+	    
+		return memberMapper.insert(member);
+	    }
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@Override
 	public List<Member> getMemberList(HttpServletRequest request) {
 		MemberExample memberExample = new MemberExample();

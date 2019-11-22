@@ -46,13 +46,13 @@ public interface BusinessOrderMapper {
 	
 	int selectByMonthSum();
 
-	List<BusinessOrder> selectByCommon(BusinessOrderExample businessOrderExaple);
+	List<BusinessOrder> selectByCommon(String providerid);
 
-	List<BusinessOrder> selectByStop(BusinessOrderExample businessOrderExaple);
+	List<BusinessOrder> selectByStop(String providerid);
 
-	List<BusinessOrder> selectByLikeInfo(BusinessOrderExample businessOrderExample);
+	List<BusinessOrder> selectByLikeInfo(BusinessOrderExample businessOrderExample, String providerid);
 
-	List<BusinessOrder> selectByLikeInfoStop(BusinessOrderExample businessOrderExample);
+	List<BusinessOrder> selectByLikeInfoStop(BusinessOrderExample businessOrderExample, String providerid);
 
 	List<BusinessOrder> selectByOther(BusinessOrderExample businessOrderExample);
 
@@ -63,5 +63,9 @@ public interface BusinessOrderMapper {
 	int insertByNo(String business_no, BusinessOrder businessOrder);
 
 	int updateByNo(String business_no, String evaluate);
+
+	int updateByBuNo(String business_no, String val);
+
+	List<BusinessOrder> selectByUser(BusinessOrderExample businessOrderExample);
 
 }

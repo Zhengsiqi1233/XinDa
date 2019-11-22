@@ -104,11 +104,26 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+<<<<<<< HEAD
     order by create_time
+=======
+    order by create_time desc
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
     <!-- <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     
     </if> -->
+  </select>
+  <select id="selectByUser" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
+   select
+    *
+    from business_order,member
+    where
+    business_order.member_id=member.id
+    order by business_order.create_time desc
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if> 
   </select>
    <select id="selectByOther" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
    select
@@ -120,26 +135,12 @@
     where
     business_order.produt_id=provider_produt.id
     order by status desc
-    <!-- <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if> -->
-    
    <!--  <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     </if> -->
   </select>
     <select id="selectByPay" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
-     <!-- select
-     business_no, order_info, member_id, member_name, member_cellphone, order_sum,
-     evaluate, pay_type,order_num,business_order.provider_id,business_order.status,
-     business_order.produt_id,provider_produt.price,provider_produt.service_name,
-     provider_produt.provider_name,business_order.create_time
-     from business_order,provider_produt
-     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-     and
-     business_order.produt_id=provider_produt.id -->
+
       select
     <if test="distinct">
       distinct
@@ -151,14 +152,12 @@
     </if>
   </select>
   <select id="selectNoByLike" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
-    select 
-    business_no, order_info, member_id, member_name, member_cellphone, order_sum,
-     evaluate, pay_type,order_num,business_order.provider_id,business_order.status,
-     business_order.produt_id,provider_produt.price,provider_produt.service_name,
-     provider_produt.provider_name,business_order.create_time
-    from business_order,provider_produt
-    where 
-    business_order.produt_id=provider_produt.id
+    select
+    *
+    from business_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
     and business_no like '%${likeName}%'
     order by create_time
     <!-- <if test="pageSize>=0">
@@ -169,6 +168,7 @@
   
   <select id="selectByCommon" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
    select
+<<<<<<< HEAD
     <if test="distinct">
       distinct
     </if>
@@ -179,24 +179,24 @@
     
     </if>
     and status=2 
+=======
+    *
+    from business_order,member
+    where business_order.member_id=member.id
+    and provider_id like '%${providerid}%'
+    and business_order.status=2 
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
    <!--  <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     </if> -->
   </select>
   <select id="selectByStop" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
     select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from business_order
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    and status=1
-   <!--  <if test="pageSize>=0">
-    limit ${pageSize},${pageNum}
-    </if> -->
+    *
+    from business_order,member
+    where business_order.member_id=member.id
+    and provider_id like '%${providerid}%'
+    and business_order.status=1
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -205,36 +205,32 @@
     where business_no = #{businessNo,jdbcType=VARCHAR}
   </select>
   <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
-     select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from business_order
+    select
+    *
+    from business_order,member
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
     and order_info like '%${likeName}%'
-    and status=2 
-    order by create_time
+    and provider_id like '%${providerid}%'
+    and business_order.status=2 
+    order by business_order.create_time
    <!--  <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     
     </if> -->
   </select>
   <select id="selectByLikeInfoStop" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
-     select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from business_order
+    select
+    *
+    from business_order,member
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
     and order_info like '%${likeName}%'
-    and status=1
-    order by create_time
+    and provider_id like '%${providerid}%'
+    and business_order.status=1
+    order by business_order.create_time
    <!--  <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     
@@ -243,9 +239,10 @@
    <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.BusinessOrderExample" resultMap="BaseResultMap">
     select 
     *
-    from business_order
+    from business_order,member
     where business_no like '%${likeName}%'
-    order by create_time
+    and  business_order.member_id=member.id
+    order by business_order.create_time
     <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     
@@ -534,6 +531,12 @@
   <update id="updateByNo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
     update business_order
     set evaluate = #{evaluate,jdbcType=VARCHAR}
+    where business_no = #{business_no,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByBuNo" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">
+    update business_order
+    set pay_type = #{val,jdbcType=INTEGER},
+    status=1
     where business_no = #{business_no,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.datangedu.cn.model.sysUser.BusinessOrder">

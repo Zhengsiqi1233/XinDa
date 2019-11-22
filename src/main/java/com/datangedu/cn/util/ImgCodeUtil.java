@@ -17,9 +17,12 @@ public class ImgCodeUtil {
 	private static int width = 110;// 定义图片的width
 
 
+<<<<<<< HEAD
     private static int height = 45;// 定义图片的height
 
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
     private static int codeCount = 4;// 定义图片上显示验证码的个数
     private static int xx = 20;
     private static int fontHeight = 40;

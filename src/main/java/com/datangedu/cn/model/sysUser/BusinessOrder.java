@@ -28,7 +28,10 @@ public class BusinessOrder {
     private String providerName;
 
     private Integer orderNum;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
         
     private String produtId;
     
@@ -54,11 +57,21 @@ public class BusinessOrder {
 		this.produt = produt;
 	}
 
+<<<<<<< HEAD
 
 
 
     public String getBusinessNo() {
 
+=======
+	/*
+	 * public String getProdutId() { return produtId; }
+	 * 
+	 * public void setProdutId(String produtId) { this.produtId = produtId; }
+	 */
+
+    public String getBusinessNo() {
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
         return businessNo;
     }
 

@@ -1,6 +1,9 @@
 package com.datangedu.cn.controller.provider;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 
 
 	
@@ -270,4 +273,8 @@ public class ProviderController {
 
 
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 

@@ -1,4 +1,5 @@
 $(function(){
+<<<<<<< HEAD
 		$("#username").html("");
 		var txt="";
 		txt += sessionStorage.getItem("membername")
@@ -43,11 +44,19 @@ $(function(){
 })
 $(function(){
 	var providerid = sessionStorage.getItem("memberid");
+=======
+	var memberid = sessionStorage.getItem("memberid");
+	var sum = sessionStorage.getItem("sum");
+	console.log("查询该用户的订单",memberid);
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	$.ajax({
 		type:"get",
 		url:"/business/bussinessorderlist",
 		dataType:"json",
-		
+		data:{
+			memberid:memberid,
+		},
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderList = data.bussinessOrderList;
@@ -61,13 +70,13 @@ $(function(){
                     <li>
                         <img src="./images/user-lg.png" alt="图片">
                         <ul>
-                            <li>${bussinessOrderList[i].produt.providerName}</li>
-                            <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
+                            <li>${bussinessOrderList[i].providerName}</li>
+                            <li>${bussinessOrderList[i].orderInfo}</li>
                         </ul>
-                        <p>${bussinessOrderList[i].produt.price}</p>
+                        <p>${bussinessOrderList[i].orderSum}</p>
                         <p>${bussinessOrderList[i].orderNum}</p>
                     </li>
-                    <li class="font-aqua">¥${bussinessOrderList[i].orderSum}</li>`
+                    <li class="font-aqua">¥${sum}</li>`
 					if(bussinessOrderList[i].status == 1){
 						txt +=`<li class="font-aqua">已付款</li>
 						 <li>交易完成</li>
@@ -99,15 +108,14 @@ function format(time){
 }
 
 function delUser(business_no){
+	var sum = sessionStorage.getItem("sum");
+
 	console.log("删除",business_no);
 	 $.ajax({
 			type:"post",
 			url:"/business/deleteorder",
 			data:{
 				business_no:business_no,
-				//name:value, 
-    			//pagenum:4,
-    			//pagesize:1,
 			}, 
 			dataType:"json",
 			success:function(data){
@@ -116,7 +124,9 @@ function delUser(business_no){
 					$.ajax({
 						type:"get",
 						url:"/business/bussinessorderlist",
-						
+						data:{
+							business_no:business_no,
+						}, 
 						dataType:"json",
 						success:function(data){
 							console.log("成功返回的数据",data);
@@ -132,13 +142,13 @@ function delUser(business_no){
 				                    <li>
 				                        <img src="./images/user-lg.png" alt="图片">
 				                        <ul>
-				                            <li>${bussinessOrderList[i].provider.name}</li>
-				                            <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
+				                            <li>${bussinessOrderList[i].providerName}</li>
+				                            <li>${bussinessOrderList[i].orderInfo}</li>
 				                        </ul>
-				                        <p>${bussinessOrderList[i].produt.price}</p>
+				                        <p>${bussinessOrderList[i].createTime}</p>
 				                        <p>${bussinessOrderList[i].orderNum}</p>
 				                    </li>
-				                    <li class="font-aqua">¥${bussinessOrderList[i].orderSum}</li>`
+				                    <li class="font-aqua">¥${sum}</li>`
 									if(bussinessOrderList[i].status == 1){
 										txt +=`<li class="font-aqua">已付款</li>
 										 <li>交易完成</li>
@@ -190,7 +200,7 @@ $(".user-action a").on("click", function(event){
 })
 function pay(business_no){
 	console.log("付款",business_no);
-    location.href="redirect?page=e-commerce_settlement";
+    location.href="redirect?page=e-commerce_settlement2";
     sessionStorage.setItem("business_no",business_no);
 
 		

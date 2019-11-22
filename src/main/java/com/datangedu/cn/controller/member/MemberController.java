@@ -1,5 +1,13 @@
 package com.datangedu.cn.controller.member;
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 
 
 
@@ -47,6 +55,10 @@ import com.datangedu.cn.service.MemberService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 import com.datangedu.cn.dao.mapper.MemberMapper;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.Region;
@@ -63,6 +75,7 @@ public class MemberController {
 	MemberService memberService;
 	@Resource
 	MemberMapper memberMapper;
+<<<<<<< HEAD
 
 	
 
@@ -70,6 +83,12 @@ public class MemberController {
 	 * 会员登陆
 	 */
 
+=======
+	
+	/*
+	 * 会员登陆
+	 */
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@RequestMapping(value = "memberlogin", method = RequestMethod.POST)
 	public Map<String,Object> login(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -86,12 +105,18 @@ public class MemberController {
 		}else if(!request.getParameter("inputCode").equalsIgnoreCase((String) session.getAttribute("code"))) {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
+<<<<<<< HEAD
 
 			System.out.println("list.size" + list.size());
 			//map.put("memberid",list.get(0).getId());
 			//map.put("member", list.get(0));
 			 
 
+=======
+			System.out.println("list.size" + list.size());
+			//map.put("memberid",list.get(0).getId());
+			//map.put("member", list.get(0));
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 			System.out.println(list.size());
 			map.put("memberid", list.get(0).getId());
 			map.put("membername", list.get(0).getName());
@@ -105,7 +130,10 @@ public class MemberController {
 	/*
 	 * 会员找回密码
 	 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@RequestMapping(value = "memberfind", method = RequestMethod.POST)
 	public Map<String, Object> findPassword(HttpServletRequest request){
 		System.out.println("findpassword start");
@@ -124,9 +152,13 @@ public class MemberController {
 			map.put("mem", "请输入正确的验证码 ");
 		}else {
 			// 调用接口看用户是否存在，不存在直接提示， 存在重置密码
+<<<<<<< HEAD
 
 		System.out.println("else");
 
+=======
+		System.out.println("else");
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 			if(list == null) {
 				map.put("mem","请输入正确的手机号");
 			}else {
@@ -141,11 +173,17 @@ public class MemberController {
 		}
 		return map;	
 	}
+<<<<<<< HEAD
 
 	/*
 	 * 会员注册
 	 */
 
+=======
+	/*
+	 * 会员注册
+	 */
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@RequestMapping(value = "memberregister", method = RequestMethod.POST)
 	public Map<String,Object> userRegister(HttpServletRequest request){
 		System.out.println("userRegion start");
@@ -175,7 +213,10 @@ public class MemberController {
 		
 		return map;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	@ResponseBody
 	@RequestMapping(value="/memberpage",method=RequestMethod.GET)	
 	public Map<String,Object> MemberPage(HttpServletRequest request){
@@ -194,6 +235,7 @@ public class MemberController {
 		map.put("memberList", memberList);
 		return map;
 	}
+<<<<<<< HEAD
 	/*
 	 * 会员头像
 	 */
@@ -255,4 +297,7 @@ public class MemberController {
 	
 	
 	
+=======
+
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 }

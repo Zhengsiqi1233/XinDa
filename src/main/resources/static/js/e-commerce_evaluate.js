@@ -1,4 +1,5 @@
 $(function(){
+<<<<<<< HEAD
 		$("#username").html("");
 		var txt="";
 		txt += sessionStorage.getItem("membername")
@@ -29,11 +30,16 @@ $(function(){
 })
 $(function(){
 	//var providerid = sessionStorage.getItem("memberid");
+=======
+	var memberid = sessionStorage.getItem("memberid");
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	$.ajax({
 		type:"get",
 		url:"/business/bussinessorderlist",
 		dataType:"json",
-		
+		data:{
+			memberid:memberid,
+		},
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderList = data.bussinessOrderList;
@@ -45,9 +51,9 @@ $(function(){
                <img src="" alt="图片" />
                 <ul class="article-info">
 					
-                    <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
-                    <li>${bussinessOrderList[i].produt.serviceInfo}</li>
-                    <li>${bussinessOrderList[i].produt.providerName}</li>
+                    <li>${bussinessOrderList[i].businessNo}</li>
+                    <li>${bussinessOrderList[i].orderInfo}</li>
+                    <li>${bussinessOrderList[i].providerName}</li>
                 </ul>
                 <p>购买时间：${format(bussinessOrderList[i].createTime)}</p>
                 <p class="evaluate_btn" onclick="evaluate1('${bussinessOrderList[i].businessNo}')">去评价</p>
@@ -129,12 +135,12 @@ $(".save").on("click", function(event){
 						for(var i = 0; i < bussinessOrderList.length; i ++){
 							if(bussinessOrderList[i].evaluate == null){
 							txt += `<div class="article">
-			               <img src="" alt="图片" />
+			                <img src="" alt="图片" />
 			                <ul class="article-info">
 								
-			                    <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
-			                    <li>${bussinessOrderList[i].produt.serviceInfo}</li>
-			                    <li>${bussinessOrderList[i].produt.providerName}</li>
+			                <li>${bussinessOrderList[i].businessNo}</li>
+                            <li>${bussinessOrderList[i].orderInfo}</li>
+                            <li>${bussinessOrderList[i].providerName}</li>
 			                </ul>
 			                <p>购买时间：${format(bussinessOrderList[i].createTime)}</p>
 			                <p class="evaluate_btn" onclick="evaluate1('${bussinessOrderList[i].businessNo}')">去评价</p>

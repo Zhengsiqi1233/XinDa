@@ -41,4 +41,15 @@ public interface ProviderProdutMapper {
 
 	List<ProviderProdut> selectByLikeInfo(ProviderProdutExample providerProdutExample);
 
+<<<<<<< HEAD
+=======
+	List<ProviderProdut> selectByPrice(ProviderProdutExample providerProdutExample);
+
+	List<ProviderProdut> selectByNameLike(ProviderProdutExample providerProdutExample);
+
+	List<ProviderProdut> selectByClick(String providerId);
+
+	List<ProviderProdut> selectByProvider(String providerid);
+    
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 }

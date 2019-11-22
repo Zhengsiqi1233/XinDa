@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type:"get",
-		url:"/business/bussinessorderlist",
+		url:"/business/bussinessorderlistbyuser",
 		dataType:"json",
 		data:{
 			pagenum:20,
@@ -9,17 +9,17 @@ $(function(){
 		},
 		success:function(data){
 			console.log("成功返回的数据",data);
-			var bussinessOrderList = data.bussinessOrderList;
+			var bussinessOrderListByUser = data.bussinessOrderListByUser;
 			$("#bussinessorderlist").html("");
 			var txt = "";
-			for(var i = 0; i < bussinessOrderList.length; i ++){
+			for(var i = 0; i < bussinessOrderListByUser.length; i ++){
 				txt += `<tr> 
-					<td>${bussinessOrderList[i].businessNo}</td>
-					<td>${bussinessOrderList[i].memberName}</td>					
-					<td>${bussinessOrderList[i].orderInfo}*${bussinessOrderList[i].orderNum}</td>
-					<td>¥${bussinessOrderList[i].orderSum}</td>
-					<td>${format(bussinessOrderList[i].createTime)}</td>
-                    <td>${bussinessOrderList[i].status}</td>
+					<td>${bussinessOrderListByUser[i].businessNo}</td>
+					<td>${bussinessOrderListByUser[i].member.name}</td>					
+					<td>${bussinessOrderListByUser[i].orderInfo}</td>
+					<td>¥${bussinessOrderListByUser[i].orderSum}</td>
+					<td>${format(bussinessOrderListByUser[i].createTime)}</td>
+                    <td>${bussinessOrderListByUser[i].status}</td>
                     <td>
                         <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
                     </td>

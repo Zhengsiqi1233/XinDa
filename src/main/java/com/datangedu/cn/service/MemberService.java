@@ -23,6 +23,7 @@ public interface MemberService {
 
 	public List<Member> getMemberCart(String memberid);
 
+<<<<<<< HEAD
 	public Member getMemberImg(String id);
 
 	public int getMemberChange(HttpServletRequest request, MultipartFile file);
@@ -33,6 +34,9 @@ public interface MemberService {
 
 	public int doChangeMima(HttpServletRequest request, String memberid);
 
+=======
+	
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	
 
 }

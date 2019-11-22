@@ -12,7 +12,7 @@ public interface BusinessOrderService {
 
 	public List<BusinessOrder> getBusinessOrderListById(String providerid);
 	
-	public List<BusinessOrder> getBussinessOrderList(HttpServletRequest request);
+	public List<BusinessOrder> getBussinessOrderList(HttpServletRequest request, String memberid);
 
 	public List<BusinessOrder> getBussinessOrderPage(HttpServletRequest request);
 
@@ -30,7 +30,10 @@ public interface BusinessOrderService {
 
 	public int getBussinessOrderMonthSum(HttpServletRequest request);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 	public List<BusinessOrder> getBusinessOrderListByIdStop(String providerid);
 
 	public List<BusinessOrder> getBussinessOrderLike(HttpServletRequest request,String providerid);
@@ -54,11 +57,17 @@ public interface BusinessOrderService {
 
 	public List<Cart> getBusinessOrderName(String temp1);
 
+<<<<<<< HEAD
 	public List<BusinessOrder> getBusinessOrderBuyNow(HttpServletRequest request, String produtid, String memberid,
 			String membername);
 
 	public List<ProviderProdut> getBusinessOrderNameBuyNow(String string);
 
+=======
+	public int getBusinessContinuePay(HttpServletRequest request);
+
+	public List<BusinessOrder> getBussinessOrderListByUser(HttpServletRequest request);
+>>>>>>> ac7810fbdfc531926d55c23bf71380f621c03f9b
 
 
 }
