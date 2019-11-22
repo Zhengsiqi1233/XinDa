@@ -26,8 +26,6 @@ $(".order2").on("click", function(){
 $(".order3").on("click", function(){
     $(".main-top li").eq(3).text("未通过用户");
 })
-<<<<<<< HEAD
-=======
 $(function(){
 		$("#username").html("");
 		var txt="";
@@ -60,8 +58,8 @@ $(function(){
 						txt += `<tr>
 							<td>${businessOrderList[i].businessNo}</td>
 							<td>${businessOrderList[i].orderInfo}</td>
-							<td>${businessOrderList[i].memberName}</td>
-							<td>${businessOrderList[i].memberCellphone}</td>
+							<td>${businessOrderList[i].member.name}</td>
+							<td>${businessOrderList[i].member.cellphone}</td>
 							<td>${businessOrderList[i].orderNum}</td>
 							<td>${businessOrderList[i].orderSum}</td>
 							<td>${format(businessOrderList[i].createTime)}</td>
@@ -108,8 +106,8 @@ $(".businessordercommon").on("click",function(){
 						txt += `<tr>
 							<td>${businessOrderList[i].businessNo}</td>
 							<td>${businessOrderList[i].orderInfo}</td>
-							<td>${businessOrderList[i].memberName}</td>
-							<td>${businessOrderList[i].memberCellphone}</td>
+							<td>${businessOrderList[i].member.name}</td>
+							<td>${businessOrderList[i].member.cellphone}</td>
 							<td>${businessOrderList[i].orderNum}</td>
 							<td>${businessOrderList[i].orderSum}</td>
 							<td>${format(businessOrderList[i].createTime)}</td>
@@ -153,8 +151,8 @@ $(".businessordercommon").on("click",function(){
             						txt += `<tr>
             							<td>${businessOrderList[i].businessNo}</td>
             							<td>${businessOrderList[i].orderInfo}</td>
-            							<td>${businessOrderList[i].memberName}</td>
-            							<td>${businessOrderList[i].memberCellphone}</td>
+            							<td>${businessOrderList[i].member.name}</td>
+            							<td>${businessOrderList[i].member.cellphone}</td>
             							<td>${businessOrderList[i].orderNum}</td>
             							<td>${businessOrderList[i].orderSum}</td>
             							<td>${format(businessOrderList[i].createTime)}</td>
@@ -202,8 +200,8 @@ $(".businessorderstop").on("click",function(){
 						txt += `<tr>
 							<td>${businessOrderList[i].businessNo}</td>
 							<td>${businessOrderList[i].orderInfo}</td>
-							<td>${businessOrderList[i].memberName}</td>
-							<td>${businessOrderList[i].memberCellphone}</td>
+							<td>${businessOrderList[i].member.name}</td>
+							<td>${businessOrderList[i].member.cellphone}</td>
 							<td>${businessOrderList[i].orderNum}</td>
 							<td>${businessOrderList[i].orderSum}</td>
 							<td>${format(businessOrderList[i].createTime)}</td>
@@ -220,7 +218,6 @@ $(".businessorderstop").on("click",function(){
 					console.log("失败后返回的数据",data);
 				}
 		})
-<<<<<<< HEAD
 		$(".search-btn").on("click",function(){
             	var value=$(".searchlist").val();
             	/*var providerid = sessionStorage.getItem("providerid");
@@ -248,8 +245,8 @@ $(".businessorderstop").on("click",function(){
             						txt += `<tr>
             							<td>${businessOrderList[i].businessNo}</td>
             							<td>${businessOrderList[i].orderInfo}</td>
-            							<td>${businessOrderList[i].memberName}</td>
-            							<td>${businessOrderList[i].memberCellphone}</td>
+            							<td>${businessOrderList[i].member.name}</td>
+            							<td>${businessOrderList[i].member.cellphone}</td>
             							<td>${businessOrderList[i].orderNum}</td>
             							<td>${businessOrderList[i].orderSum}</td>
             							<td>${format(businessOrderList[i].createTime)}</td>
@@ -268,8 +265,3 @@ $(".businessorderstop").on("click",function(){
             		})
             })
 })
-		
-=======
-		
->>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b

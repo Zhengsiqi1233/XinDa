@@ -15,14 +15,11 @@ import com.datangedu.cn.dao.mapper.MemberMapper;
 import com.datangedu.cn.dao.mapper.ProviderProdutMapper;
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.BusinessOrderExample;
-<<<<<<< HEAD
-=======
 import com.datangedu.cn.model.sysUser.Cart;
 import com.datangedu.cn.model.sysUser.CartExample;
 import com.datangedu.cn.model.sysUser.Member;
 import com.datangedu.cn.model.sysUser.MemberExample;
 import com.datangedu.cn.model.sysUser.ProviderProdut;
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 import com.datangedu.cn.model.sysUser.ProviderProdutExample;
 import com.datangedu.cn.service.BusinessOrderService;
 import com.datangedu.cn.service.ProviderProdutService;
@@ -40,6 +37,16 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 	@Resource
 	ProviderProdutService providerProdutService;
 	/*
+	 * 获取管理员端的所有的订单展示
+	 */
+	@Override
+	public List<BusinessOrder> getBussinessOrderListByUser(HttpServletRequest request) {
+		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
+		businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+		return businessOrderMapper.selectByUser(businessOrderExample);
+	}
+	/*
 	 * 根据服务商id获取订单
 	 */
 	@Override
@@ -49,12 +56,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		BusinessOrderExample.Criteria criteria = businessOrderExaple.createCriteria();
 		System.out.println("providerid : " + providerid);
 		criteria.andProviderIdEqualTo(providerid);
-<<<<<<< HEAD
-		return businessOrderMapper.selectByCommon(businessOrderExaple);
-=======
-
-		return businessOrderMapper.selectByExample(businessOrderExaple);
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
+		return businessOrderMapper.selectByCommon(providerid);
 	}
 	
 	@Override
@@ -62,7 +64,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		BusinessOrderExample businessOrderExaple = new BusinessOrderExample();
 		BusinessOrderExample.Criteria criteria = businessOrderExaple.createCriteria();
 		criteria.andProviderIdEqualTo(providerid);
-		return businessOrderMapper.selectByStop(businessOrderExaple);
+		return businessOrderMapper.selectByStop(providerid);
 	}
 	
 	@Override
@@ -73,7 +75,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		businessOrderExample.setLikeName(request.getParameter("order_info"));
 		//businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
 		//businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
-		    List<BusinessOrder> bussinessOrderLike=businessOrderMapper.selectByLikeInfo(businessOrderExample);
+		    List<BusinessOrder> bussinessOrderLike=businessOrderMapper.selectByLikeInfo(businessOrderExample,providerid);
 			return bussinessOrderLike;
 	}
 	
@@ -85,23 +87,27 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		businessOrderExample.setLikeName(request.getParameter("order_info"));
 		//businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
 		//businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
-		    List<BusinessOrder> bussinessOrderLikeStop=businessOrderMapper.selectByLikeInfoStop(businessOrderExample);
+		    List<BusinessOrder> bussinessOrderLikeStop=businessOrderMapper.selectByLikeInfoStop(businessOrderExample,providerid);
 			return bussinessOrderLikeStop;
 	}
 	
 	@Override
-	public List<BusinessOrder> getBussinessOrderList(HttpServletRequest request) {
+	public List<BusinessOrder> getBussinessOrderList(HttpServletRequest request,String memberid) {
+		//String memberid=request.getParameter("memberid");
+		System.out.println(memberid);
+		System.out.println("哈哈哈哈");
 		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
 		BusinessOrderExample.Criteria criteria=businessOrderExample.createCriteria();
-		//criteria.andMemberIdEqualTo(memberid);
+		criteria.andMemberIdEqualTo(memberid);
 		//businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
 		//businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
-		return businessOrderMapper.selectByOther(businessOrderExample);
+		return businessOrderMapper.selectByExample(businessOrderExample);
 	}
 
 	@Override
 	public int setOrderDelete(HttpServletRequest request) {
 		String business_no=request.getParameter("business_no");
+		System.out.println(business_no);
 		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
 		BusinessOrderExample.Criteria criteria=businessOrderExample.createCriteria();
 		criteria.andBusinessNoEqualTo(business_no);
@@ -115,11 +121,24 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
         return businessOrderMapper.selectByPay(businessOrderExample);
 	}
 	@Override
+	public int getBusinessContinuePay(HttpServletRequest request) {
+		String business_no=request.getParameter("business_no");
+		String val=request.getParameter("val");
+		//System.out.println(business_no);
+		System.out.println(val);
+		System.out.println("斤斤计较");
+		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
+		BusinessOrderExample.Criteria criteria=businessOrderExample.createCriteria();
+		criteria.andBusinessNoEqualTo(business_no);
+		return businessOrderMapper.updateByBuNo(business_no,val);
+	}
+	@Override
 	public int evaluateInsert(HttpServletRequest request) {
 		String business_no=request.getParameter("business_no");
 		String evaluate=request.getParameter("evaluate");
 		System.out.println(business_no);
 		System.out.println(evaluate);
+		System.out.println("hhhhh");
 		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
 		BusinessOrderExample.Criteria criteria=businessOrderExample.createCriteria();
 		criteria.andBusinessNoEqualTo(business_no);
@@ -130,8 +149,12 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 	
 	@Override
 	public List<BusinessOrder> getBussinessNoLike(HttpServletRequest request) {
+		String memberid=request.getParameter("memberid");
 		BusinessOrderExample businessOrderExample=new BusinessOrderExample();
 		businessOrderExample.setLikeName(request.getParameter("business_no"));
+		BusinessOrderExample.Criteria criteria=businessOrderExample.createCriteria();
+		criteria.andBusinessNoEqualTo(memberid);
+		System.out.println("kjhgfghj"+memberid);
 		//businessOrderExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
 		//businessOrderExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
 		    List<BusinessOrder> bussinessNoLike=businessOrderMapper.selectNoByLike(businessOrderExample);
@@ -206,10 +229,13 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		String aa = "";
 		String bb = "";
 		String cc = "";
+		String dd = "";
+		String ee = "";
 		for(int i = 0; i< list.size(); i++) {
 			list.get(i).getProdutId();
 			list.get(i).getProdutName();
 			list.get(i).getBuyNum();
+			list.get(i).getProviderName();
 			ProviderProdutExample providerProdutExample = new ProviderProdutExample();
 			ProviderProdutExample.Criteria criteria3 = providerProdutExample.createCriteria();
 			criteria3.andIdEqualTo(list.get(i).getProdutId());
@@ -218,6 +244,8 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 			bb += produt.get(0).getProviderId() + ",";
 			aa += list.get(i).getProdutId() + "*" + list.get(i).getBuyNum() + ",";
 			cc += list.get(i).getProdutId() + ",";
+			dd += list.get(i).getProviderName()+ ",";
+			ee += list.get(i).getProviderName()+"*" + list.get(i).getBuyNum() + ",";
 			System.out.println(cc);
 		}
 		MemberExample memberExample = new MemberExample();
@@ -234,13 +262,17 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		businessOrder.setCreateTime(new Date());
 		aa = aa.substring(0, aa.lastIndexOf(","));
 		bb = bb.substring(0, bb.lastIndexOf(","));
-		cc = cc.substring(0, cc.lastIndexOf(","));
+		cc = cc.substring(0, cc.lastIndexOf(",")); 
+		dd = dd.substring(0, dd.lastIndexOf(","));
+		ee = ee.substring(0, ee.lastIndexOf(","));
 		businessOrder.setOrderInfo(aa);
 		businessOrder.setProviderId(bb);
 		businessOrder.setProdutId(cc);
-		System.out.println(aa);
+		businessOrder.setProviderName(dd);
+		System.out.println(ee);
 		System.out.println(bb);
 		System.out.println(cc);
+		System.out.println(dd);
 		int a = businessOrderMapper.insert(businessOrder);
 		
 		//businessOrder.setOrderInfo(info);
@@ -271,6 +303,8 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		businessOrder.setPayType(type);
 		businessOrder.setStatus(1);
 		businessOrder.setBusinessNo(businessNo);
+		System.out.println(type);
+		System.out.println("订单号"+businessNo);
 		return businessOrderMapper.updateByPrimaryKeySelective(businessOrder);
 	}
 	
@@ -281,6 +315,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService{
 		criteria.andProdutIdEqualTo(temp1);
 		return cartMapper.selectByExample(cartExample);
 	}
+
 	
 
 

@@ -15,6 +15,14 @@
     <result column="necessary" jdbcType="INTEGER" property="necessary" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+ <association property="provider" javaType="com.datangedu.cn.model.sysUser.Provider" resultMap="providerDo"/>
+    
+  </resultMap>
+  <resultMap type="com.datangedu.cn.model.sysUser.Provider" id="providerDo">
+  <id column="id" property="id" jdbcType="VARCHAR"/>
+  <result column="name" property="name" jdbcType="VARCHAR"/>  
+    <result column="provider_info_member" property="providerInfoMember" jdbcType="VARCHAR"/>  
+      <result column="tel" property="tel" jdbcType="VARCHAR"/>  
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.datangedu.cn.model.sysUser.ProviderProdut">
     <result column="service_img" jdbcType="LONGVARBINARY" property="serviceImg" />
@@ -101,7 +109,7 @@
     </if>
   </select>
   <select id="selectByExample" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
-    select
+    <!-- select
     <if test="distinct">
       distinct
     </if>
@@ -112,7 +120,28 @@
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
+    </if> -->
+    select 
+    *
+    from provider_produt,provider
+    where  provider_produt.provider_id=provider.id
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
     </if>
+  </select>
+   <select id="selectByProvider" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider_produt
+    where provider_id=${providerid}
+    
+  </select>
+  <select id="selectByPrice" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select
+    *
+    from provider_produt,provider
+    where provider_produt.provider_id=provider.id
+      order by price
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
@@ -122,15 +151,30 @@
     from provider_produt
     where id = #{id,jdbcType=VARCHAR}
   </select>
-<<<<<<< HEAD
   <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
     select 
     *
-    from provider_produt
+    from provider_produt,provider
     where service_name like '%${likeName}%'
+    and provider_produt.provider_id=provider.id
     <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     </if>
+  </select>
+  <select id="selectByNameLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider
+    where provider.name like '%${likeName}%'
+    <if test="pageSize>=0">
+    limit ${pageSize},${pageNum}
+    </if>
+  </select>
+  <select id="selectByClick" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+    select 
+    *
+    from provider_produt
+     where provider_id=${providerId}
   </select>
   <select id="selectByLikeInfo" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
     select
@@ -149,8 +193,7 @@
     
     </if> -->
   </select>
-=======
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from provider_produt
     where id = #{id,jdbcType=VARCHAR}
@@ -270,7 +313,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-   <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
+  <!--  <select id="selectByLike" parameterType="com.datangedu.cn.model.sysUser.ProviderProdutExample" resultMap="BaseResultMap">
     select 
     *
     from provider_produt
@@ -278,7 +321,7 @@
     <if test="pageSize>=0">
     limit ${pageSize},${pageNum}
     </if>
-  </select>
+  </select> -->
   <update id="updateByExampleSelective" parameterType="map">
     update provider_produt
     <set>

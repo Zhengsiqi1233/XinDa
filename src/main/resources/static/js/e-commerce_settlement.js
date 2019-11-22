@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 	var business_no = sessionStorage.getItem("business_no");
 	$.ajax({
 		type:"get",
@@ -6,17 +6,15 @@ $(function(){
 		dataType:"json",
 		data:{
 			business_no:business_no,
-			/*pagenum:20,
-			pagesize:1,*/
+			pagenum:20,
+			pagesize:1,
 		},
 		success:function(data){
 			console.log("成功返回的数据",data);
 			var bussinessOrderPay = data.bussinessOrderPay;
 			$("#bussinessorderpay").html("");
 			var txt = "";
-				txt += `<div class="content width1200">
-        <p class="product_num font-aqua">订单详情</p>
-        <hr color="#ededed" size="1">
+				txt += `
         <ul class="merchandise">
             <li>
                 订单编号：<span class="font-aqua">sessionStorage.getItem("business_no")</span>
@@ -37,8 +35,7 @@ $(function(){
         <ul class="payment">
             <li>金额总计：<span>¥${bussinessOrderList[i].orderSum}</span></li>
             <li>支付</li>
-        </ul>
-    </div>`
+        </ul>`
 			
 				
 			console.log(txt);
@@ -50,7 +47,7 @@ $(function(){
 		}
 	})
 	
-})
+})*/
 
 $(".payment li").eq(1).on("click", function(){
     location.href="redirect?page=e-commerce_order";

@@ -35,13 +35,18 @@ public interface ProviderProdutMapper {
     int updateByPrimaryKeyWithBLOBs(ProviderProdut record);
 
     int updateByPrimaryKey(ProviderProdut record);
-<<<<<<< HEAD
+
 
 	List<ProviderProdut> selectByLike(ProviderProdutExample example);
 
 	List<ProviderProdut> selectByLikeInfo(ProviderProdutExample providerProdutExample);
-=======
+
+	List<ProviderProdut> selectByPrice(ProviderProdutExample providerProdutExample);
+
+	List<ProviderProdut> selectByNameLike(ProviderProdutExample providerProdutExample);
+
+	List<ProviderProdut> selectByClick(String providerId);
+
+	List<ProviderProdut> selectByProvider(String providerid);
     
-    List<ProviderProdut> selectByLike(ProviderProdutExample example);
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 }

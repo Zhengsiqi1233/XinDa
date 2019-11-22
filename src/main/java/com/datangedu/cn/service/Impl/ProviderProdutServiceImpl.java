@@ -16,12 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.datangedu.cn.controller.id.Sequence;
 import com.datangedu.cn.dao.mapper.ProviderMapper;
 import com.datangedu.cn.dao.mapper.ProviderProdutMapper;
-<<<<<<< HEAD
 import com.datangedu.cn.model.sysUser.BusinessOrder;
 import com.datangedu.cn.model.sysUser.BusinessOrderExample;
-=======
 import com.datangedu.cn.model.sysUser.Provider;
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 import com.datangedu.cn.model.sysUser.ProviderProdutExample;
 
@@ -42,7 +39,8 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		ProviderProdutExample providerProdutExample = new ProviderProdutExample();
 		ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
 		criteria.andProviderIdEqualTo(providerid);
-		return providerProdutMapper.selectByExample(providerProdutExample);
+		System.out.println("ljhgffghjkl;ldfgh098234");
+		return providerProdutMapper.selectByProvider(providerid);
 	}
 	/*
 	 * 根据服务名称获取产品的列表
@@ -140,11 +138,31 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 	    List<ProviderProdut> providerProdutPage=providerProdutMapper.selectByLike(providerProdutExample);
 		return providerProdutPage;
 	}
+	 
+	@Override
+	public List<ProviderProdut> getProviderProdutBy(HttpServletRequest request) {
+		
+	    ProviderProdutExample providerProdutExample=new ProviderProdutExample();
+	    providerProdutExample.setLikeName(request.getParameter("provider_name"));
+	    System.out.println("林肯郡海关法");
+		providerProdutExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		providerProdutExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+	    List<ProviderProdut> ProviderProdutBy=providerProdutMapper.selectByNameLike(providerProdutExample);
+		return ProviderProdutBy;
+	}
+  
+	@Override
+	public List<ProviderProdut> getProviderProdutByClick(HttpServletRequest request) {
+		String providerId=request.getParameter("providerId");
+	    ProviderProdutExample providerProdutExample=new ProviderProdutExample();
+	    ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
+	    System.out.println(providerId);
+	    criteria.andProviderIdEqualTo(providerId);
+	    List<ProviderProdut> ProviderProdutBy=providerProdutMapper.selectByClick(providerId);
+		return ProviderProdutBy;
+	}
 	
-
-
-	
-	/*
+  	/*
 	 * 修改服务商信息
 	 */
 	@Override
@@ -183,13 +201,20 @@ public class ProviderProdutServiceImpl  implements ProviderProdutService{
 		} catch (Exception e) {
 			
 			return 1;
-		 }		
-		
-		
-		
-		
-		
+		 }			
 	}
+	/*
+	 * 会员端的所有产品根据价格进行排序
+	 */
+	@Override
+	public List<ProviderProdut> getProviderProdutListByPrice(HttpServletRequest request) {
+		ProviderProdutExample providerProdutExample=new ProviderProdutExample();
+		ProviderProdutExample.Criteria criteria=providerProdutExample.createCriteria();
+		providerProdutExample.setPageNum(Integer.parseInt(request.getParameter("pagenum")));
+		providerProdutExample.setPageSize(Integer.parseInt(request.getParameter("pagesize")));
+		return providerProdutMapper.selectByPrice(providerProdutExample);
+} 
+	
 
 
 }

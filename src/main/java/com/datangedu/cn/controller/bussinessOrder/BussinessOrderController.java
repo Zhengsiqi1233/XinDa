@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.datangedu.cn.model.sysUser.BusinessOrder;
-<<<<<<< HEAD
 import com.datangedu.cn.model.sysUser.Provider;
-=======
 import com.datangedu.cn.model.sysUser.Cart;
->>>>>>> 80103050b21413fcf7364418868f0a9ec951a22b
 import com.datangedu.cn.model.sysUser.ProviderProdut;
 
 
@@ -42,6 +39,18 @@ public class BussinessOrderController {
 	BusinessOrderService businessOrderService;
 	@Resource
 	CartService cartService;
+    /*
+     * 查询超级管理员端的所有的订单展示
+     */
+	@ResponseBody
+	@RequestMapping(value="/bussinessorderlistbyuser",method=RequestMethod.GET)	
+	public Map<String,Object> bussinessOrderListByUser(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		Map<String,Object> map=new HashMap<String,Object>();
+		List<BusinessOrder> bussinessOrderListByUser=businessOrderService.getBussinessOrderListByUser(request);
+		map.put("bussinessOrderListByUser", bussinessOrderListByUser);
+		return map; 
+	}
 	/*
 	 * 根据服务商id获取服务中的订单列表
 	 */
@@ -102,11 +111,11 @@ public class BussinessOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/bussinessorderlist",method=RequestMethod.GET)	
-	public Map<String,Object> bussinessOrderList(HttpServletRequest request){
+	public Map<String,Object> bussinessOrderList(HttpServletRequest request,String memberid){
 		HttpSession session = request.getSession();
-		//session.setAttribute("memberid", memberid);
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BusinessOrder> bussinessOrderList=businessOrderService.getBussinessOrderList(request);
+		System.out.println("用户id"+memberid);
+		List<BusinessOrder> bussinessOrderList=businessOrderService.getBussinessOrderList(request,memberid);
 		map.put("bussinessOrderList", bussinessOrderList);
 		return map; 
 	}
@@ -115,15 +124,16 @@ public class BussinessOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/deleteorder",method =RequestMethod.POST)
-		public Map<String, Object> orderDelete(HttpServletRequest request){
+		public Map<String, Object> orderDelete(HttpServletRequest request,String business_no){
 		Map<String, Object> map=new HashMap<String, Object>();
+		System.out.println("删除的用户id"+business_no);
 		int order=businessOrderService.setOrderDelete(request);
 		map.put("msg","恭喜删除成功");
 		map.put("code", 1);
 		return map;			
    }
 	/*
-	 * 根据未完成的订单进行付款
+	 * 根据未完成的订单进行付款的展示界面
 	 */
 	@ResponseBody
 	@RequestMapping(value="/bussinessorderpay",method=RequestMethod.GET)	
@@ -142,8 +152,9 @@ public class BussinessOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/bussinessnolike",method=RequestMethod.GET)	
-	public Map<String,Object> bussinessNoLike(HttpServletRequest request){
+	public Map<String,Object> bussinessNoLike(HttpServletRequest request,String memberid){
 		Map<String,Object> map=new HashMap<String,Object>();
+		System.out.println(memberid);
 		List<BusinessOrder> bussinessNoLike=businessOrderService.getBussinessNoLike(request);
 		map.put("bussinessNoLike", bussinessNoLike);
 		map.put("code", 1);
@@ -167,7 +178,24 @@ public class BussinessOrderController {
 		map.put("code",1);
 		return map;	
 	}
-		
+	
+	/*
+	 * 付款完成未完成的订单
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getBusPay",method =RequestMethod.POST)
+		public Map<String, Object> getBusPay(HttpServletRequest request){
+		HttpSession session =  request.getSession();
+		//session.setAttribute("business_no", business_no);
+		//System.out.println(business_no);
+		Map<String, Object> map=new HashMap<String, Object>();
+		businessOrderService.getBusinessContinuePay(request);
+		//BusinessOrder businessOrder = new BusinessOrder();
+		//businessOrder.setEvaluate(request.getParameter("evaluate"));
+		map.put("code",1);
+		return map;	
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/bussinessorderpage",method=RequestMethod.GET)	
 	public Map<String,Object> bussinessOrderPage(HttpServletRequest request){
@@ -307,5 +335,7 @@ public class BussinessOrderController {
 		return map;
 		
 	}
+	
+
 
 }

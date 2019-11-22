@@ -129,12 +129,14 @@
         <script>
             $(".search-btn").on("click",function(){
             	var value=$(".searchlist").val();
+            	var memberid = sessionStorage.getItem("memberid");
+            	console.log("成功返回的数据",memberid);
             	$.ajax({
             		type:"get",
             		url:"/business/bussinessnolike",
             		data:{
             			business_no:value, 
-            			
+            			memberid:memberid,
             		}, 
             		success:function(data){
             			console.log("成功返回的数据",data);
@@ -149,12 +151,12 @@
                   <li>
                       <img src="./images/user-lg.png" alt="图片">
                       <ul>
-                          <li>${bussinessOrderList[i].produt.providerName}</li>
-                          <li>${bussinessOrderList[i].produt.serviceName}*${bussinessOrderList[i].orderNum}</li>
-                      </ul>
-                      <p>${bussinessOrderList[i].produt.price}</p>
-                      <p>${bussinessOrderList[i].orderNum}</p>
-                  </li>
+                      <li>${bussinessOrderList[i].providerName}</li>
+                      <li>${bussinessOrderList[i].orderInfo}</li>
+                  </ul>
+                  <p>${bussinessOrderList[i].createTime}</p>
+                  <p>${bussinessOrderList[i].orderNum}</p>
+              </li>
                   <li class="font-aqua">¥${bussinessOrderList[i].orderSum}</li>`
 					if(bussinessOrderList[i].status == 1){
 						txt +=`<li class="font-aqua">已付款</li>

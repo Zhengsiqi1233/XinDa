@@ -48,9 +48,7 @@ import com.datangedu.cn.service.Impl.ProviderProdutServiceImpl;
 @Controller
 @RequestMapping("/providerProdut")
 public class ProviderProdutController {
-<<<<<<< HEAD
-	
-=======
+
 	@Resource
 	ProviderProdutService providerProdutService ;
 	@Resource
@@ -71,8 +69,8 @@ public class ProviderProdutController {
 		session.setAttribute("providerid", providerid);
 		System.out.println(providerid);
 		Map<String,Object> map = new HashMap<String,Object>();
-		List<ProviderProdut> providerProdutList = providerProdutService.getProdutListById(providerid);
-		map.put("providerProdutList", providerProdutList);
+		List<ProviderProdut> providerProdutListById = providerProdutService.getProdutListById(providerid);
+		map.put("providerProdutListById", providerProdutListById);
 		return map;
 	}
 	
@@ -156,6 +154,9 @@ public class ProviderProdutController {
 		map.put("code", 1);
 		return map;			
    }
+	/*
+	 * 根据产品名称去查询相应的产品
+	 */
 	@ResponseBody
 	@RequestMapping(value="/providerprodutpage",method=RequestMethod.GET)	
 	public Map<String,Object> ProviderProdutPage(HttpServletRequest request){
@@ -165,7 +166,46 @@ public class ProviderProdutController {
 		map.put("code", 1);
 		return map;
 	}
-<<<<<<< HEAD
+	/*
+	 *根据服务商的名称查询该匹配的所有服务商
+	 */
+	@ResponseBody
+	@RequestMapping(value="/providerprodutlikebyprovidername",method=RequestMethod.GET)	
+	public Map<String,Object> ProviderProdutBy(HttpServletRequest request){
+		Map<String,Object> map=new HashMap<String,Object>();
+		System.out.println("看见黄瓜疯狂浪费");
+		List<ProviderProdut> ProviderProdutBy=providerProdutService.getProviderProdutBy(request);
+		map.put("ProviderProdutBy", ProviderProdutBy);
+		map.put("code", 1);
+		return map;
+	}
+	/*
+	 * 根据查询到的服务商然后进行该服务商 的所有的产品展示
+	 */
+	@ResponseBody
+	@RequestMapping(value="/providerprodutbyclick",method=RequestMethod.GET)	
+	public Map<String,Object> ProviderProdutByClick(HttpServletRequest request,String providerId){
+		Map<String,Object> map=new HashMap<String,Object>();
+		System.out.println("和我i和i我");
+		System.out.println("服务商的id"+providerId);
+		List<ProviderProdut> ProviderProdutByClick=providerProdutService.getProviderProdutByClick(request);
+		map.put("ProviderProdutByClick", ProviderProdutByClick);
+		map.put("code", 1);
+		return map;
+	}
+	
+	/*
+	 * 按照价格将所有的产品排序（会员端）
+	 */
+	@ResponseBody
+	@RequestMapping(value="/providerprodutlistbyprice",method=RequestMethod.GET)	
+	public Map<String,Object> ProviderProdutListByPrice(HttpServletRequest request){
+		HttpSession session = request.getSession(); 
+		Map<String,Object> map=new HashMap<String,Object>();
+		List<ProviderProdut> providerProdutListByPrice=providerProdutService.getProviderProdutListByPrice(request);
+		map.put("providerProdutListByPrice", providerProdutListByPrice);
+		return map; 
+	}
 	/*
 	 * 修改服务商信息
 	 */
@@ -178,9 +218,6 @@ public class ProviderProdutController {
 		return "service_setting";	
 	
 	}
-=======
->>>>>>> 3108f68f89e884fc8d57da4c9bf410ea617eadf8
->>>>>>> b7a05bcfa47b76e291a5e39f9b2feec3440c0dd4
 
 	
 }
